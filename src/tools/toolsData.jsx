@@ -55,6 +55,14 @@ const toolsData = [
   descriptionAr: "كرر أي نص عدة مرات فورًا لأغراض الاختبار والتنسيق وإنشاء المحتوى.",
   category: "text-tools"
 },
+{
+  name: "Case Converter",
+  nameAr: "محول حالة النص",
+  path: "/case-converter",
+  description: "Convert text to uppercase, lowercase, title case, or sentence case instantly.",
+  descriptionAr: "حوّل النص إلى أحرف كبيرة أو صغيرة أو Title Case أو Sentence case فورًا.",
+  category: "text-tools"
+},
   {
     name: 'Age Calculator',
     nameAr: 'حاسبة العمر',

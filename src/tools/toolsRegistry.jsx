@@ -17,7 +17,8 @@ const componentMap = {
     '/base64-encoder-decoder': lazy(() => import('./Base64EncoderDecoder')),
     '/url-encoder-decoder': lazy(() => import('./URLEncoderDecoder')),
     '/lorem-ipsum-generator': lazy(() => import('./LoremIpsumGenerator')),
-    '/text-repeater': lazy(() => import('./TextRepeater'))
+    '/text-repeater': lazy(() => import('./TextRepeater')),
+    '/case-converter': lazy(() => import('./CaseConverter'))
     
 };
 
