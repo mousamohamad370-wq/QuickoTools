@@ -48,6 +48,14 @@ const toolsData = [
     category: 'text-tools'
   },
   {
+  name: "Text Repeater",
+  nameAr: "مكرر النص",
+  path: "/text-repeater",
+  description: "Repeat any text multiple times instantly for testing, formatting, and content tasks.",
+  descriptionAr: "كرر أي نص عدة مرات فورًا لأغراض الاختبار والتنسيق وإنشاء المحتوى.",
+  category: "text-tools"
+},
+  {
     name: 'Age Calculator',
     nameAr: 'حاسبة العمر',
     path: '/age-calculator',
