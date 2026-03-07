@@ -127,6 +127,14 @@ const toolsData = [
   descriptionAr: "قم بترميز الروابط والنصوص لاستخدامها بأمان في الويب أو فكها فورًا.",
   category: "developer-tools"
 },
+{
+  name: "HTML Entity Encoder / Decoder",
+  nameAr: "تشفير وفك HTML Entities",
+  path: "/html-entity-encoder-decoder",
+  description: "Encode special HTML characters into entities or decode them back into normal text instantly.",
+  descriptionAr: "حوّل أحرف HTML الخاصة إلى entities أو فكها إلى نص عادي فورًا.",
+  category: "developer-tools"
+},
   {
     name: 'Slug Generator',
     nameAr: 'مولد Slug',

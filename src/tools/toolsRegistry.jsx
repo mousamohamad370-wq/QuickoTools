@@ -19,7 +19,9 @@ const componentMap = {
     '/lorem-ipsum-generator': lazy(() => import('./LoremIpsumGenerator')),
     '/text-repeater': lazy(() => import('./TextRepeater')),
     '/case-converter': lazy(() => import('./CaseConverter')),
-    '/line-break-remover': lazy(() => import('./LineBreakRemover'))
+    '/line-break-remover': lazy(() => import('./LineBreakRemover')),
+    '/html-entity-encoder-decoder': lazy(() => import('./HTMLEntityEncoderDecoder'))
+    
     
 };
 

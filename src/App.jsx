@@ -1,9 +1,11 @@
 import { Suspense, useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
-import toolsRegistry from './tools/toolsRegistry';
 import Categories from './pages/Categories';
 import CategoryPage from './pages/CategoryPage';
+import Navbar from './components/Navbar';
+import toolsRegistry from './tools/toolsRegistry';
+import Footer from './components/Footer';
 
 function PageLoader() {
   return (
@@ -24,35 +26,41 @@ function App() {
   }, [language]);
 
   return (
-    <Suspense fallback={<PageLoader />}>
-      <Routes>
-        <Route
-          path="/"
-          element={<Home language={language} setLanguage={setLanguage} />}
-        />
-        <Route
-  path="/categories"
-  element={<Categories language={language} />}
-/>
+    <>
+      <Navbar language={language} setLanguage={setLanguage} />
 
-<Route
-  path="/:categorySlug"
-  element={<CategoryPage language={language} />}
-/>
+      <Suspense fallback={<PageLoader />}>
+        <Routes>
+          <Route
+            path="/"
+            element={<Home language={language} setLanguage={setLanguage} />}
+          />
 
-        {toolsRegistry.map((tool) => {
-          const ToolComponent = tool.component;
+          <Route
+            path="/categories"
+            element={<Categories language={language} />}
+          />
 
-          return (
-            <Route
-              key={tool.path}
-              path={tool.path}
-              element={<ToolComponent language={language} />}
-            />
-          );
-        })}
-      </Routes>
-    </Suspense>
+          <Route
+            path="/:categorySlug"
+            element={<CategoryPage language={language} />}
+          />
+
+          {toolsRegistry.map((tool) => {
+            const ToolComponent = tool.component;
+
+            return (
+              <Route
+                key={tool.path}
+                path={tool.path}
+                element={<ToolComponent language={language} />}
+              />
+            );
+          })}
+        </Routes>
+      </Suspense>
+      <Footer language={language} />
+    </>
   );
 }
 
