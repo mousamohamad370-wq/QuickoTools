@@ -80,6 +80,14 @@ const toolsData = [
     category: 'developer-tools'
   },
   {
+  name: "UUID Generator",
+  nameAr: "مولد UUID",
+  path: "/uuid-generator",
+  description: "Generate UUIDs instantly for development and databases.",
+  descriptionAr: "إنشاء UUID فورًا للاستخدام في البرمجة وقواعد البيانات.",
+  category: "developer-tools"
+},
+  {
     name: 'Slug Generator',
     nameAr: 'مولد Slug',
     path: '/slug-generator',

@@ -12,7 +12,8 @@ const componentMap = {
   '/bmi-calculator': lazy(() => import('./BMICalculator')),
   '/percentage-calculator': lazy(() => import('./PercentageCalculator')),
   '/json-formatter': lazy(() => import('./JSONFormatter')),
-  '/slug-generator': lazy(() => import('./SlugGenerator'))
+  '/slug-generator': lazy(() => import('./SlugGenerator')),
+    '/uuid-generator': lazy(() => import('./UUIDGenerator'))
 };
 
 const toolsRegistry = toolsData.map((tool) => ({
