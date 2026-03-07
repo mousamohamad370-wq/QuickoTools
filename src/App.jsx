@@ -7,6 +7,8 @@ import QRCodeGenerator from "./tools/QRCodeGenerator";
 import TextCaseConverter from "./tools/TextCaseConverter";
 import RemoveDuplicateLines from "./tools/RemoveDuplicateLines";
 import AgeCalculator from "./tools/AgeCalculator";
+import BMICalculator from "./tools/BMICalculator";
+
 
 function App() {
   return (
@@ -19,6 +21,7 @@ function App() {
        <Route path="/text-case-converter" element={<TextCaseConverter />} />
        <Route path="/remove-duplicate-lines" element={<RemoveDuplicateLines />} />
        <Route path="/age-calculator" element={<AgeCalculator />} />
+       <Route path="/bmi-calculator" element={<BMICalculator />} />
     </Routes>
   );
 }
