@@ -2,6 +2,8 @@ import { Suspense, useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import toolsRegistry from './tools/toolsRegistry';
+import Categories from './pages/Categories';
+import CategoryPage from './pages/CategoryPage';
 
 function PageLoader() {
   return (
@@ -28,6 +30,15 @@ function App() {
           path="/"
           element={<Home language={language} setLanguage={setLanguage} />}
         />
+        <Route
+  path="/categories"
+  element={<Categories language={language} />}
+/>
+
+<Route
+  path="/:categorySlug"
+  element={<CategoryPage language={language} />}
+/>
 
         {toolsRegistry.map((tool) => {
           const ToolComponent = tool.component;
