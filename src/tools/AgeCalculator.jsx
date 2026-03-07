@@ -1,9 +1,54 @@
 import { useState } from 'react';
 
-function AgeCalculator() {
+function AgeCalculator({ language }) {
   const [birthDate, setBirthDate] = useState('');
   const [result, setResult] = useState(null);
   const [error, setError] = useState('');
+
+  const content = {
+    en: {
+      title: 'Age Calculator',
+      description:
+        'Calculate age from date of birth instantly with extra details like weeks, hours, minutes, and next birthday.',
+      label: 'Date of Birth',
+      useToday: 'Use Today',
+      calculate: 'Calculate Age',
+      clear: 'Clear',
+      errorEmpty: 'Please select your date of birth',
+      errorFuture: 'Date of birth cannot be in the future.',
+      years: 'Years',
+      months: 'Months',
+      days: 'Days',
+      totalDays: 'Total Days',
+      weeks: 'Weeks',
+      hours: 'Hours',
+      minutes: 'Minutes',
+      nextBirthday: 'Next Birthday In',
+      daysSuffix: 'Days'
+    },
+    ar: {
+      title: 'حاسبة العمر',
+      description:
+        'احسب العمر من تاريخ الميلاد فورًا مع تفاصيل إضافية مثل الأسابيع والساعات والدقائق وموعد عيد الميلاد القادم.',
+      label: 'تاريخ الميلاد',
+      useToday: 'استخدم تاريخ اليوم',
+      calculate: 'احسب العمر',
+      clear: 'مسح',
+      errorEmpty: 'يرجى اختيار تاريخ الميلاد',
+      errorFuture: 'لا يمكن أن يكون تاريخ الميلاد في المستقبل.',
+      years: 'السنوات',
+      months: 'الأشهر',
+      days: 'الأيام',
+      totalDays: 'إجمالي الأيام',
+      weeks: 'الأسابيع',
+      hours: 'الساعات',
+      minutes: 'الدقائق',
+      nextBirthday: 'عيد الميلاد القادم بعد',
+      daysSuffix: 'يوم'
+    }
+  };
+
+  const t = language === 'ar' ? content.ar : content.en;
 
   const getTodayDate = () => {
     return new Date().toISOString().split('T')[0];
@@ -12,18 +57,10 @@ function AgeCalculator() {
   const calculateNextBirthdayDays = (dob, today) => {
     const currentYear = today.getFullYear();
 
-    let nextBirthday = new Date(
-      currentYear,
-      dob.getMonth(),
-      dob.getDate()
-    );
+    let nextBirthday = new Date(currentYear, dob.getMonth(), dob.getDate());
 
     if (nextBirthday < today) {
-      nextBirthday = new Date(
-        currentYear + 1,
-        dob.getMonth(),
-        dob.getDate()
-      );
+      nextBirthday = new Date(currentYear + 1, dob.getMonth(), dob.getDate());
     }
 
     const oneDay = 1000 * 60 * 60 * 24;
@@ -34,7 +71,7 @@ function AgeCalculator() {
 
   const calculateAge = () => {
     if (!birthDate) {
-      setError('Please select your date of birth');
+      setError(t.errorEmpty);
       setResult(null);
       return;
     }
@@ -46,7 +83,7 @@ function AgeCalculator() {
     dob.setHours(0, 0, 0, 0);
 
     if (dob > today) {
-      setError('Date of birth cannot be in the future.');
+      setError(t.errorFuture);
       setResult(null);
       return;
     }
@@ -106,17 +143,14 @@ function AgeCalculator() {
   };
 
   return (
-    <main className="tool-page">
+    <main className="tool-page" dir={language === 'ar' ? 'rtl' : 'ltr'}>
       <div className="tool-container">
-        <h1 className="tool-page-title">Age Calculator</h1>
+        <h1 className="tool-page-title">{t.title}</h1>
 
-        <p className="tool-page-description">
-          Calculate age from date of birth instantly with extra details like
-          weeks, hours, minutes, and next birthday.
-        </p>
+        <p className="tool-page-description">{t.description}</p>
 
         <div className="tool-box">
-          <label className="tool-label">Date of Birth</label>
+          <label className="tool-label">{t.label}</label>
 
           <div className="age-input-row">
             <input
@@ -131,7 +165,7 @@ function AgeCalculator() {
               onClick={handleUseToday}
               className="tool-secondary-button age-use-today-button"
             >
-              Use Today
+              {t.useToday}
             </button>
           </div>
 
@@ -141,7 +175,7 @@ function AgeCalculator() {
               onClick={calculateAge}
               className="tool-primary-button"
             >
-              Calculate Age
+              {t.calculate}
             </button>
 
             <button
@@ -149,57 +183,55 @@ function AgeCalculator() {
               onClick={clearFields}
               className="tool-secondary-button"
             >
-              Clear
+              {t.clear}
             </button>
           </div>
         </div>
 
-        {error && (
-          <div className="tool-error-message">
-            {error}
-          </div>
-        )}
+        {error && <div className="tool-error-message">{error}</div>}
 
         {result && (
           <div className="age-results-grid age-results-show">
             <div className="result-card">
-              <h2 className="result-card-title">Years</h2>
+              <h2 className="result-card-title">{t.years}</h2>
               <p className="result-card-value">{result.years}</p>
             </div>
 
             <div className="result-card">
-              <h2 className="result-card-title">Months</h2>
+              <h2 className="result-card-title">{t.months}</h2>
               <p className="result-card-value">{result.months}</p>
             </div>
 
             <div className="result-card">
-              <h2 className="result-card-title">Days</h2>
+              <h2 className="result-card-title">{t.days}</h2>
               <p className="result-card-value">{result.days}</p>
             </div>
 
             <div className="result-card">
-              <h2 className="result-card-title">Total Days</h2>
+              <h2 className="result-card-title">{t.totalDays}</h2>
               <p className="result-card-value">{result.totalDays}</p>
             </div>
 
             <div className="result-card">
-              <h2 className="result-card-title">Weeks</h2>
+              <h2 className="result-card-title">{t.weeks}</h2>
               <p className="result-card-value">{result.weeks}</p>
             </div>
 
             <div className="result-card">
-              <h2 className="result-card-title">Hours</h2>
+              <h2 className="result-card-title">{t.hours}</h2>
               <p className="result-card-value">{result.hours}</p>
             </div>
 
             <div className="result-card">
-              <h2 className="result-card-title">Minutes</h2>
+              <h2 className="result-card-title">{t.minutes}</h2>
               <p className="result-card-value">{result.minutes}</p>
             </div>
 
             <div className="result-card">
-              <h2 className="result-card-title">Next Birthday In</h2>
-              <p className="result-card-value">{result.nextBirthdayDays} Days</p>
+              <h2 className="result-card-title">{t.nextBirthday}</h2>
+              <p className="result-card-value">
+                {result.nextBirthdayDays} {t.daysSuffix}
+              </p>
             </div>
           </div>
         )}
