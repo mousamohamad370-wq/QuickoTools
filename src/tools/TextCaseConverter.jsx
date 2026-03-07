@@ -1,7 +1,34 @@
 import { useState } from 'react';
 
-function TextCaseConverter() {
+function TextCaseConverter({ language }) {
   const [text, setText] = useState('');
+
+  const content = {
+    en: {
+      title: 'Text Case Converter',
+      description: 'Convert text to uppercase, lowercase, or capitalize format instantly.',
+      placeholder: 'Type or paste your text here...',
+      uppercase: 'UPPERCASE',
+      lowercase: 'lowercase',
+      capitalize: 'Capitalize',
+      clear: 'Clear',
+      preview: 'Preview',
+      empty: 'Converted text will appear here.'
+    },
+    ar: {
+      title: 'تحويل حالة النص',
+      description: 'حوّل النص إلى أحرف كبيرة أو صغيرة أو بصيغة العنوان فورًا.',
+      placeholder: 'اكتب النص هنا أو ألصقه...',
+      uppercase: 'أحرف كبيرة',
+      lowercase: 'أحرف صغيرة',
+      capitalize: 'أول حرف كبير',
+      clear: 'مسح',
+      preview: 'المعاينة',
+      empty: 'سيظهر النص المعدّل هنا.'
+    }
+  };
+
+  const t = language === 'ar' ? content.ar : content.en;
 
   const convertToUppercase = () => {
     setText(text.toUpperCase());
@@ -29,20 +56,24 @@ function TextCaseConverter() {
   };
 
   return (
-    <main style={{ padding: '40px 20px' }}>
+    <main
+      className="tool-page"
+      dir={language === 'ar' ? 'rtl' : 'ltr'}
+      style={{ padding: '40px 20px' }}
+    >
       <div style={{ maxWidth: '900px', margin: '0 auto' }}>
         <h1 style={{ fontSize: '32px', marginBottom: '12px' }}>
-          Text Case Converter
+          {t.title}
         </h1>
 
         <p style={{ color: '#6b7280', marginBottom: '24px', lineHeight: '1.6' }}>
-          Convert text to uppercase, lowercase, or capitalize format instantly.
+          {t.description}
         </p>
 
         <textarea
           value={text}
           onChange={(event) => setText(event.target.value)}
-          placeholder="Type or paste your text here..."
+          placeholder={t.placeholder}
           style={{
             width: '100%',
             minHeight: '220px',
@@ -76,7 +107,7 @@ function TextCaseConverter() {
               cursor: 'pointer'
             }}
           >
-            UPPERCASE
+            {t.uppercase}
           </button>
 
           <button
@@ -90,7 +121,7 @@ function TextCaseConverter() {
               cursor: 'pointer'
             }}
           >
-            lowercase
+            {t.lowercase}
           </button>
 
           <button
@@ -104,7 +135,7 @@ function TextCaseConverter() {
               cursor: 'pointer'
             }}
           >
-            Capitalize
+            {t.capitalize}
           </button>
 
           <button
@@ -118,7 +149,7 @@ function TextCaseConverter() {
               cursor: 'pointer'
             }}
           >
-            Clear
+            {t.clear}
           </button>
         </div>
 
@@ -131,7 +162,7 @@ function TextCaseConverter() {
           }}
         >
           <h2 style={{ fontSize: '18px', marginBottom: '10px' }}>
-            Preview
+            {t.preview}
           </h2>
 
           <div
@@ -146,7 +177,7 @@ function TextCaseConverter() {
               wordBreak: 'break-word'
             }}
           >
-            {text || 'Converted text will appear here.'}
+            {text || t.empty}
           </div>
         </div>
       </div>
