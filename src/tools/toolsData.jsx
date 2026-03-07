@@ -110,7 +110,15 @@ const toolsData = [
     description: 'Convert text into a clean URL-friendly slug.',
     descriptionAr: 'حوّل النص إلى رابط URL نظيف وسهل القراءة.',
     category: 'generators'
-  }
+  },
+  {
+  name: "Lorem Ipsum Generator",
+  nameAr: "مولد Lorem Ipsum",
+  path: "/lorem-ipsum-generator",
+  description: "Generate placeholder text instantly for design, UI, and development projects.",
+  descriptionAr: "أنشئ نصًا تجريبيًا فورًا لمشاريع التصميم والواجهات والتطوير.",
+  category: "generators"
+},
 ];
 
 export default toolsData;

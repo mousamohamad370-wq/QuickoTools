@@ -15,7 +15,8 @@ const componentMap = {
   '/slug-generator': lazy(() => import('./SlugGenerator')),
     '/uuid-generator': lazy(() => import('./UUIDGenerator')),
     '/base64-encoder-decoder': lazy(() => import('./Base64EncoderDecoder')),
-    '/url-encoder-decoder': lazy(() => import('./URLEncoderDecoder'))
+    '/url-encoder-decoder': lazy(() => import('./URLEncoderDecoder')),
+    '/lorem-ipsum-generator': lazy(() => import('./LoremIpsumGenerator'))
 };
 
 const toolsRegistry = toolsData.map((tool) => ({
