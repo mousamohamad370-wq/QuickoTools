@@ -13,7 +13,9 @@ const componentMap = {
   '/percentage-calculator': lazy(() => import('./PercentageCalculator')),
   '/json-formatter': lazy(() => import('./JSONFormatter')),
   '/slug-generator': lazy(() => import('./SlugGenerator')),
-    '/uuid-generator': lazy(() => import('./UUIDGenerator'))
+    '/uuid-generator': lazy(() => import('./UUIDGenerator')),
+    '/base64-encoder-decoder': lazy(() => import('./Base64EncoderDecoder')),
+    '/url-encoder-decoder': lazy(() => import('./URLEncoderDecoder'))
 };
 
 const toolsRegistry = toolsData.map((tool) => ({

@@ -87,6 +87,22 @@ const toolsData = [
   descriptionAr: "إنشاء UUID فورًا للاستخدام في البرمجة وقواعد البيانات.",
   category: "developer-tools"
 },
+{
+  name: "Base64 Encoder / Decoder",
+  nameAr: "تشفير وفك Base64",
+  path: "/base64-encoder-decoder",
+  description: "Encode text to Base64 or decode Base64 back to plain text instantly.",
+  descriptionAr: "حوّل النص إلى Base64 أو فك Base64 إلى نص عادي فورًا.",
+  category: "developer-tools"
+},
+{
+  name: "URL Encoder / Decoder",
+  nameAr: "تشفير وفك URL",
+  path: "/url-encoder-decoder",
+  description: "Encode URLs and text for safe web usage or decode them back instantly.",
+  descriptionAr: "قم بترميز الروابط والنصوص لاستخدامها بأمان في الويب أو فكها فورًا.",
+  category: "developer-tools"
+},
   {
     name: 'Slug Generator',
     nameAr: 'مولد Slug',
