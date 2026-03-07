@@ -10,6 +10,7 @@ import RemoveDuplicateLines from './tools/RemoveDuplicateLines';
 import AgeCalculator from './tools/AgeCalculator';
 import BMICalculator from './tools/BMICalculator';
 import PercentageCalculator from './tools/PercentageCalculator';
+import JSONFormatter from './tools/JSONFormatter';
 
 function App() {
   const [language, setLanguage] = useState(() => {
@@ -76,7 +77,12 @@ function App() {
         path="/percentage-calculator"
         element={<PercentageCalculator language={language} />}
       />
+      <Route
+        path="/json-formatter"
+        element={<JSONFormatter language={language} />}
+      />
     </Routes>
+
   );
 }
 
