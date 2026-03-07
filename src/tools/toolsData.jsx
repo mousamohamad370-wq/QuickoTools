@@ -63,6 +63,14 @@ const toolsData = [
   descriptionAr: "حوّل النص إلى أحرف كبيرة أو صغيرة أو Title Case أو Sentence case فورًا.",
   category: "text-tools"
 },
+{
+  name: "Line Break Remover",
+  nameAr: "إزالة فواصل الأسطر",
+  path: "/line-break-remover",
+  description: "Remove line breaks from text instantly and turn multi-line text into a clean single line.",
+  descriptionAr: "احذف فواصل الأسطر من النص فورًا وحوّل النص متعدد الأسطر إلى سطر واحد مرتب.",
+  category: "text-tools"
+},
   {
     name: 'Age Calculator',
     nameAr: 'حاسبة العمر',

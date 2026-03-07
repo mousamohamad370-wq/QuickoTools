@@ -18,7 +18,8 @@ const componentMap = {
     '/url-encoder-decoder': lazy(() => import('./URLEncoderDecoder')),
     '/lorem-ipsum-generator': lazy(() => import('./LoremIpsumGenerator')),
     '/text-repeater': lazy(() => import('./TextRepeater')),
-    '/case-converter': lazy(() => import('./CaseConverter'))
+    '/case-converter': lazy(() => import('./CaseConverter')),
+    '/line-break-remover': lazy(() => import('./LineBreakRemover'))
     
 };
 
