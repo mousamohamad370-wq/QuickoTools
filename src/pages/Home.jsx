@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import '../styles/home.css';
 import ToolCard from '../components/ToolCard';
-import toolsList from '../tools/toolsList';
+import toolsRegistry from '../tools/toolsRegistry';
 
 function Home({ language, setLanguage }) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -35,10 +35,10 @@ function Home({ language, setLanguage }) {
     const value = searchTerm.trim().toLowerCase();
 
     if (!value) {
-      return toolsList;
+      return toolsRegistry;
     }
 
-    return toolsList.filter((tool) => {
+    return toolsRegistry.filter((tool) => {
       const toolName =
         language === 'ar' && tool.nameAr ? tool.nameAr.toLowerCase() : tool.name.toLowerCase();
 
