@@ -4,6 +4,7 @@ import WordCounter from "./tools/WordCounter";
 import CharacterCounter from "./tools/CharacterCounter";
 import PasswordGenerator from "./tools/PasswordGenerator";
 import QRCodeGenerator from "./tools/QRCodeGenerator";
+import TextCaseConverter from "./tools/TextCaseConverter";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
        <Route path="/character-counter" element={<CharacterCounter />} />
        <Route path="/password-generator" element={<PasswordGenerator />} />
        <Route path="/qr-code-generator" element={<QRCodeGenerator />} />
+       <Route path="/text-case-converter" element={<TextCaseConverter />} />
     </Routes>
   );
 }
