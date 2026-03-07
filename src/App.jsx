@@ -9,11 +9,17 @@ import RemoveDuplicateLines from "./tools/RemoveDuplicateLines";
 import AgeCalculator from "./tools/AgeCalculator";
 import BMICalculator from "./tools/BMICalculator";
 import PercentageCalculator from "./tools/PercentageCalculator";
+import { useState } from "react";
+
 
 
 function App() {
+  const [language, setLanguage] = useState('en');
+  
   return (
     <Routes>
+       <Route path="/"element={ <Home language={language} setLanguage={setLanguage}/> } />
+    
       <Route path="/" element={<Home />} />
       <Route path="/word-counter" element={<WordCounter />} />
        <Route path="/character-counter" element={<CharacterCounter />} />

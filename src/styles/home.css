@@ -11,6 +11,26 @@
   margin: 0 auto;
   text-align: center;
 }
+.language-toggle-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 999px;
+  background-color: #111827;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.language-toggle-button:hover {
+  background-color: #1f2937;
+  transform: translateY(-1px);
+}
 
 .hero-title {
   font-size: 40px;
