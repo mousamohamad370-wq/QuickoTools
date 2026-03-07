@@ -1,12 +1,34 @@
 import { useState } from 'react';
 
-function RemoveDuplicateLines() {
+function RemoveDuplicateLines({ language }) {
   const [text, setText] = useState('');
 
   const lines = text.split('\n');
-
   const cleanedLines = [...new Set(lines)];
   const cleanedText = cleanedLines.join('\n');
+
+  const content = {
+    en: {
+      title: 'Remove Duplicate Lines',
+      description: 'Remove duplicate lines from your text instantly.',
+      placeholder: 'Paste your lines here...',
+      remove: 'Remove Duplicates',
+      clear: 'Clear',
+      totalLines: 'Total Lines',
+      uniqueLines: 'Unique Lines'
+    },
+    ar: {
+      title: 'إزالة الأسطر المكررة',
+      description: 'أزل الأسطر المكررة من النص فورًا.',
+      placeholder: 'ألصق الأسطر هنا...',
+      remove: 'إزالة التكرار',
+      clear: 'مسح',
+      totalLines: 'إجمالي الأسطر',
+      uniqueLines: 'الأسطر الفريدة'
+    }
+  };
+
+  const t = language === 'ar' ? content.ar : content.en;
 
   const handleRemoveDuplicates = () => {
     setText(cleanedText);
@@ -17,20 +39,24 @@ function RemoveDuplicateLines() {
   };
 
   return (
-    <main style={{ padding: '40px 20px' }}>
+    <main
+      className="tool-page"
+      dir={language === 'ar' ? 'rtl' : 'ltr'}
+      style={{ padding: '40px 20px' }}
+    >
       <div style={{ maxWidth: '900px', margin: '0 auto' }}>
         <h1 style={{ fontSize: '32px', marginBottom: '12px' }}>
-          Remove Duplicate Lines
+          {t.title}
         </h1>
 
         <p style={{ color: '#6b7280', marginBottom: '24px', lineHeight: '1.6' }}>
-          Remove duplicate lines from your text instantly.
+          {t.description}
         </p>
 
         <textarea
           value={text}
           onChange={(event) => setText(event.target.value)}
-          placeholder="Paste your lines here..."
+          placeholder={t.placeholder}
           style={{
             width: '100%',
             minHeight: '240px',
@@ -64,7 +90,7 @@ function RemoveDuplicateLines() {
               cursor: 'pointer'
             }}
           >
-            Remove Duplicates
+            {t.remove}
           </button>
 
           <button
@@ -78,7 +104,7 @@ function RemoveDuplicateLines() {
               cursor: 'pointer'
             }}
           >
-            Clear
+            {t.clear}
           </button>
         </div>
 
@@ -98,7 +124,7 @@ function RemoveDuplicateLines() {
             }}
           >
             <h2 style={{ fontSize: '18px', marginBottom: '8px' }}>
-              Total Lines
+              {t.totalLines}
             </h2>
             <p style={{ fontSize: '28px', fontWeight: '700' }}>
               {text ? lines.length : 0}
@@ -114,7 +140,7 @@ function RemoveDuplicateLines() {
             }}
           >
             <h2 style={{ fontSize: '18px', marginBottom: '8px' }}>
-              Unique Lines
+              {t.uniqueLines}
             </h2>
             <p style={{ fontSize: '28px', fontWeight: '700' }}>
               {text ? cleanedLines.length : 0}
