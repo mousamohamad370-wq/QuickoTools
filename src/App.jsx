@@ -6,6 +6,7 @@ import PasswordGenerator from "./tools/PasswordGenerator";
 import QRCodeGenerator from "./tools/QRCodeGenerator";
 import TextCaseConverter from "./tools/TextCaseConverter";
 import RemoveDuplicateLines from "./tools/RemoveDuplicateLines";
+import AgeCalculator from "./tools/AgeCalculator";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
        <Route path="/qr-code-generator" element={<QRCodeGenerator />} />
        <Route path="/text-case-converter" element={<TextCaseConverter />} />
        <Route path="/remove-duplicate-lines" element={<RemoveDuplicateLines />} />
+       <Route path="/age-calculator" element={<AgeCalculator />} />
     </Routes>
   );
 }

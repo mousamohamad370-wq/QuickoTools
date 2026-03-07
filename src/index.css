@@ -21,3 +21,203 @@ textarea,
 select {
   font: inherit;
 }
+.tool-page {
+  padding: 40px 20px;
+}
+
+.tool-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.tool-page-title {
+  font-size: 32px;
+  margin-bottom: 12px;
+  color: #111827;
+}
+
+.tool-page-description {
+  color: #6b7280;
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+.tool-box {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  margin-bottom: 24px;
+}
+
+.tool-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #111827;
+}
+
+.age-input-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.tool-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background-color: #ffffff;
+  outline: none;
+}
+
+.tool-input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.10);
+}
+
+.tool-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.tool-primary-button,
+.tool-secondary-button {
+  border: none;
+  padding: 12px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.15s ease, opacity 0.15s ease, background-color 0.15s ease;
+}
+
+.tool-primary-button:hover,
+.tool-secondary-button:hover {
+  transform: translateY(-1px);
+}
+
+.tool-primary-button {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+.tool-primary-button:hover {
+  background-color: #1d4ed8;
+}
+
+.tool-secondary-button {
+  background-color: #111827;
+  color: #ffffff;
+}
+
+.tool-secondary-button:hover {
+  background-color: #1f2937;
+}
+
+.age-use-today-button {
+  white-space: nowrap;
+}
+
+.tool-error-message {
+  background-color: #fee2e2;
+  color: #b91c1c;
+  padding: 14px 16px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.age-results-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.age-results-show {
+  animation: fadeSlideUp 0.35s ease forwards;
+}
+
+.result-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+.result-card-title {
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: #111827;
+}
+
+.result-card-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: #111827;
+  word-break: break-word;
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 992px) {
+  .age-results-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .tool-page {
+    padding: 30px 16px;
+  }
+
+  .tool-page-title {
+    font-size: 28px;
+  }
+
+  .tool-box {
+    padding: 18px;
+  }
+
+  .age-input-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .age-use-today-button {
+    width: 100%;
+  }
+
+  .tool-actions {
+    flex-direction: column;
+  }
+
+  .tool-primary-button,
+  .tool-secondary-button {
+    width: 100%;
+  }
+
+  .age-results-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .result-card {
+    padding: 18px;
+  }
+
+  .result-card-value {
+    font-size: 24px;
+  }
+}
