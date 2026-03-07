@@ -8,6 +8,7 @@ import TextCaseConverter from "./tools/TextCaseConverter";
 import RemoveDuplicateLines from "./tools/RemoveDuplicateLines";
 import AgeCalculator from "./tools/AgeCalculator";
 import BMICalculator from "./tools/BMICalculator";
+import PercentageCalculator from "./tools/PercentageCalculator";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
        <Route path="/remove-duplicate-lines" element={<RemoveDuplicateLines />} />
        <Route path="/age-calculator" element={<AgeCalculator />} />
        <Route path="/bmi-calculator" element={<BMICalculator />} />
+       <Route path="/percentage-calculator" element={<PercentageCalculator />} />
     </Routes>
   );
 }
