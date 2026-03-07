@@ -5,6 +5,7 @@ import CharacterCounter from "./tools/CharacterCounter";
 import PasswordGenerator from "./tools/PasswordGenerator";
 import QRCodeGenerator from "./tools/QRCodeGenerator";
 import TextCaseConverter from "./tools/TextCaseConverter";
+import RemoveDuplicateLines from "./tools/RemoveDuplicateLines";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
        <Route path="/password-generator" element={<PasswordGenerator />} />
        <Route path="/qr-code-generator" element={<QRCodeGenerator />} />
        <Route path="/text-case-converter" element={<TextCaseConverter />} />
+       <Route path="/remove-duplicate-lines" element={<RemoveDuplicateLines />} />
     </Routes>
   );
 }
