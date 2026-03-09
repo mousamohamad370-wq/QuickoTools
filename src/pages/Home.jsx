@@ -63,25 +63,24 @@ function Home({ language }) {
 
   const content = {
     en: {
-      heroTitle: 'QuickoTools',
+      heroTitle: 'Free Online Tools for Everyday Tasks',
       heroText:
-        'Free online tools for everyday tasks. Fast, simple, and designed to work smoothly on desktop and mobile.',
-      heroCtaPrimary: 'Browse Categories',
+        'QuickoTools brings together fast, simple, and useful online tools for calculators, generators, text utilities, and developer workflows.',
+      heroSubText:
+        'Designed for daily use on desktop and mobile, with clean pages, quick results, and organized categories.',
+      heroCtaPrimary: 'Explore Categories',
       heroCtaSecondary: 'View Popular Tools',
-      introTitle: 'Simple tools for daily use',
-      introText:
-        'QuickoTools helps you solve everyday tasks with free online tools for calculators, generators, text tools, developer tools, and more.',
-      searchTitle: 'Find a tool quickly',
+      searchTitle: 'Find the right tool quickly',
       searchText:
-        'Search by tool name or description to jump directly to the right tool.',
+        'Search by tool name or description to jump directly to the tool you need.',
+      searchPlaceholder: 'Search tools by name or description...',
+      searchResultsTitle: 'Search Results',
       categoriesTitle: 'Browse by Category',
       categoriesText:
-        'Find the right tool faster by exploring our main tool categories.',
+        'Explore the main sections of QuickoTools and find the right tool faster.',
       popularTitle: 'Popular Tools',
       popularText:
-        'Start with some of the most useful tools used by visitors every day.',
-      searchPlaceholder: 'Search by tool name or description...',
-      searchResultsTitle: 'Search Results',
+        'Start with some of the most frequently used tools on the site.',
       noToolsTitle: 'No tools found',
       noToolsText: 'Try searching with a different keyword.',
       openCategory: 'Open Category',
@@ -89,42 +88,41 @@ function Home({ language }) {
       whyItems: [
         {
           title: 'Free to use',
-          description: 'Use all tools online without complicated steps.'
+          description: 'Use tools instantly without unnecessary steps.'
         },
         {
           title: 'Fast and simple',
-          description: 'Clean and lightweight tools designed for quick results.'
+          description: 'Clean and lightweight pages focused on getting results quickly.'
         },
         {
-          title: 'Works on mobile and desktop',
-          description: 'Built to work smoothly across phones, tablets, and computers.'
+          title: 'Works everywhere',
+          description: 'Built for mobile, tablet, and desktop browsing.'
         },
         {
-          title: 'Multiple tool categories',
-          description: 'Browse calculators, generators, text tools, developer tools, and more.'
+          title: 'Well organized',
+          description: 'Browse tools through clear categories and direct search.'
         }
       ]
     },
     ar: {
-      heroTitle: 'كويكو تولز',
+      heroTitle: 'أدوات أونلاين مجانية للمهام اليومية',
       heroText:
-        'أدوات أونلاين مجانية للمهام اليومية. سريعة وبسيطة ومصممة لتعمل بسلاسة على الهاتف والكمبيوتر.',
-      heroCtaPrimary: 'تصفح التصنيفات',
+        'يجمع QuickoTools أدوات سريعة وبسيطة ومفيدة تشمل الحاسبات والمولدات وأدوات النص وأدوات المطورين.',
+      heroSubText:
+        'مصمم للاستخدام اليومي على الهاتف والكمبيوتر، مع صفحات واضحة ونتائج سريعة وتصنيفات منظمة.',
+      heroCtaPrimary: 'استكشف التصنيفات',
       heroCtaSecondary: 'عرض الأدوات الشائعة',
-      introTitle: 'أدوات بسيطة للاستخدام اليومي',
-      introText:
-        'يساعدك QuickoTools في إنجاز المهام اليومية عبر أدوات مجانية أونلاين تشمل الحاسبات والمولدات وأدوات النص وأدوات المطورين وغيرها.',
-      searchTitle: 'اعثر على الأداة بسرعة',
+      searchTitle: 'اعثر على الأداة المناسبة بسرعة',
       searchText:
-        'ابحث باسم الأداة أو وصفها للوصول مباشرة إلى الأداة المناسبة.',
+        'ابحث باسم الأداة أو وصفها للوصول مباشرة إلى الأداة التي تحتاجها.',
+      searchPlaceholder: 'ابحث عن أداة بالاسم أو الوصف...',
+      searchResultsTitle: 'نتائج البحث',
       categoriesTitle: 'تصفح حسب التصنيف',
       categoriesText:
-        'اعثر على الأداة المناسبة بسرعة عبر استكشاف التصنيفات الرئيسية.',
+        'استكشف الأقسام الرئيسية في QuickoTools واعثر على الأداة المناسبة بشكل أسرع.',
       popularTitle: 'الأدوات الشائعة',
       popularText:
-        'ابدأ ببعض الأدوات الأكثر استخدامًا بين الزوار يوميًا.',
-      searchPlaceholder: 'ابحث باسم الأداة أو وصفها...',
-      searchResultsTitle: 'نتائج البحث',
+        'ابدأ ببعض الأدوات الأكثر استخدامًا داخل الموقع.',
       noToolsTitle: 'لم يتم العثور على أدوات',
       noToolsText: 'جرّب كلمة بحث مختلفة.',
       openCategory: 'افتح التصنيف',
@@ -132,19 +130,19 @@ function Home({ language }) {
       whyItems: [
         {
           title: 'مجاني للاستخدام',
-          description: 'استخدم جميع الأدوات أونلاين بدون خطوات معقدة.'
+          description: 'استخدم الأدوات مباشرة بدون خطوات غير ضرورية.'
         },
         {
           title: 'سريع وبسيط',
-          description: 'أدوات خفيفة ونظيفة مصممة لإعطاء نتائج سريعة.'
+          description: 'صفحات خفيفة وواضحة تركّز على الوصول للنتيجة بسرعة.'
         },
         {
-          title: 'يعمل على الهاتف والكمبيوتر',
-          description: 'مصمم ليعمل بسلاسة على الجوال والتابلت والكمبيوتر.'
+          title: 'يعمل على كل الأجهزة',
+          description: 'مصمم للعمل على الهاتف والتابلت والكمبيوتر.'
         },
         {
-          title: 'تصنيفات أدوات متعددة',
-          description: 'تصفح الحاسبات والمولدات وأدوات النص وأدوات المطورين وغيرها.'
+          title: 'منظم بوضوح',
+          description: 'تصفح الأدوات عبر تصنيفات واضحة وبحث مباشر.'
         }
       ]
     }
@@ -181,46 +179,48 @@ function Home({ language }) {
   return (
     <main className="home-page" dir={language === 'ar' ? 'rtl' : 'ltr'}>
       <section className="hero-section">
-        <div className="hero-container">
-          <h1 className="hero-title">{currentContent.heroTitle}</h1>
+        <div className="hero-container hero-surface">
+          <div className="hero-content">
+            <div className="hero-copy">
+              <span className="hero-badge">QuickoTools</span>
 
-          <p className="hero-text">{currentContent.heroText}</p>
+              <h1 className="hero-title">{currentContent.heroTitle}</h1>
 
-          <div className="hero-actions">
-            <a href="#categories-section" className="tool-card-button">
-              {currentContent.heroCtaPrimary}
-            </a>
+              <p className="hero-text">{currentContent.heroText}</p>
+              <p className="hero-subtext">{currentContent.heroSubText}</p>
 
-            <a
-              href="#popular-tools"
-              className="tool-card-button hero-secondary-button"
-            >
-              {currentContent.heroCtaSecondary}
-            </a>
+              <div className="hero-actions">
+                <a href="#categories-section" className="tool-card-button">
+                  {currentContent.heroCtaPrimary}
+                </a>
+
+                <a
+                  href="#popular-tools"
+                  className="tool-card-button hero-secondary-button"
+                >
+                  {currentContent.heroCtaSecondary}
+                </a>
+              </div>
+            </div>
+
+            <div className="hero-orbs" aria-hidden="true">
+              <span className="hero-orb hero-orb-one"></span>
+              <span className="hero-orb hero-orb-two"></span>
+              <span className="hero-orb hero-orb-three"></span>
+              <span className="hero-orb hero-orb-four"></span>
+              <span className="hero-orb hero-orb-five"></span>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="tools-section">
+      <section className="tools-section search-section">
         <div className="tools-container">
           <div className="tools-header">
-            <h2 className="tools-section-title">
-              {currentContent.introTitle}
-            </h2>
-            <p className="hero-text">{currentContent.introText}</p>
-          </div>
-        </div>
-      </section>
-
-      <section className="tools-section">
-        <div className="tools-container">
-          <div className="tools-header">
-            <h2 className="tools-section-title">
-              {currentContent.searchTitle}
-            </h2>
+            <h2 className="tools-section-title">{currentContent.searchTitle}</h2>
             <p className="hero-text">{currentContent.searchText}</p>
 
-            <div className="tools-search-box">
+            <div className="tools-search-box tools-search-box-large">
               <input
                 type="text"
                 value={searchTerm}
@@ -235,7 +235,7 @@ function Home({ language }) {
             <>
               {filteredTools.length > 0 ? (
                 <>
-                  <div className="tools-header">
+                  <div className="tools-header tools-header-compact">
                     <h2 className="tools-section-title">
                       {currentContent.searchResultsTitle}
                     </h2>
@@ -281,18 +281,20 @@ function Home({ language }) {
             <p className="hero-text">{currentContent.categoriesText}</p>
           </div>
 
-          <div className="tools-grid">
+          <div className="category-grid">
             {categories.map((category) => (
-              <div key={category.slug} className="tool-card">
-                <h3 className="tool-card-title">
-                  {language === 'ar' ? category.nameAr : category.name}
-                </h3>
+              <div key={category.slug} className="category-card">
+                <div className="category-card-content">
+                  <h3 className="category-card-title">
+                    {language === 'ar' ? category.nameAr : category.name}
+                  </h3>
 
-                <p className="tool-card-description">
-                  {language === 'ar'
-                    ? category.descriptionAr
-                    : category.description}
-                </p>
+                  <p className="category-card-description">
+                    {language === 'ar'
+                      ? category.descriptionAr
+                      : category.description}
+                  </p>
+                </div>
 
                 <Link to={`/${category.slug}`} className="tool-card-button">
                   {currentContent.openCategory}

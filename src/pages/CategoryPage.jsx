@@ -8,13 +8,13 @@ function CategoryPage({ language }) {
   const { categorySlug } = useParams();
 
   const categoriesMap = {
-    'generators': {
+    generators: {
       name: 'Generators',
       nameAr: 'المولدات',
       description: 'Tools for generating passwords, QR codes, slugs, and more.',
       descriptionAr: 'أدوات لإنشاء كلمات المرور ورموز QR والـ Slugs وغيرها.'
     },
-    'calculators': {
+    calculators: {
       name: 'Calculators',
       nameAr: 'الحاسبات',
       description: 'Useful calculation tools like age, BMI, and percentage calculators.',
@@ -32,7 +32,7 @@ function CategoryPage({ language }) {
       description: 'Formatting and developer-focused utilities.',
       descriptionAr: 'أدوات تنسيق وخدمات مفيدة للمطورين.'
     },
-    'converters': {
+    converters: {
       name: 'Converters',
       nameAr: 'أدوات التحويل',
       description: 'Convert text and content into different formats.',
@@ -72,9 +72,12 @@ function CategoryPage({ language }) {
     return (
       <main className="home-page" dir={language === 'ar' ? 'rtl' : 'ltr'}>
         <section className="hero-section">
-          <div className="hero-container">
-            <h1 className="hero-title">{t.notFoundTitle}</h1>
-            <p className="hero-text">{t.notFoundText}</p>
+          <div className="hero-container hero-surface page-hero-surface">
+            <div className="page-hero-content">
+              <span className="hero-badge">QuickoTools</span>
+              <h1 className="hero-title page-hero-title">{t.notFoundTitle}</h1>
+              <p className="hero-text">{t.notFoundText}</p>
+            </div>
           </div>
         </section>
       </main>
@@ -84,16 +87,20 @@ function CategoryPage({ language }) {
   return (
     <main className="home-page" dir={language === 'ar' ? 'rtl' : 'ltr'}>
       <section className="hero-section">
-        <div className="hero-container">
-          <h1 className="hero-title">
-            {language === 'ar' ? currentCategory.nameAr : currentCategory.name}
-          </h1>
+        <div className="hero-container hero-surface page-hero-surface">
+          <div className="page-hero-content">
+            <span className="hero-badge">QuickoTools</span>
 
-          <p className="hero-text">
-            {language === 'ar'
-              ? currentCategory.descriptionAr
-              : currentCategory.description}
-          </p>
+            <h1 className="hero-title page-hero-title">
+              {language === 'ar' ? currentCategory.nameAr : currentCategory.name}
+            </h1>
+
+            <p className="hero-text">
+              {language === 'ar'
+                ? currentCategory.descriptionAr
+                : currentCategory.description}
+            </p>
+          </div>
         </div>
       </section>
 

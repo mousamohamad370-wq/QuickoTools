@@ -20,7 +20,8 @@ const componentMap = {
     '/text-repeater': lazy(() => import('./TextRepeater')),
     '/case-converter': lazy(() => import('./CaseConverter')),
     '/line-break-remover': lazy(() => import('./LineBreakRemover')),
-    '/html-entity-encoder-decoder': lazy(() => import('./HTMLEntityEncoderDecoder'))
+    '/html-entity-encoder-decoder': lazy(() => import('./HTMLEntityEncoderDecoder')),
+    '/roman-numeral-converter': lazy(() => import('./RomanNumeralConverter')),
     
     
 };

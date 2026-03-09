@@ -40,6 +40,14 @@ const toolsData = [
     category: 'converters'
   },
   {
+  name: "Roman Numeral Converter",
+  nameAr: "محول الأرقام الرومانية",
+  path: "/roman-numeral-converter",
+  description: "Convert numbers to Roman numerals or Roman numerals back to numbers instantly.",
+  descriptionAr: "حوّل الأرقام إلى أرقام رومانية أو حوّل الأرقام الرومانية إلى أرقام عادية فورًا.",
+  category: "converters"
+},
+  {
     name: 'Remove Duplicate Lines',
     nameAr: 'إزالة الأسطر المكررة',
     path: '/remove-duplicate-lines',

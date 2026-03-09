@@ -49,13 +49,15 @@ function Categories({ language }) {
 
   const content = {
     en: {
-      title: 'Tool Categories',
-      description: 'Browse QuickoTools by category to find the right tool faster.',
+      title: 'Browse Tool Categories',
+      description:
+        'Explore QuickoTools by category and discover the right tools faster.',
       open: 'Open Category'
     },
     ar: {
-      title: 'تصنيفات الأدوات',
-      description: 'تصفح أدوات QuickoTools حسب التصنيف للوصول للأداة المناسبة بسرعة.',
+      title: 'تصفح تصنيفات الأدوات',
+      description:
+        'استكشف QuickoTools حسب التصنيف للوصول إلى الأدوات المناسبة بشكل أسرع.',
       open: 'افتح التصنيف'
     }
   };
@@ -65,26 +67,31 @@ function Categories({ language }) {
   return (
     <main className="home-page" dir={language === 'ar' ? 'rtl' : 'ltr'}>
       <section className="hero-section">
-        <div className="hero-container">
-          <h1 className="hero-title">{t.title}</h1>
-          <p className="hero-text">{t.description}</p>
+        <div className="hero-container hero-surface page-hero-surface">
+          <div className="page-hero-content">
+            <span className="hero-badge">QuickoTools</span>
+            <h1 className="hero-title page-hero-title">{t.title}</h1>
+            <p className="hero-text">{t.description}</p>
+          </div>
         </div>
       </section>
 
       <section className="tools-section">
         <div className="tools-container">
-          <div className="tools-grid">
+          <div className="category-grid">
             {categories.map((category) => (
-              <div key={category.slug} className="tool-card">
-                <h3 className="tool-card-title">
-                  {language === 'ar' ? category.nameAr : category.name}
-                </h3>
+              <div key={category.slug} className="category-card">
+                <div className="category-card-content">
+                  <h3 className="category-card-title">
+                    {language === 'ar' ? category.nameAr : category.name}
+                  </h3>
 
-                <p className="tool-card-description">
-                  {language === 'ar'
-                    ? category.descriptionAr
-                    : category.description}
-                </p>
+                  <p className="category-card-description">
+                    {language === 'ar'
+                      ? category.descriptionAr
+                      : category.description}
+                  </p>
+                </div>
 
                 <Link to={`/${category.slug}`} className="tool-card-button">
                   {t.open}

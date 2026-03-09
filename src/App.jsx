@@ -1,11 +1,13 @@
 import { Suspense, useEffect, useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
 import Categories from './pages/Categories';
 import CategoryPage from './pages/CategoryPage';
 import Navbar from './components/Navbar';
-import toolsRegistry from './tools/toolsRegistry';
 import Footer from './components/Footer';
+import toolsRegistry from './tools/toolsRegistry';
+import About from './pages/About';
+import Contact from './pages/Contact';
 
 function PageLoader() {
   return (
@@ -14,6 +16,28 @@ function PageLoader() {
       <p className="page-loader-text">Loading...</p>
     </div>
   );
+}
+
+function ScrollToTop() {
+  const { pathname, hash } = useLocation();
+
+  useEffect(() => {
+    if (hash) {
+      const element = document.querySelector(hash);
+
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 0);
+      }
+
+      return;
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [pathname, hash]);
+
+  return null;
 }
 
 function App() {
@@ -27,24 +51,22 @@ function App() {
 
   return (
     <>
+      <ScrollToTop />
       <Navbar language={language} setLanguage={setLanguage} />
 
       <Suspense fallback={<PageLoader />}>
         <Routes>
-          <Route
-            path="/"
-            element={<Home language={language} setLanguage={setLanguage} />}
-          />
-
+          <Route path="/" element={<Home language={language} />} />
           <Route
             path="/categories"
             element={<Categories language={language} />}
           />
-
           <Route
             path="/:categorySlug"
             element={<CategoryPage language={language} />}
           />
+          <Route path="/about" element={<About language={language} />} />
+          <Route path="/contact" element={<Contact language={language} />} />
 
           {toolsRegistry.map((tool) => {
             const ToolComponent = tool.component;
@@ -59,6 +81,7 @@ function App() {
           })}
         </Routes>
       </Suspense>
+
       <Footer language={language} />
     </>
   );

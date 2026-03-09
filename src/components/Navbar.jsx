@@ -11,6 +11,7 @@ function Navbar({ language, setLanguage }) {
       categories: 'Categories',
       popular: 'Popular Tools',
       menu: 'Menu',
+      close: 'Close',
       languageButton: 'AR'
     },
     ar: {
@@ -19,6 +20,7 @@ function Navbar({ language, setLanguage }) {
       categories: 'التصنيفات',
       popular: 'الأدوات الشائعة',
       menu: 'القائمة',
+      close: 'إغلاق',
       languageButton: 'EN'
     }
   };
@@ -27,6 +29,7 @@ function Navbar({ language, setLanguage }) {
 
   const handleLanguageToggle = () => {
     setLanguage(language === 'en' ? 'ar' : 'en');
+    setIsMenuOpen(false);
   };
 
   const handleMenuToggle = () => {
@@ -45,17 +48,17 @@ function Navbar({ language, setLanguage }) {
         </Link>
 
         <nav className={`site-navbar-links ${isMenuOpen ? 'is-open' : ''}`}>
-          <Link to="/" className="site-navbar-link" onClick={handleCloseMenu}>
+          <a href="/#top" className="site-navbar-link" onClick={handleCloseMenu}>
             {t.home}
-          </Link>
+          </a>
 
-          <Link
-            to="/categories"
+          <a
+            href="/#categories-section"
             className="site-navbar-link"
             onClick={handleCloseMenu}
           >
             {t.categories}
-          </Link>
+          </a>
 
           <a
             href="/#popular-tools"
@@ -78,8 +81,9 @@ function Navbar({ language, setLanguage }) {
           type="button"
           className="site-navbar-menu-button"
           onClick={handleMenuToggle}
+          aria-label={isMenuOpen ? t.close : t.menu}
         >
-          {t.menu}
+          {isMenuOpen ? '✕' : '☰'}
         </button>
       </div>
     </header>
