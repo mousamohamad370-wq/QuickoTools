@@ -10,6 +10,8 @@ function Navbar({ language, setLanguage }) {
       home: 'Home',
       categories: 'Categories',
       popular: 'Popular Tools',
+      about: 'About',
+      contact: 'Contact',
       menu: 'Menu',
       close: 'Close',
       languageButton: 'AR'
@@ -19,6 +21,8 @@ function Navbar({ language, setLanguage }) {
       home: 'الرئيسية',
       categories: 'التصنيفات',
       popular: 'الأدوات الشائعة',
+      about: 'حول',
+      contact: 'اتصل بنا',
       menu: 'القائمة',
       close: 'إغلاق',
       languageButton: 'EN'
@@ -67,6 +71,22 @@ function Navbar({ language, setLanguage }) {
           >
             {t.popular}
           </a>
+
+          <Link
+            to="/about"
+            className="site-navbar-link"
+            onClick={handleCloseMenu}
+          >
+            {t.about}
+          </Link>
+
+          <Link
+            to="/contact"
+            className="site-navbar-link"
+            onClick={handleCloseMenu}
+          >
+            {t.contact}
+          </Link>
 
           <button
             type="button"

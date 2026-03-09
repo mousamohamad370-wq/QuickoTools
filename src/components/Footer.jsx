@@ -9,6 +9,7 @@ function Footer({ language }) {
       linksTitle: 'Quick Links',
       categories: 'Categories',
       popularTools: 'Popular Tools',
+      about: 'About',
       contact: 'Contact',
       privacy: 'Privacy Policy',
       copyright: '© 2026 QuickoTools. All rights reserved.'
@@ -20,6 +21,7 @@ function Footer({ language }) {
       linksTitle: 'روابط سريعة',
       categories: 'التصنيفات',
       popularTools: 'الأدوات الشائعة',
+      about: 'حول',
       contact: 'اتصل بنا',
       privacy: 'سياسة الخصوصية',
       copyright: '© 2026 QuickoTools. جميع الحقوق محفوظة.'
@@ -49,11 +51,15 @@ function Footer({ language }) {
             </li>
 
             <li>
-              <a href="#">{t.contact}</a>
+              <Link to="/about">{t.about}</Link>
             </li>
 
             <li>
-              <a href="#">{t.privacy}</a>
+              <Link to="/contact">{t.contact}</Link>
+            </li>
+
+            <li>
+              <Link to="/privacy-policy">{t.privacy}</Link>
             </li>
           </ul>
         </div>
