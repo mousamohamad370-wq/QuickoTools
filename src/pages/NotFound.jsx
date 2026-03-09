@@ -1,7 +1,16 @@
+import usePageMeta from '../hooks/usePageMeta';
 import { Link } from 'react-router-dom';
 import '../styles/home.css';
 
 function NotFound({ language }) {
+    usePageMeta(
+  language === 'ar'
+    ? 'الصفحة غير موجودة - QuickoTools'
+    : 'Page Not Found - QuickoTools',
+  language === 'ar'
+    ? 'الصفحة التي تبحث عنها غير موجودة على QuickoTools.'
+    : 'The page you are looking for does not exist on QuickoTools.'
+);
   const content = {
     en: {
       title: 'Page Not Found',

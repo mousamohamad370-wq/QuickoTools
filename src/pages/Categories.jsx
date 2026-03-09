@@ -1,7 +1,16 @@
+import usePageMeta from '../hooks/usePageMeta';
 import { Link } from 'react-router-dom';
 import '../styles/home.css';
 
 function Categories({ language }) {
+  usePageMeta(
+  language === 'ar'
+    ? 'تصنيفات الأدوات - QuickoTools'
+    : 'Tool Categories - QuickoTools',
+  language === 'ar'
+    ? 'استكشف تصنيفات أدوات QuickoTools للوصول السريع إلى الحاسبات والمولدات وأدوات النص وأدوات المطورين.'
+    : 'Explore QuickoTools categories to quickly find calculators, generators, text tools, and developer tools.'
+);
   const categories = [
     {
       name: 'Generators',

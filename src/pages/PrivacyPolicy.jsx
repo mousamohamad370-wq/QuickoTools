@@ -1,6 +1,15 @@
+import usePageMeta from '../hooks/usePageMeta';
 import '../styles/home.css';
 
 function PrivacyPolicy({ language }) {
+    usePageMeta(
+  language === 'ar'
+    ? 'سياسة الخصوصية - QuickoTools'
+    : 'Privacy Policy - QuickoTools',
+  language === 'ar'
+    ? 'اقرأ سياسة الخصوصية الخاصة بموقع QuickoTools وكيفية التعامل مع المعلومات الأساسية.'
+    : 'Read the QuickoTools privacy policy and learn how basic information is handled on the website.'
+);
   const content = {
     en: {
       title: 'Privacy Policy',

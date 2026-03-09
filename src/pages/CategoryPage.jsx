@@ -1,3 +1,4 @@
+import usePageMeta from '../hooks/usePageMeta';
 import { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import ToolCard from '../components/ToolCard';
@@ -5,6 +6,22 @@ import toolsData from '../tools/toolsData';
 import '../styles/home.css';
 
 function CategoryPage({ language }) {
+  usePageMeta(
+  currentCategory
+    ? language === 'ar'
+      ? `${currentCategory.nameAr} - QuickoTools`
+      : `${currentCategory.name} - QuickoTools`
+    : language === 'ar'
+      ? 'التصنيف غير موجود - QuickoTools'
+      : 'Category Not Found - QuickoTools',
+  currentCategory
+    ? language === 'ar'
+      ? currentCategory.descriptionAr
+      : currentCategory.description
+    : language === 'ar'
+      ? 'التصنيف المطلوب غير موجود في QuickoTools.'
+      : 'The requested category does not exist on QuickoTools.'
+);
   const { categorySlug } = useParams();
 
   const categoriesMap = {
