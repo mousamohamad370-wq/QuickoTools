@@ -9,6 +9,7 @@ import toolsRegistry from './tools/toolsRegistry';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import NotFound from './pages/NotFound';
 
 function PageLoader() {
   return (
@@ -72,6 +73,7 @@ function App() {
   path="/privacy-policy"
   element={<PrivacyPolicy language={language} />}
 />
+<Route path="*" element={<NotFound language={language} />} />
 
           {toolsRegistry.map((tool) => {
             const ToolComponent = tool.component;
