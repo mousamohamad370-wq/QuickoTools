@@ -1,3 +1,4 @@
+import usePageMeta from '../hooks/usePageMeta';
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/home.css';
@@ -5,6 +6,14 @@ import ToolCard from '../components/ToolCard';
 import toolsData from '../tools/toolsData';
 
 function Home({ language }) {
+  usePageMeta(
+  language === 'ar'
+    ? 'QuickoTools - أدوات مجانية أونلاين'
+    : 'QuickoTools - Free Online Tools',
+  language === 'ar'
+    ? 'مجموعة أدوات أونلاين مجانية تشمل الحاسبات والمولدات وأدوات النص وأدوات المطورين.'
+    : 'Free online tools for everyday tasks including calculators, generators, text tools, and developer tools.'
+);
   const [searchTerm, setSearchTerm] = useState('');
 
   const categories = [
