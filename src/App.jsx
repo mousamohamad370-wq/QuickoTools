@@ -8,6 +8,7 @@ import Footer from './components/Footer';
 import toolsRegistry from './tools/toolsRegistry';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 function PageLoader() {
   return (
@@ -67,6 +68,10 @@ function App() {
           />
           <Route path="/about" element={<About language={language} />} />
           <Route path="/contact" element={<Contact language={language} />} />
+          <Route
+  path="/privacy-policy"
+  element={<PrivacyPolicy language={language} />}
+/>
 
           {toolsRegistry.map((tool) => {
             const ToolComponent = tool.component;
