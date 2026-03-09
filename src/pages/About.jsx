@@ -1,6 +1,16 @@
+import usePageMeta from '../hooks/usePageMeta';
 import '../styles/home.css';
 
 function About({ language }) {
+  usePageMeta(
+    language === 'ar'
+      ? 'حول QuickoTools'
+      : 'About QuickoTools',
+    language === 'ar'
+      ? 'تعرّف على QuickoTools والأدوات المجانية التي يقدمها للاستخدام اليومي.'
+      : 'Learn about QuickoTools and the free online tools it offers for everyday use.'
+  );
+
   const content = {
     en: {
       title: 'About QuickoTools',

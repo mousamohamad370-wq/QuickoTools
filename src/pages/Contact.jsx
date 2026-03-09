@@ -1,6 +1,15 @@
+import usePageMeta from '../hooks/usePageMeta';
 import '../styles/home.css';
 
 function Contact({ language }) {
+    usePageMeta(
+  language === 'ar'
+    ? 'اتصل بنا - QuickoTools'
+    : 'Contact - QuickoTools',
+  language === 'ar'
+    ? 'تواصل مع QuickoTools للاستفسارات العامة والملاحظات والاقتراحات.'
+    : 'Contact QuickoTools for general questions, feedback, and suggestions.'
+);
   const content = {
     en: {
       title: 'Contact',
