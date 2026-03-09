@@ -10,6 +10,7 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import NotFound from './pages/NotFound';
+import'./components/ScrollToTop.jsx';
 
 function PageLoader() {
   return (
