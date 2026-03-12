@@ -1,53 +1,67 @@
 import { Link } from 'react-router-dom';
 
 function Footer({ language }) {
+  const currentYear = new Date().getFullYear();
+
   const content = {
     en: {
       aboutTitle: 'About QuickoTools',
       aboutText:
-        'QuickoTools provides free and simple online tools for everyday tasks including calculators, generators, text tools, and developer utilities.',
+        'QuickoTools provides free and simple online tools for everyday tasks including calculators, generators, text tools, converters, and developer utilities.',
       linksTitle: 'Quick Links',
+      contactTitle: 'Contact',
+      home: 'Home',
       categories: 'Categories',
       popularTools: 'Popular Tools',
       about: 'About',
       contact: 'Contact',
       privacy: 'Privacy Policy',
-      copyright: '© 2026 QuickoTools. All rights reserved.'
+      emailLabel: 'Email',
+      emailValue: 'contact@quickotools.com',
+      copyright: `© ${currentYear} QuickoTools. All rights reserved.`
     },
     ar: {
       aboutTitle: 'حول QuickoTools',
       aboutText:
-        'يوفر QuickoTools أدوات أونلاين مجانية وبسيطة للمهام اليومية مثل الحاسبات والمولدات وأدوات النص وأدوات المطورين.',
+        'يوفر QuickoTools أدوات أونلاين مجانية وبسيطة للمهام اليومية مثل الحاسبات والمولدات وأدوات النص وأدوات التحويل وأدوات المطورين.',
       linksTitle: 'روابط سريعة',
+      contactTitle: 'التواصل',
+      home: 'الرئيسية',
       categories: 'التصنيفات',
       popularTools: 'الأدوات الشائعة',
       about: 'حول',
       contact: 'اتصل بنا',
       privacy: 'سياسة الخصوصية',
-      copyright: '© 2026 QuickoTools. جميع الحقوق محفوظة.'
+      emailLabel: 'البريد الإلكتروني',
+      emailValue: 'contact@quickotools.com',
+      copyright: `© ${currentYear} QuickoTools. جميع الحقوق محفوظة.`
     }
   };
 
   const t = language === 'ar' ? content.ar : content.en;
 
   return (
-    <footer className="site-footer">
+    <footer className="site-footer" dir={language === 'ar' ? 'rtl' : 'ltr'}>
       <div className="site-footer-container">
         <div className="footer-section">
-          <h3 className="footer-title">{t.aboutTitle}</h3>
+          <h2 className="footer-title">{t.aboutTitle}</h2>
           <p className="footer-text">{t.aboutText}</p>
         </div>
 
         <div className="footer-section">
-          <h3 className="footer-title">{t.linksTitle}</h3>
+          <h2 className="footer-title">{t.linksTitle}</h2>
 
           <ul className="footer-links">
+            <li>
+              <Link to="/">{t.home}</Link>
+            </li>
+
             <li>
               <Link to="/categories">{t.categories}</Link>
             </li>
 
             <li>
-              <a href="/#popular-tools">{t.popularTools}</a>
+              <Link to="/#popular-tools">{t.popularTools}</Link>
             </li>
 
             <li>
@@ -62,6 +76,14 @@ function Footer({ language }) {
               <Link to="/privacy-policy">{t.privacy}</Link>
             </li>
           </ul>
+        </div>
+
+        <div className="footer-section">
+          <h2 className="footer-title">{t.contactTitle}</h2>
+          <p className="footer-text">
+            <strong>{t.emailLabel}:</strong>{' '}
+            <a href={`mailto:${t.emailValue}`}>{t.emailValue}</a>
+          </p>
         </div>
       </div>
 
