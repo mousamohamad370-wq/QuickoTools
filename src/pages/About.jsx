@@ -7,42 +7,46 @@ function About({ language }) {
       ? 'حول QuickoTools'
       : 'About QuickoTools',
     language === 'ar'
-      ? 'تعرّف على QuickoTools والأدوات المجانية التي يقدمها للاستخدام اليومي.'
-      : 'Learn about QuickoTools and the free online tools it offers for everyday use.'
+      ? 'تعرّف على QuickoTools، موقع الأدوات الأونلاين المجانية الذي يساعد المستخدمين على إنجاز المهام اليومية بسرعة وسهولة.'
+      : 'Learn about QuickoTools, a free online tools website built to help users solve everyday tasks quickly and easily.'
   );
 
   const content = {
     en: {
       title: 'About QuickoTools',
       description:
-        'QuickoTools is a free online tools website built to help people solve everyday tasks quickly and easily.',
+        'QuickoTools is a free online tools website built to help users solve everyday tasks quickly, simply, and efficiently.',
       intro:
-        'Our goal is to provide simple, fast, and useful web tools that work smoothly on desktop and mobile. We focus on calculators, generators, text tools, developer tools, and other practical utilities.',
-      sectionTitle: 'What we offer',
+        'Our goal is to create a lightweight and practical platform that offers useful online tools for daily needs. We focus on simple experiences, fast performance, and tools that work smoothly across desktop and mobile devices.',
+      sectionTitle: 'What QuickoTools offers',
       points: [
-        'Free online tools for daily use',
-        'Fast and simple user experience',
+        'Free online tools for everyday use',
+        'Simple and fast user experience',
         'Multiple categories for easy browsing',
-        'Tools designed to work on phone and desktop'
+        'Responsive design for desktop and mobile',
+        'Useful tools across text, calculators, generators, converters, and developer needs',
+        'Growing collection of tools designed to stay easy to use'
       ],
       closing:
-        'QuickoTools is built to stay lightweight, useful, and easy to use for everyone.'
+        'QuickoTools is built to stay fast, useful, and accessible, with a growing library of tools designed to save time and make common tasks easier.'
     },
     ar: {
       title: 'حول QuickoTools',
       description:
-        'QuickoTools هو موقع أدوات أونلاين مجانية تم إنشاؤه لمساعدة المستخدمين على إنجاز المهام اليومية بسرعة وسهولة.',
+        'QuickoTools هو موقع أدوات أونلاين مجانية تم إنشاؤه لمساعدة المستخدمين على إنجاز المهام اليومية بسرعة وبساطة وكفاءة.',
       intro:
-        'هدفنا هو تقديم أدوات ويب بسيطة وسريعة ومفيدة تعمل بسلاسة على الهاتف والكمبيوتر. نركّز على الحاسبات والمولدات وأدوات النص وأدوات المطورين وغيرها من الأدوات العملية.',
-      sectionTitle: 'ماذا نقدم',
+        'هدفنا هو بناء منصة خفيفة وعملية توفر أدوات أونلاين مفيدة للاستخدام اليومي. نركز على سهولة الاستخدام وسرعة الأداء وأدوات تعمل بسلاسة على الهاتف والكمبيوتر.',
+      sectionTitle: 'ماذا يقدم QuickoTools',
       points: [
         'أدوات أونلاين مجانية للاستخدام اليومي',
-        'تجربة استخدام سريعة وبسيطة',
+        'تجربة استخدام بسيطة وسريعة',
         'تصنيفات متعددة لتسهيل التصفح',
-        'أدوات مصممة للعمل على الهاتف والكمبيوتر'
+        'تصميم متجاوب للهاتف والكمبيوتر',
+        'أدوات مفيدة ضمن النصوص والحاسبات والمولدات والمحولات وأدوات المطورين',
+        'مكتبة أدوات متنامية مصممة لتبقى سهلة الاستخدام'
       ],
       closing:
-        'تم بناء QuickoTools ليبقى خفيفًا ومفيدًا وسهل الاستخدام للجميع.'
+        'تم بناء QuickoTools ليبقى سريعًا ومفيدًا وسهل الوصول، مع مكتبة أدوات متنامية تهدف إلى توفير الوقت وتسهيل المهام الشائعة.'
     }
   };
 
@@ -64,6 +68,7 @@ function About({ language }) {
         <div className="tools-container">
           <div className="tool-card">
             <h2 className="tool-card-title">{t.sectionTitle}</h2>
+
             <p className="tool-card-description" style={{ marginBottom: '16px' }}>
               {t.intro}
             </p>

@@ -2,38 +2,40 @@ import usePageMeta from '../hooks/usePageMeta';
 import '../styles/home.css';
 
 function Contact({ language }) {
-    usePageMeta(
-  language === 'ar'
-    ? 'اتصل بنا - QuickoTools'
-    : 'Contact - QuickoTools',
-  language === 'ar'
-    ? 'تواصل مع QuickoTools للاستفسارات العامة والملاحظات والاقتراحات.'
-    : 'Contact QuickoTools for general questions, feedback, and suggestions.'
-);
+  usePageMeta(
+    language === 'ar'
+      ? 'اتصل بنا - QuickoTools'
+      : 'Contact - QuickoTools',
+    language === 'ar'
+      ? 'تواصل مع QuickoTools للاستفسارات والاقتراحات أو للإبلاغ عن مشكلة في الأدوات.'
+      : 'Contact QuickoTools for questions, feedback, or to report an issue with the tools.'
+  );
+
   const content = {
     en: {
-      title: 'Contact',
+      title: 'Contact QuickoTools',
       description:
-        'Need to get in touch with QuickoTools? Use the information below for general questions and feedback.',
+        'If you have a question, suggestion, or found an issue with one of the tools, feel free to contact us.',
       intro:
-        'We welcome feedback, suggestions, and general inquiries related to QuickoTools.',
+        'We welcome feedback and suggestions that help improve QuickoTools and make the tools more useful for everyone.',
+      contactTitle: 'Contact Information',
       emailLabel: 'Email',
       emailValue: 'contact@quickotools.com',
-      noteTitle: 'Contact Note',
-      noteText:
-        'This page is currently a simple contact page for informational purposes. You can later replace the email address with your official contact email or add a contact form.'
+      note:
+        'For general questions, feedback, or reporting a problem with a tool, please contact us using the email above.'
     },
+
     ar: {
-      title: 'اتصل بنا',
+      title: 'التواصل مع QuickoTools',
       description:
-        'هل تريد التواصل مع QuickoTools؟ استخدم المعلومات التالية للاستفسارات العامة والملاحظات.',
+        'إذا كان لديك سؤال أو اقتراح أو واجهت مشكلة في إحدى الأدوات يمكنك التواصل معنا.',
       intro:
-        'نرحب بالملاحظات والاقتراحات والاستفسارات العامة المتعلقة بـ QuickoTools.',
+        'نرحب بالملاحظات والاقتراحات التي تساعدنا على تحسين QuickoTools وجعل الأدوات أكثر فائدة للجميع.',
+      contactTitle: 'معلومات التواصل',
       emailLabel: 'البريد الإلكتروني',
       emailValue: 'contact@quickotools.com',
-      noteTitle: 'ملاحظة',
-      noteText:
-        'هذه الصفحة حاليًا عبارة عن صفحة تواصل بسيطة لأغراض تعريفية. يمكنك لاحقًا استبدال البريد الإلكتروني بالبريد الرسمي أو إضافة نموذج تواصل.'
+      note:
+        'للاستفسارات العامة أو الاقتراحات أو للإبلاغ عن مشكلة في إحدى الأدوات يمكنك التواصل معنا عبر البريد أعلاه.'
     }
   };
 
@@ -54,17 +56,22 @@ function Contact({ language }) {
       <section className="tools-section">
         <div className="tools-container">
           <div className="tool-card">
-            <h2 className="tool-card-title">{t.noteTitle}</h2>
+            <h2 className="tool-card-title">{t.contactTitle}</h2>
+
             <p className="tool-card-description" style={{ marginBottom: '16px' }}>
               {t.intro}
             </p>
 
-            <p className="tool-card-description" style={{ marginBottom: '10px' }}>
+            <p className="tool-card-description" style={{ marginBottom: '12px' }}>
               <strong>{t.emailLabel}:</strong>{' '}
-              <a href={`mailto:${t.emailValue}`}>{t.emailValue}</a>
+              <a href={`mailto:${t.emailValue}`}>
+                {t.emailValue}
+              </a>
             </p>
 
-            <p className="tool-card-description">{t.noteText}</p>
+            <p className="tool-card-description">
+              {t.note}
+            </p>
           </div>
         </div>
       </section>
