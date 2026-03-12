@@ -7,13 +7,14 @@ import toolsData from '../tools/toolsData';
 
 function Home({ language }) {
   usePageMeta(
-  language === 'ar'
-    ? 'QuickoTools - أدوات مجانية أونلاين'
-    : 'QuickoTools - Free Online Tools',
-  language === 'ar'
-    ? 'مجموعة أدوات أونلاين مجانية تشمل الحاسبات والمولدات وأدوات النص وأدوات المطورين.'
-    : 'Free online tools for everyday tasks including calculators, generators, text tools, and developer tools.'
-);
+    language === 'ar'
+      ? 'QuickoTools - أدوات مجانية أونلاين للحساب والنصوص والتحويل'
+      : 'QuickoTools - Free Online Tools for Calculators, Text, Generators and More',
+    language === 'ar'
+      ? 'اكتشف أدوات أونلاين مجانية وسريعة تشمل الحاسبات والمولدات وأدوات النص وأدوات المطورين وأدوات التحويل للاستخدام اليومي.'
+      : 'Discover fast and free online tools for calculators, generators, text tools, developer utilities, converters, and more.'
+  );
+
   const [searchTerm, setSearchTerm] = useState('');
 
   const categories = [
@@ -74,30 +75,35 @@ function Home({ language }) {
     en: {
       heroTitle: 'Free Online Tools for Everyday Tasks',
       heroText:
-        'QuickoTools brings together fast, simple, and useful online tools for calculators, generators, text utilities, and developer workflows.',
+        'QuickoTools helps you solve everyday tasks with free online tools for calculators, generators, text utilities, converters, and developer workflows.',
       heroSubText:
-        'Designed for daily use on desktop and mobile, with clean pages, quick results, and organized categories.',
+        'Built for speed, simplicity, and clean results on desktop and mobile, with organized categories and growing tool collections.',
       heroCtaPrimary: 'Explore Categories',
       heroCtaSecondary: 'View Popular Tools',
+      heroCtaTertiary: 'Search Tools',
       searchTitle: 'Find the right tool quickly',
       searchText:
         'Search by tool name or description to jump directly to the tool you need.',
       searchPlaceholder: 'Search tools by name or description...',
       searchResultsTitle: 'Search Results',
+      searchResultsCount: 'results found',
+      clearSearch: 'Clear Search',
       categoriesTitle: 'Browse by Category',
       categoriesText:
-        'Explore the main sections of QuickoTools and find the right tool faster.',
+        'Explore the main sections of QuickoTools and find useful tools faster through clear categories.',
       popularTitle: 'Popular Tools',
       popularText:
-        'Start with some of the most frequently used tools on the site.',
+        'Start with some of the most commonly used tools currently featured on the site.',
       noToolsTitle: 'No tools found',
       noToolsText: 'Try searching with a different keyword.',
       openCategory: 'Open Category',
       whyTitle: 'Why QuickoTools',
+      whyText:
+        'QuickoTools is designed to stay practical, lightweight, and easy to use as the tool library continues to grow.',
       whyItems: [
         {
           title: 'Free to use',
-          description: 'Use tools instantly without unnecessary steps.'
+          description: 'Use tools instantly without unnecessary steps or signups.'
         },
         {
           title: 'Fast and simple',
@@ -116,30 +122,35 @@ function Home({ language }) {
     ar: {
       heroTitle: 'أدوات أونلاين مجانية للمهام اليومية',
       heroText:
-        'يجمع QuickoTools أدوات سريعة وبسيطة ومفيدة تشمل الحاسبات والمولدات وأدوات النص وأدوات المطورين.',
+        'يساعدك QuickoTools على إنجاز المهام اليومية من خلال أدوات أونلاين مجانية تشمل الحاسبات والمولدات وأدوات النص وأدوات التحويل وأدوات المطورين.',
       heroSubText:
-        'مصمم للاستخدام اليومي على الهاتف والكمبيوتر، مع صفحات واضحة ونتائج سريعة وتصنيفات منظمة.',
+        'تم تصميمه ليكون سريعًا وبسيطًا ويعطي نتائج واضحة على الهاتف والكمبيوتر، مع تصنيفات منظمة ومكتبة أدوات متنامية.',
       heroCtaPrimary: 'استكشف التصنيفات',
       heroCtaSecondary: 'عرض الأدوات الشائعة',
+      heroCtaTertiary: 'ابحث عن أداة',
       searchTitle: 'اعثر على الأداة المناسبة بسرعة',
       searchText:
         'ابحث باسم الأداة أو وصفها للوصول مباشرة إلى الأداة التي تحتاجها.',
       searchPlaceholder: 'ابحث عن أداة بالاسم أو الوصف...',
       searchResultsTitle: 'نتائج البحث',
+      searchResultsCount: 'نتيجة',
+      clearSearch: 'مسح البحث',
       categoriesTitle: 'تصفح حسب التصنيف',
       categoriesText:
-        'استكشف الأقسام الرئيسية في QuickoTools واعثر على الأداة المناسبة بشكل أسرع.',
+        'استكشف الأقسام الرئيسية في QuickoTools واعثر على الأدوات المفيدة بشكل أسرع من خلال تصنيفات واضحة.',
       popularTitle: 'الأدوات الشائعة',
       popularText:
-        'ابدأ ببعض الأدوات الأكثر استخدامًا داخل الموقع.',
+        'ابدأ ببعض الأدوات الأكثر استخدامًا والمعروضة حاليًا داخل الموقع.',
       noToolsTitle: 'لم يتم العثور على أدوات',
       noToolsText: 'جرّب كلمة بحث مختلفة.',
       openCategory: 'افتح التصنيف',
       whyTitle: 'لماذا QuickoTools',
+      whyText:
+        'تم تصميم QuickoTools ليبقى عمليًا وخفيفًا وسهل الاستخدام مع استمرار نمو مكتبة الأدوات.',
       whyItems: [
         {
           title: 'مجاني للاستخدام',
-          description: 'استخدم الأدوات مباشرة بدون خطوات غير ضرورية.'
+          description: 'استخدم الأدوات مباشرة بدون خطوات غير ضرورية أو تسجيل.'
         },
         {
           title: 'سريع وبسيط',
@@ -157,7 +168,7 @@ function Home({ language }) {
     }
   };
 
-  const currentContent = content[language];
+  const currentContent = content[language] || content.en;
 
   const filteredTools = useMemo(() => {
     const value = searchTerm.trim().toLowerCase();
@@ -177,13 +188,23 @@ function Home({ language }) {
           ? tool.descriptionAr.toLowerCase()
           : tool.description.toLowerCase();
 
-      return toolName.includes(value) || toolDescription.includes(value);
+      const toolLanguages = Array.isArray(tool.languages)
+        ? tool.languages.join(' ').toLowerCase()
+        : '';
+
+      return (
+        toolName.includes(value) ||
+        toolDescription.includes(value) ||
+        toolLanguages.includes(value)
+      );
     });
   }, [searchTerm, language]);
 
   const popularTools = useMemo(() => {
     return toolsData.filter((tool) => popularToolPaths.includes(tool.path));
   }, []);
+
+  const hasSearch = searchTerm.trim() !== '';
 
   return (
     <main className="home-page" dir={language === 'ar' ? 'rtl' : 'ltr'}>
@@ -209,6 +230,13 @@ function Home({ language }) {
                 >
                   {currentContent.heroCtaSecondary}
                 </a>
+
+                <a
+                  href="#search-tools"
+                  className="tool-card-button hero-secondary-button"
+                >
+                  {currentContent.heroCtaTertiary}
+                </a>
               </div>
             </div>
 
@@ -223,7 +251,7 @@ function Home({ language }) {
         </div>
       </section>
 
-      <section className="tools-section search-section">
+      <section className="tools-section search-section" id="search-tools">
         <div className="tools-container">
           <div className="tools-header">
             <h2 className="tools-section-title">{currentContent.searchTitle}</h2>
@@ -231,16 +259,29 @@ function Home({ language }) {
 
             <div className="tools-search-box tools-search-box-large">
               <input
-                type="text"
+                type="search"
                 value={searchTerm}
                 onChange={(event) => setSearchTerm(event.target.value)}
                 placeholder={currentContent.searchPlaceholder}
                 className="tools-search-input"
+                aria-label={currentContent.searchPlaceholder}
               />
             </div>
+
+            {hasSearch && (
+              <div className="hero-actions" style={{ marginTop: '12px' }}>
+                <button
+                  type="button"
+                  className="tool-card-button hero-secondary-button"
+                  onClick={() => setSearchTerm('')}
+                >
+                  {currentContent.clearSearch}
+                </button>
+              </div>
+            )}
           </div>
 
-          {searchTerm.trim() !== '' && (
+          {hasSearch && (
             <>
               {filteredTools.length > 0 ? (
                 <>
@@ -248,6 +289,9 @@ function Home({ language }) {
                     <h2 className="tools-section-title">
                       {currentContent.searchResultsTitle}
                     </h2>
+                    <p className="hero-text">
+                      {filteredTools.length} {currentContent.searchResultsCount}
+                    </p>
                   </div>
 
                   <div className="tools-grid">
@@ -347,6 +391,7 @@ function Home({ language }) {
         <div className="tools-container">
           <div className="tools-header">
             <h2 className="tools-section-title">{currentContent.whyTitle}</h2>
+            <p className="hero-text">{currentContent.whyText}</p>
           </div>
 
           <div className="tools-grid">
