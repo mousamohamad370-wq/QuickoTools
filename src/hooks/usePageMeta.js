@@ -6,19 +6,30 @@ function usePageMeta(title, description) {
       document.title = title;
     }
 
-    if (!description) {
-      return;
+    if (description) {
+      let metaDescription = document.querySelector(
+        'meta[name="description"]'
+      );
+
+      if (!metaDescription) {
+        metaDescription = document.createElement('meta');
+        metaDescription.setAttribute('name', 'description');
+        document.head.appendChild(metaDescription);
+      }
+
+      metaDescription.setAttribute('content', description);
     }
 
-    let metaDescription = document.querySelector('meta[name="description"]');
+    // Canonical URL
+    let canonicalLink = document.querySelector('link[rel="canonical"]');
 
-    if (!metaDescription) {
-      metaDescription = document.createElement('meta');
-      metaDescription.setAttribute('name', 'description');
-      document.head.appendChild(metaDescription);
+    if (!canonicalLink) {
+      canonicalLink = document.createElement('link');
+      canonicalLink.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonicalLink);
     }
 
-    metaDescription.setAttribute('content', description);
+    canonicalLink.setAttribute('href', window.location.href);
   }, [title, description]);
 }
 

@@ -3,7 +3,7 @@ import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/home.css';
 import ToolCard from '../components/ToolCard';
-import toolsData from '../tools/toolsData';
+import toolsData from '../tools/data/toolsData';
 
 function Home({ language }) {
   usePageMeta(

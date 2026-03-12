@@ -5,7 +5,7 @@ import Categories from './pages/Categories';
 import CategoryPage from './pages/CategoryPage';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import toolsRegistry from './tools/toolsRegistry';
+import toolsRegistry from './tools/registry/toolsRegistry.jsx';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import PrivacyPolicy from './pages/PrivacyPolicy';

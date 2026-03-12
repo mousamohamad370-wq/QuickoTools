@@ -2,7 +2,7 @@ import usePageMeta from '../hooks/usePageMeta';
 import { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import ToolCard from '../components/ToolCard';
-import toolsData from '../tools/toolsData';
+import toolsData from '../tools/data/toolsData';
 import '../styles/home.css';
 
 function CategoryPage({ language }) {
