@@ -6,22 +6,6 @@ import toolsData from '../tools/toolsData';
 import '../styles/home.css';
 
 function CategoryPage({ language }) {
-  usePageMeta(
-  currentCategory
-    ? language === 'ar'
-      ? `${currentCategory.nameAr} - QuickoTools`
-      : `${currentCategory.name} - QuickoTools`
-    : language === 'ar'
-      ? 'التصنيف غير موجود - QuickoTools'
-      : 'Category Not Found - QuickoTools',
-  currentCategory
-    ? language === 'ar'
-      ? currentCategory.descriptionAr
-      : currentCategory.description
-    : language === 'ar'
-      ? 'التصنيف المطلوب غير موجود في QuickoTools.'
-      : 'The requested category does not exist on QuickoTools.'
-);
   const { categorySlug } = useParams();
 
   const categoriesMap = {
@@ -81,6 +65,23 @@ function CategoryPage({ language }) {
   const t = language === 'ar' ? pageContent.ar : pageContent.en;
   const currentCategory = categoriesMap[categorySlug];
 
+  usePageMeta(
+    currentCategory
+      ? language === 'ar'
+        ? `${currentCategory.nameAr} - QuickoTools`
+        : `${currentCategory.name} - QuickoTools`
+      : language === 'ar'
+        ? 'التصنيف غير موجود - QuickoTools'
+        : 'Category Not Found - QuickoTools',
+    currentCategory
+      ? language === 'ar'
+        ? currentCategory.descriptionAr
+        : currentCategory.description
+      : language === 'ar'
+        ? 'التصنيف المطلوب غير موجود في QuickoTools.'
+        : 'The requested category does not exist on QuickoTools.'
+  );
+
   const filteredTools = useMemo(() => {
     return toolsData.filter((tool) => tool.category === categorySlug);
   }, [categorySlug]);
@@ -129,9 +130,7 @@ function CategoryPage({ language }) {
                 <ToolCard
                   key={tool.path}
                   name={language === 'ar' ? tool.nameAr : tool.name}
-                  description={
-                    language === 'ar' ? tool.descriptionAr : tool.description
-                  }
+                  description={language === 'ar' ? tool.descriptionAr : tool.description}
                   path={tool.path}
                   language={language}
                 />
