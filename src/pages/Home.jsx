@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import '../styles/home.css';
 import ToolCard from '../components/ToolCard';
 import toolsData from '../tools/data/toolsData';
+import categoriesData from '../tools/data/categoriesData';
 
 function Home({ language }) {
   usePageMeta(
@@ -17,86 +18,54 @@ function Home({ language }) {
 
   const [searchTerm, setSearchTerm] = useState('');
 
-  const categories = [
-    {
-      name: 'Generators',
-      nameAr: 'المولدات',
-      slug: 'generators',
-      description: 'Tools for generating passwords, QR codes, slugs, and more.',
-      descriptionAr: 'أدوات لإنشاء كلمات المرور ورموز QR والـ Slugs وغيرها.'
-    },
-    {
-      name: 'Calculators',
-      nameAr: 'الحاسبات',
-      slug: 'calculators',
-      description: 'Useful calculation tools like age, BMI, and percentage calculators.',
-      descriptionAr: 'أدوات حساب مفيدة مثل العمر وBMI والنسبة المئوية.'
-    },
-    {
-      name: 'Text Tools',
-      nameAr: 'أدوات النص',
-      slug: 'text-tools',
-      description: 'Tools for counting, cleaning, and improving text.',
-      descriptionAr: 'أدوات لعدّ النص وتنظيفه وتحسينه.'
-    },
-    {
-      name: 'Developer Tools',
-      nameAr: 'أدوات المطورين',
-      slug: 'developer-tools',
-      description: 'Formatting and developer-focused utilities.',
-      descriptionAr: 'أدوات تنسيق وخدمات مفيدة للمطورين.'
-    },
-    {
-      name: 'Converters',
-      nameAr: 'أدوات التحويل',
-      slug: 'converters',
-      description: 'Convert text and content into different formats.',
-      descriptionAr: 'حوّل النصوص والمحتوى إلى صيغ مختلفة.'
-    },
-    {
-      name: 'Random Tools',
-      nameAr: 'أدوات متنوعة',
-      slug: 'random-tools',
-      description: 'Extra useful tools that do not fit into other categories.',
-      descriptionAr: 'أدوات إضافية مفيدة لا تندرج بسهولة تحت تصنيف آخر.'
-    }
-  ];
-
-  const popularToolPaths = [
-    '/age-calculator',
-    '/bmi-calculator',
-    '/word-counter',
-    '/json-formatter',
-    '/password-generator',
-    '/qr-code-generator'
-  ];
-
   const content = {
     en: {
       heroTitle: 'Free Online Tools for Everyday Tasks',
       heroText:
         'QuickoTools helps you solve everyday tasks with free online tools for calculators, generators, text utilities, converters, and developer workflows.',
       heroSubText:
-        'Built for speed, simplicity, and clean results on desktop and mobile, with organized categories and growing tool collections.',
+        'Built for speed, simplicity, and clean results on desktop and mobile, with organized categories and a growing library of useful tools.',
       heroCtaPrimary: 'Explore Categories',
       heroCtaSecondary: 'View Popular Tools',
       heroCtaTertiary: 'Search Tools',
+
+      stats: [
+        { value: '100%', label: 'Free Tools' },
+        { value: '2', label: 'Languages' },
+        { value: 'Fast', label: 'Simple Experience' }
+      ],
+      statsAr: [
+        { value: '100%', label: 'أدوات مجانية' },
+        { value: '2', label: 'لغات' },
+        { value: 'سريع', label: 'تجربة بسيطة' }
+      ],
+
       searchTitle: 'Find the right tool quickly',
       searchText:
-        'Search by tool name or description to jump directly to the tool you need.',
-      searchPlaceholder: 'Search tools by name or description...',
+        'Search by tool name, description, or keywords to jump directly to the tool you need.',
+      searchPlaceholder: 'Search tools by name, description, or keyword...',
       searchResultsTitle: 'Search Results',
       searchResultsCount: 'results found',
       clearSearch: 'Clear Search',
+      quickSearchTitle: 'Try',
+      quickSearches: ['Age Calculator', 'Word Counter', 'JSON Formatter', 'Password Generator'],
+
       categoriesTitle: 'Browse by Category',
       categoriesText:
         'Explore the main sections of QuickoTools and find useful tools faster through clear categories.',
+      categoryToolsCount: 'tools',
+
       popularTitle: 'Popular Tools',
       popularText:
         'Start with some of the most commonly used tools currently featured on the site.',
+
       noToolsTitle: 'No tools found',
-      noToolsText: 'Try searching with a different keyword.',
+      noToolsText: 'Try searching with a different keyword or explore the categories below.',
+      browseCategories: 'Browse Categories',
+      viewPopularTools: 'View Popular Tools',
+
       openCategory: 'Open Category',
+
       whyTitle: 'Why QuickoTools',
       whyText:
         'QuickoTools is designed to stay practical, lightweight, and easy to use as the tool library continues to grow.',
@@ -119,6 +88,7 @@ function Home({ language }) {
         }
       ]
     },
+
     ar: {
       heroTitle: 'أدوات أونلاين مجانية للمهام اليومية',
       heroText:
@@ -128,22 +98,44 @@ function Home({ language }) {
       heroCtaPrimary: 'استكشف التصنيفات',
       heroCtaSecondary: 'عرض الأدوات الشائعة',
       heroCtaTertiary: 'ابحث عن أداة',
+
+      stats: [
+        { value: '100%', label: 'أدوات مجانية' },
+        { value: '2', label: 'لغات' },
+        { value: 'سريع', label: 'تجربة بسيطة' }
+      ],
+      statsAr: [
+        { value: '100%', label: 'أدوات مجانية' },
+        { value: '2', label: 'لغات' },
+        { value: 'سريع', label: 'تجربة بسيطة' }
+      ],
+
       searchTitle: 'اعثر على الأداة المناسبة بسرعة',
       searchText:
-        'ابحث باسم الأداة أو وصفها للوصول مباشرة إلى الأداة التي تحتاجها.',
-      searchPlaceholder: 'ابحث عن أداة بالاسم أو الوصف...',
+        'ابحث باسم الأداة أو وصفها أو الكلمات المفتاحية للوصول مباشرة إلى الأداة التي تحتاجها.',
+      searchPlaceholder: 'ابحث عن أداة بالاسم أو الوصف أو كلمة مفتاحية...',
       searchResultsTitle: 'نتائج البحث',
       searchResultsCount: 'نتيجة',
       clearSearch: 'مسح البحث',
+      quickSearchTitle: 'جرّب',
+      quickSearches: ['حاسبة العمر', 'عداد الكلمات', 'منسق JSON', 'مولد كلمات المرور'],
+
       categoriesTitle: 'تصفح حسب التصنيف',
       categoriesText:
         'استكشف الأقسام الرئيسية في QuickoTools واعثر على الأدوات المفيدة بشكل أسرع من خلال تصنيفات واضحة.',
+      categoryToolsCount: 'أدوات',
+
       popularTitle: 'الأدوات الشائعة',
       popularText:
         'ابدأ ببعض الأدوات الأكثر استخدامًا والمعروضة حاليًا داخل الموقع.',
+
       noToolsTitle: 'لم يتم العثور على أدوات',
-      noToolsText: 'جرّب كلمة بحث مختلفة.',
+      noToolsText: 'جرّب كلمة بحث مختلفة أو تصفح التصنيفات بالأسفل.',
+      browseCategories: 'تصفح التصنيفات',
+      viewPopularTools: 'عرض الأدوات الشائعة',
+
       openCategory: 'افتح التصنيف',
+
       whyTitle: 'لماذا QuickoTools',
       whyText:
         'تم تصميم QuickoTools ليبقى عمليًا وخفيفًا وسهل الاستخدام مع استمرار نمو مكتبة الأدوات.',
@@ -169,6 +161,12 @@ function Home({ language }) {
   };
 
   const currentContent = content[language] || content.en;
+  const currentStats =
+    language === 'ar' ? currentContent.statsAr : currentContent.stats;
+
+  const publishedTools = useMemo(() => {
+    return toolsData.filter((tool) => tool.isPublished);
+  }, []);
 
   const filteredTools = useMemo(() => {
     const value = searchTerm.trim().toLowerCase();
@@ -177,7 +175,7 @@ function Home({ language }) {
       return [];
     }
 
-    return toolsData.filter((tool) => {
+    return publishedTools.filter((tool) => {
       const toolName =
         language === 'ar' && tool.nameAr
           ? tool.nameAr.toLowerCase()
@@ -188,6 +186,16 @@ function Home({ language }) {
           ? tool.descriptionAr.toLowerCase()
           : tool.description.toLowerCase();
 
+      const toolKeywords = (
+        language === 'ar' && Array.isArray(tool.keywordsAr)
+          ? tool.keywordsAr
+          : Array.isArray(tool.keywords)
+          ? tool.keywords
+          : []
+      )
+        .join(' ')
+        .toLowerCase();
+
       const toolLanguages = Array.isArray(tool.languages)
         ? tool.languages.join(' ').toLowerCase()
         : '';
@@ -195,14 +203,28 @@ function Home({ language }) {
       return (
         toolName.includes(value) ||
         toolDescription.includes(value) ||
+        toolKeywords.includes(value) ||
         toolLanguages.includes(value)
       );
     });
-  }, [searchTerm, language]);
+  }, [searchTerm, language, publishedTools]);
 
   const popularTools = useMemo(() => {
-    return toolsData.filter((tool) => popularToolPaths.includes(tool.path));
-  }, []);
+    return publishedTools.filter((tool) => tool.isPopular);
+  }, [publishedTools]);
+
+  const categoriesWithCounts = useMemo(() => {
+    return categoriesData.map((category) => {
+      const toolsCount = publishedTools.filter(
+        (tool) => tool.category === category.slug
+      ).length;
+
+      return {
+        ...category,
+        toolsCount
+      };
+    });
+  }, [publishedTools]);
 
   const hasSearch = searchTerm.trim() !== '';
 
@@ -238,6 +260,15 @@ function Home({ language }) {
                   {currentContent.heroCtaTertiary}
                 </a>
               </div>
+
+              <div className="home-stats-grid">
+                {currentStats.map((item) => (
+                  <div key={item.label} className="home-stat-card">
+                    <span className="home-stat-value">{item.value}</span>
+                    <span className="home-stat-label">{item.label}</span>
+                  </div>
+                ))}
+              </div>
             </div>
 
             <div className="hero-orbs" aria-hidden="true">
@@ -268,8 +299,27 @@ function Home({ language }) {
               />
             </div>
 
+            <div className="quick-search-row">
+              <span className="quick-search-label">
+                {currentContent.quickSearchTitle}:
+              </span>
+
+              <div className="quick-search-tags">
+                {currentContent.quickSearches.map((term) => (
+                  <button
+                    key={term}
+                    type="button"
+                    className="quick-search-tag"
+                    onClick={() => setSearchTerm(term)}
+                  >
+                    {term}
+                  </button>
+                ))}
+              </div>
+            </div>
+
             {hasSearch && (
-              <div className="hero-actions" style={{ marginTop: '12px' }}>
+              <div className="hero-actions search-clear-actions">
                 <button
                   type="button"
                   className="tool-card-button hero-secondary-button"
@@ -297,7 +347,7 @@ function Home({ language }) {
                   <div className="tools-grid">
                     {filteredTools.map((tool) => (
                       <ToolCard
-                        key={tool.path}
+                        key={tool.id || tool.path}
                         name={
                           language === 'ar' && tool.nameAr
                             ? tool.nameAr
@@ -318,6 +368,18 @@ function Home({ language }) {
                 <div className="tools-empty-state">
                   <h3>{currentContent.noToolsTitle}</h3>
                   <p>{currentContent.noToolsText}</p>
+
+                  <div className="empty-state-actions">
+                    <a href="#categories-section" className="tool-card-button">
+                      {currentContent.browseCategories}
+                    </a>
+                    <a
+                      href="#popular-tools"
+                      className="tool-card-button hero-secondary-button"
+                    >
+                      {currentContent.viewPopularTools}
+                    </a>
+                  </div>
                 </div>
               )}
             </>
@@ -335,12 +397,18 @@ function Home({ language }) {
           </div>
 
           <div className="category-grid">
-            {categories.map((category) => (
+            {categoriesWithCounts.map((category) => (
               <div key={category.slug} className="category-card">
                 <div className="category-card-content">
-                  <h3 className="category-card-title">
-                    {language === 'ar' ? category.nameAr : category.name}
-                  </h3>
+                  <div className="category-card-top">
+                    <h3 className="category-card-title">
+                      {language === 'ar' ? category.nameAr : category.name}
+                    </h3>
+
+                    <span className="category-tools-count">
+                      {category.toolsCount} {currentContent.categoryToolsCount}
+                    </span>
+                  </div>
 
                   <p className="category-card-description">
                     {language === 'ar'
@@ -361,6 +429,7 @@ function Home({ language }) {
       <section className="tools-section" id="popular-tools">
         <div className="tools-container">
           <div className="tools-header">
+            <span className="section-kicker">Most Used</span>
             <h2 className="tools-section-title">
               {currentContent.popularTitle}
             </h2>
@@ -370,7 +439,7 @@ function Home({ language }) {
           <div className="tools-grid">
             {popularTools.map((tool) => (
               <ToolCard
-                key={tool.path}
+                key={tool.id || tool.path}
                 name={
                   language === 'ar' && tool.nameAr ? tool.nameAr : tool.name
                 }
@@ -396,7 +465,7 @@ function Home({ language }) {
 
           <div className="tools-grid">
             {currentContent.whyItems.map((item) => (
-              <div key={item.title} className="tool-card">
+              <div key={item.title} className="tool-card why-card">
                 <h3 className="tool-card-title">{item.title}</h3>
                 <p className="tool-card-description">{item.description}</p>
               </div>
