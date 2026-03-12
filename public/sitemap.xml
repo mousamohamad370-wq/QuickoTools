@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
@@ -25,6 +24,136 @@
   <url>
     <loc>https://quickotools.com/privacy-policy</loc>
     <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://quickotools.com/generators</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://quickotools.com/calculators</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://quickotools.com/text-tools</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://quickotools.com/developer-tools</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://quickotools.com/converters</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://quickotools.com/random-tools</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://quickotools.com/word-counter</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://quickotools.com/character-counter</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://quickotools.com/remove-duplicate-lines</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://quickotools.com/text-repeater</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://quickotools.com/case-converter</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://quickotools.com/text-case-converter</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://quickotools.com/line-break-remover</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://quickotools.com/age-calculator</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://quickotools.com/bmi-calculator</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://quickotools.com/percentage-calculator</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://quickotools.com/password-generator</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://quickotools.com/qr-code-generator</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://quickotools.com/slug-generator</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://quickotools.com/lorem-ipsum-generator</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://quickotools.com/json-formatter</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://quickotools.com/uuid-generator</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://quickotools.com/base64-encoder-decoder</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://quickotools.com/url-encoder-decoder</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://quickotools.com/html-entity-encoder-decoder</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://quickotools.com/roman-numeral-converter</loc>
+    <priority>0.8</priority>
   </url>
 
 </urlset>
