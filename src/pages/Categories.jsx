@@ -1,77 +1,55 @@
-import usePageMeta from '../hooks/usePageMeta';
+import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import usePageMeta from '../hooks/usePageMeta';
 import '../styles/home.css';
+import categoriesData from '../tools/data/categoriesData';
+import toolsData from '../tools/data/toolsData';
 
 function Categories({ language }) {
   usePageMeta(
-  language === 'ar'
-    ? 'تصنيفات الأدوات - QuickoTools'
-    : 'Tool Categories - QuickoTools',
-  language === 'ar'
-    ? 'استكشف تصنيفات أدوات QuickoTools للوصول السريع إلى الحاسبات والمولدات وأدوات النص وأدوات المطورين.'
-    : 'Explore QuickoTools categories to quickly find calculators, generators, text tools, and developer tools.'
-);
-  const categories = [
-    {
-      name: 'Generators',
-      nameAr: 'المولدات',
-      slug: 'generators',
-      description: 'Tools for generating passwords, QR codes, slugs, and more.',
-      descriptionAr: 'أدوات لإنشاء كلمات المرور ورموز QR والـ Slugs وغيرها.'
-    },
-    {
-      name: 'Calculators',
-      nameAr: 'الحاسبات',
-      slug: 'calculators',
-      description: 'Useful calculation tools like age, BMI, and percentage calculators.',
-      descriptionAr: 'أدوات حساب مفيدة مثل العمر وBMI والنسبة المئوية.'
-    },
-    {
-      name: 'Text Tools',
-      nameAr: 'أدوات النص',
-      slug: 'text-tools',
-      description: 'Tools for counting, cleaning, and improving text.',
-      descriptionAr: 'أدوات لعدّ النص وتنظيفه وتحسينه.'
-    },
-    {
-      name: 'Developer Tools',
-      nameAr: 'أدوات المطورين',
-      slug: 'developer-tools',
-      description: 'Formatting and developer-focused utilities.',
-      descriptionAr: 'أدوات تنسيق وخدمات مفيدة للمطورين.'
-    },
-    {
-      name: 'Converters',
-      nameAr: 'أدوات التحويل',
-      slug: 'converters',
-      description: 'Convert text and content into different formats.',
-      descriptionAr: 'حوّل النصوص والمحتوى إلى صيغ مختلفة.'
-    },
-    {
-      name: 'Random Tools',
-      nameAr: 'أدوات متنوعة',
-      slug: 'random-tools',
-      description: 'Extra useful tools that do not fit into other categories.',
-      descriptionAr: 'أدوات إضافية مفيدة لا تندرج بسهولة تحت تصنيف آخر.'
-    }
-  ];
+    language === 'ar'
+      ? 'تصنيفات الأدوات - QuickoTools'
+      : 'Tool Categories - QuickoTools',
+    language === 'ar'
+      ? 'استكشف تصنيفات أدوات QuickoTools للوصول السريع إلى الحاسبات والمولدات وأدوات النص وأدوات المطورين وأدوات التحويل.'
+      : 'Explore QuickoTools categories to quickly find calculators, generators, text tools, developer tools, and converters.'
+  );
 
   const content = {
     en: {
       title: 'Browse Tool Categories',
       description:
         'Explore QuickoTools by category and discover the right tools faster.',
-      open: 'Open Category'
+      open: 'Open Category',
+      toolsCount: 'tools'
     },
     ar: {
       title: 'تصفح تصنيفات الأدوات',
       description:
         'استكشف QuickoTools حسب التصنيف للوصول إلى الأدوات المناسبة بشكل أسرع.',
-      open: 'افتح التصنيف'
+      open: 'افتح التصنيف',
+      toolsCount: 'أدوات'
     }
   };
 
   const t = language === 'ar' ? content.ar : content.en;
+
+  const publishedTools = useMemo(() => {
+    return toolsData.filter((tool) => tool.isPublished);
+  }, []);
+
+  const categoriesWithCounts = useMemo(() => {
+    return categoriesData.map((category) => {
+      const toolsCount = publishedTools.filter(
+        (tool) => tool.category === category.slug
+      ).length;
+
+      return {
+        ...category,
+        toolsCount
+      };
+    });
+  }, [publishedTools]);
 
   return (
     <main className="home-page" dir={language === 'ar' ? 'rtl' : 'ltr'}>
@@ -88,12 +66,18 @@ function Categories({ language }) {
       <section className="tools-section">
         <div className="tools-container">
           <div className="category-grid">
-            {categories.map((category) => (
+            {categoriesWithCounts.map((category) => (
               <div key={category.slug} className="category-card">
                 <div className="category-card-content">
-                  <h3 className="category-card-title">
-                    {language === 'ar' ? category.nameAr : category.name}
-                  </h3>
+                  <div className="category-card-top">
+                    <h2 className="category-card-title">
+                      {language === 'ar' ? category.nameAr : category.name}
+                    </h2>
+
+                    <span className="category-tools-count">
+                      {category.toolsCount} {t.toolsCount}
+                    </span>
+                  </div>
 
                   <p className="category-card-description">
                     {language === 'ar'
