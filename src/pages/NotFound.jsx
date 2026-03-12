@@ -9,7 +9,8 @@ function NotFound({ language }) {
       : '404 - Page Not Found | QuickoTools',
     language === 'ar'
       ? 'الصفحة التي تحاول الوصول إليها غير موجودة. يمكنك العودة إلى الصفحة الرئيسية أو تصفح أدوات QuickoTools.'
-      : 'The page you are looking for does not exist. Return to the homepage or browse QuickoTools categories.'
+      : 'The page you are looking for does not exist. Return to the homepage or browse QuickoTools categories.',
+    'noindex, nofollow'
   );
 
   const content = {

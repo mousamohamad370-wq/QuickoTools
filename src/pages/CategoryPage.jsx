@@ -1,69 +1,46 @@
-import usePageMeta from '../hooks/usePageMeta';
 import { useMemo } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
+import usePageMeta from '../hooks/usePageMeta';
 import ToolCard from '../components/ToolCard';
 import toolsData from '../tools/data/toolsData';
+import categoriesData from '../tools/data/categoriesData';
 import '../styles/home.css';
 
 function CategoryPage({ language }) {
   const { categorySlug } = useParams();
 
-  const categoriesMap = {
-    generators: {
-      name: 'Generators',
-      nameAr: 'المولدات',
-      description: 'Tools for generating passwords, QR codes, slugs, and more.',
-      descriptionAr: 'أدوات لإنشاء كلمات المرور ورموز QR والـ Slugs وغيرها.'
-    },
-    calculators: {
-      name: 'Calculators',
-      nameAr: 'الحاسبات',
-      description: 'Useful calculation tools like age, BMI, and percentage calculators.',
-      descriptionAr: 'أدوات حساب مفيدة مثل العمر وBMI والنسبة المئوية.'
-    },
-    'text-tools': {
-      name: 'Text Tools',
-      nameAr: 'أدوات النص',
-      description: 'Tools for counting, cleaning, and improving text.',
-      descriptionAr: 'أدوات لعدّ النص وتنظيفه وتحسينه.'
-    },
-    'developer-tools': {
-      name: 'Developer Tools',
-      nameAr: 'أدوات المطورين',
-      description: 'Formatting and developer-focused utilities.',
-      descriptionAr: 'أدوات تنسيق وخدمات مفيدة للمطورين.'
-    },
-    converters: {
-      name: 'Converters',
-      nameAr: 'أدوات التحويل',
-      description: 'Convert text and content into different formats.',
-      descriptionAr: 'حوّل النصوص والمحتوى إلى صيغ مختلفة.'
-    },
-    'random-tools': {
-      name: 'Random Tools',
-      nameAr: 'أدوات متنوعة',
-      description: 'Extra useful tools that do not fit into other categories.',
-      descriptionAr: 'أدوات إضافية مفيدة لا تندرج بسهولة تحت تصنيف آخر.'
-    }
-  };
-
   const pageContent = {
     en: {
       notFoundTitle: 'Category not found',
-      notFoundText: 'This category does not exist.',
+      notFoundText: 'This category does not exist on QuickoTools.',
       emptyTitle: 'No tools in this category yet',
-      emptyText: 'More tools will be added soon.'
+      emptyText: 'More tools will be added soon.',
+      browseCategories: 'Browse Categories',
+      toolsCount: 'tools'
     },
     ar: {
       notFoundTitle: 'التصنيف غير موجود',
-      notFoundText: 'هذا التصنيف غير موجود.',
+      notFoundText: 'هذا التصنيف غير موجود على QuickoTools.',
       emptyTitle: 'لا توجد أدوات في هذا التصنيف حاليًا',
-      emptyText: 'سيتم إضافة أدوات جديدة قريبًا.'
+      emptyText: 'سيتم إضافة أدوات جديدة قريبًا.',
+      browseCategories: 'تصفح التصنيفات',
+      toolsCount: 'أدوات'
     }
   };
 
   const t = language === 'ar' ? pageContent.ar : pageContent.en;
-  const currentCategory = categoriesMap[categorySlug];
+
+  const currentCategory = useMemo(() => {
+    return categoriesData.find((category) => category.slug === categorySlug);
+  }, [categorySlug]);
+
+  const publishedTools = useMemo(() => {
+    return toolsData.filter((tool) => tool.isPublished);
+  }, []);
+
+  const filteredTools = useMemo(() => {
+    return publishedTools.filter((tool) => tool.category === categorySlug);
+  }, [publishedTools, categorySlug]);
 
   usePageMeta(
     currentCategory
@@ -71,20 +48,16 @@ function CategoryPage({ language }) {
         ? `${currentCategory.nameAr} - QuickoTools`
         : `${currentCategory.name} - QuickoTools`
       : language === 'ar'
-        ? 'التصنيف غير موجود - QuickoTools'
-        : 'Category Not Found - QuickoTools',
+      ? 'التصنيف غير موجود - QuickoTools'
+      : 'Category Not Found - QuickoTools',
     currentCategory
       ? language === 'ar'
         ? currentCategory.descriptionAr
         : currentCategory.description
       : language === 'ar'
-        ? 'التصنيف المطلوب غير موجود في QuickoTools.'
-        : 'The requested category does not exist on QuickoTools.'
+      ? 'التصنيف المطلوب غير موجود في QuickoTools.'
+      : 'The requested category does not exist on QuickoTools.'
   );
-
-  const filteredTools = useMemo(() => {
-    return toolsData.filter((tool) => tool.category === categorySlug);
-  }, [categorySlug]);
 
   if (!currentCategory) {
     return (
@@ -95,6 +68,12 @@ function CategoryPage({ language }) {
               <span className="hero-badge">QuickoTools</span>
               <h1 className="hero-title page-hero-title">{t.notFoundTitle}</h1>
               <p className="hero-text">{t.notFoundText}</p>
+
+              <div className="hero-actions" style={{ justifyContent: 'center' }}>
+                <Link to="/categories" className="tool-card-button">
+                  {t.browseCategories}
+                </Link>
+              </div>
             </div>
           </div>
         </section>
@@ -118,6 +97,10 @@ function CategoryPage({ language }) {
                 ? currentCategory.descriptionAr
                 : currentCategory.description}
             </p>
+
+            <p className="hero-text" style={{ marginTop: '12px' }}>
+              <strong>{filteredTools.length}</strong> {t.toolsCount}
+            </p>
           </div>
         </div>
       </section>
@@ -128,9 +111,13 @@ function CategoryPage({ language }) {
             <div className="tools-grid">
               {filteredTools.map((tool) => (
                 <ToolCard
-                  key={tool.path}
-                  name={language === 'ar' ? tool.nameAr : tool.name}
-                  description={language === 'ar' ? tool.descriptionAr : tool.description}
+                  key={tool.id || tool.path}
+                  name={language === 'ar' && tool.nameAr ? tool.nameAr : tool.name}
+                  description={
+                    language === 'ar' && tool.descriptionAr
+                      ? tool.descriptionAr
+                      : tool.description
+                  }
                   path={tool.path}
                   language={language}
                 />
@@ -140,6 +127,12 @@ function CategoryPage({ language }) {
             <div className="tools-empty-state">
               <h3>{t.emptyTitle}</h3>
               <p>{t.emptyText}</p>
+
+              <div className="empty-state-actions">
+                <Link to="/categories" className="tool-card-button">
+                  {t.browseCategories}
+                </Link>
+              </div>
             </div>
           )}
         </div>

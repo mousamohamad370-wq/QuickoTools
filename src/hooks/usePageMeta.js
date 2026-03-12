@@ -1,15 +1,13 @@
 import { useEffect } from 'react';
 
-function usePageMeta(title, description) {
+function usePageMeta(title, description, robots = 'index, follow') {
   useEffect(() => {
     if (title) {
       document.title = title;
     }
 
     if (description) {
-      let metaDescription = document.querySelector(
-        'meta[name="description"]'
-      );
+      let metaDescription = document.querySelector('meta[name="description"]');
 
       if (!metaDescription) {
         metaDescription = document.createElement('meta');
@@ -20,7 +18,16 @@ function usePageMeta(title, description) {
       metaDescription.setAttribute('content', description);
     }
 
-    // Canonical URL
+    let metaRobots = document.querySelector('meta[name="robots"]');
+
+    if (!metaRobots) {
+      metaRobots = document.createElement('meta');
+      metaRobots.setAttribute('name', 'robots');
+      document.head.appendChild(metaRobots);
+    }
+
+    metaRobots.setAttribute('content', robots);
+
     let canonicalLink = document.querySelector('link[rel="canonical"]');
 
     if (!canonicalLink) {
@@ -30,7 +37,7 @@ function usePageMeta(title, description) {
     }
 
     canonicalLink.setAttribute('href', window.location.href);
-  }, [title, description]);
+  }, [title, description, robots]);
 }
 
 export default usePageMeta;
