@@ -16,8 +16,9 @@ function Footer({ language }) {
       about: 'About',
       contact: 'Contact',
       privacy: 'Privacy Policy',
+      terms: 'Terms of Service',
       emailLabel: 'Email',
-      emailValue: 'contact@quickotools.com',
+      emailValue: 'quickotools@gmail.com',
       copyright: `© ${currentYear} QuickoTools. All rights reserved.`
     },
     ar: {
@@ -32,8 +33,9 @@ function Footer({ language }) {
       about: 'حول',
       contact: 'اتصل بنا',
       privacy: 'سياسة الخصوصية',
+      terms: 'شروط الاستخدام',
       emailLabel: 'البريد الإلكتروني',
-      emailValue: 'contact@quickotools.com',
+      emailValue: 'quickotools@gmail.com',
       copyright: `© ${currentYear} QuickoTools. جميع الحقوق محفوظة.`
     }
   };
@@ -75,6 +77,9 @@ function Footer({ language }) {
             <li>
               <Link to="/privacy-policy">{t.privacy}</Link>
             </li>
+            <li>
+  <Link to="/terms-of-service">{t.terms}</Link>
+</li>
           </ul>
         </div>
 

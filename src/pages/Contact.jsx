@@ -33,7 +33,7 @@ function Contact({ language }) {
         'نرحب بالملاحظات والاقتراحات التي تساعدنا على تحسين QuickoTools وجعل الأدوات أكثر فائدة للجميع.',
       contactTitle: 'معلومات التواصل',
       emailLabel: 'البريد الإلكتروني',
-      emailValue: 'contact@quickotools.com',
+      emailValue: 'quickotools@gmail.com',
       note:
         'للاستفسارات العامة أو الاقتراحات أو للإبلاغ عن مشكلة في إحدى الأدوات يمكنك التواصل معنا عبر البريد أعلاه.'
     }

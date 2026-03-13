@@ -11,6 +11,7 @@ import Contact from './pages/Contact';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import NotFound from './pages/NotFound';
 import'./components/ScrollToTop.jsx';
+import Terms from './pages/Terms.jsx';
 
 function PageLoader() {
   return (
@@ -64,7 +65,9 @@ function App() {
             path="/categories"
             element={<Categories language={language} />}
           />
+          <Route path="/terms-of-service" element={<Terms language={language}/> }></Route>
           <Route
+          
             path="/:categorySlug"
             element={<CategoryPage language={language} />}
           />

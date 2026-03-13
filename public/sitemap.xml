@@ -155,5 +155,9 @@
     <loc>https://quickotools.com/roman-numeral-converter</loc>
     <priority>0.8</priority>
   </url>
+  <url>
+  <loc>https://quickotools.com/terms-of-service</loc>
+  <priority>0.5</priority>
+</url>
 
 </urlset>
