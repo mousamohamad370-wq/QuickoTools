@@ -271,13 +271,34 @@ function Home({ language }) {
               </div>
             </div>
 
-            <div className="hero-orbs" aria-hidden="true">
-              <span className="hero-orb hero-orb-one"></span>
-              <span className="hero-orb hero-orb-two"></span>
-              <span className="hero-orb hero-orb-three"></span>
-              <span className="hero-orb hero-orb-four"></span>
-              <span className="hero-orb hero-orb-five"></span>
-            </div>
+         <div className="hero-tools-visual" aria-hidden="true">
+  <div className="hero-search-mock">
+    <span className="hero-search-icon">🔍</span>
+    <span className="hero-search-text">Search</span>
+  </div>
+
+  <div className="hero-tools-grid">
+    <div className="hero-tool-card">
+      <span className="hero-tool-icon">{`</>`}</span>
+      <span>Code</span>
+    </div>
+
+    <div className="hero-tool-card">
+      <span className="hero-tool-icon">🧮</span>
+      <span>Calculator</span>
+    </div>
+
+    <div className="hero-tool-card">
+      <span className="hero-tool-icon">T</span>
+      <span>Text</span>
+    </div>
+
+    <div className="hero-tool-card">
+      <span className="hero-tool-icon">⚡</span>
+      <span>Fast</span>
+    </div>
+  </div>
+</div>
           </div>
         </div>
       </section>
