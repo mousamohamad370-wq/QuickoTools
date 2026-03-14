@@ -896,3 +896,72 @@
     font-size: 0.76rem;
   }
 }
+.hero-tool-card-count {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+}
+
+.hero-tool-count-number {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.hero-tool-card-count small {
+  font-size: 0.8rem;
+  opacity: 0.75;
+}
+/* Tool count card (dark card with number) */
+.hero-tool-card-count {
+  background: #0f172a;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  padding: 16px;
+  border-radius: 16px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* big number */
+.hero-tool-count-number {
+  font-size: 2.4rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+/* main label */
+.hero-tool-card-count span {
+  font-size: 0.95rem;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+/* small text */
+.hero-tool-card-count small {
+  font-size: 0.75rem;
+  opacity: 0.6;
+}
+
+/* subtle glow */
+.hero-tool-card-count::after {
+  content: "";
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(59,130,246,0.35) 0%, transparent 70%);
+  top: -40px;
+  right: -40px;
+  pointer-events: none;
+}
+.hero-search-text {
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: 0.3px;
+}

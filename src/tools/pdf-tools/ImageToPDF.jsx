@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { jsPDF } from 'jspdf';
 import usePageMeta from '../../hooks/usePageMeta';
 import '../../styles/tool-page.css';
@@ -24,7 +24,12 @@ const content = {
       'This tool converts a single image such as JPG or PNG into a PDF document that you can download and share easily.',
     fileNameLabel: 'Selected File',
     noFile: 'No file selected',
-    invalidFile: 'Please upload a valid image file.'
+    invalidFile: 'Please upload a valid image file.',
+    generating: 'Generating PDF...',
+    downloadHelp:
+      'If the PDF does not download, please open this page in Chrome or Safari and try again.',
+    inAppWarning:
+      'You are using an in-app browser (Facebook / Instagram). File downloads may not work properly here.'
   },
   ar: {
     metaTitle: 'تحويل صورة إلى PDF - QuickoTools',
@@ -45,7 +50,12 @@ const content = {
       'تقوم هذه الأداة بتحويل صورة واحدة مثل JPG أو PNG إلى مستند PDF يمكنك تنزيله ومشاركته بسهولة.',
     fileNameLabel: 'الملف المحدد',
     noFile: 'لا يوجد ملف محدد',
-    invalidFile: 'يرجى رفع ملف صورة صالح.'
+    invalidFile: 'يرجى رفع ملف صورة صالح.',
+    generating: 'جارٍ إنشاء ملف PDF...',
+    downloadHelp:
+      'إذا لم يتم تنزيل الملف، يرجى فتح الموقع في متصفح مثل Chrome أو Safari ثم إعادة المحاولة.',
+    inAppWarning:
+      'أنت تستخدم متصفح داخل تطبيق (فيسبوك أو إنستغرام)، وقد لا يعمل تنزيل الملفات هنا بشكل صحيح.'
   }
 };
 
@@ -59,6 +69,18 @@ function ImageToPDF({ language }) {
 
   usePageMeta(currentContent.metaTitle, currentContent.metaDescription);
 
+  const isInAppBrowser = useMemo(() => {
+    const ua = navigator.userAgent || '';
+    return /FBAN|FBAV|Instagram/i.test(ua);
+  }, []);
+
+  const isMobileDevice = useMemo(() => {
+    const ua = navigator.userAgent || '';
+    return /Android|iPhone|iPad|iPod|Mobile/i.test(ua);
+  }, []);
+
+  const shouldShowBrowserWarning = isInAppBrowser && isMobileDevice;
+
   const selectedFileName = useMemo(() => {
     return selectedFile ? selectedFile.name : currentContent.noFile;
   }, [selectedFile, currentContent.noFile]);
@@ -71,6 +93,14 @@ function ImageToPDF({ language }) {
       return '';
     });
   }, []);
+
+  useEffect(() => {
+    return () => {
+      if (previewUrl && previewUrl.startsWith('blob:')) {
+        URL.revokeObjectURL(previewUrl);
+      }
+    };
+  }, [previewUrl]);
 
   const handleFileChange = useCallback(
     (event) => {
@@ -102,9 +132,14 @@ function ImageToPDF({ language }) {
   }, [cleanupPreview]);
 
   const handleDownload = useCallback(async () => {
+    if (shouldShowBrowserWarning) {
+      alert(currentContent.downloadHelp);
+    }
+
     if (!selectedFile || !previewUrl) return;
 
     setIsGenerating(true);
+    setError('');
 
     try {
       const image = new Image();
@@ -122,17 +157,37 @@ function ImageToPDF({ language }) {
       });
 
       const imageType = selectedFile.type === 'image/png' ? 'PNG' : 'JPEG';
-
       pdf.addImage(image, imageType, 0, 0, image.width, image.height);
 
       const baseName = selectedFile.name.replace(/\.[^.]+$/, '') || 'image';
-      pdf.save(`${baseName}.pdf`);
+      const fileName = `${baseName}.pdf`;
+
+      const blob = pdf.output('blob');
+      const url = URL.createObjectURL(blob);
+
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = fileName;
+      link.rel = 'noopener';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      setTimeout(() => {
+        URL.revokeObjectURL(url);
+      }, 4000);
     } catch {
       setError(currentContent.invalidFile);
     } finally {
       setIsGenerating(false);
     }
-  }, [selectedFile, previewUrl, currentContent.invalidFile]);
+  }, [
+    selectedFile,
+    previewUrl,
+    shouldShowBrowserWarning,
+    currentContent.downloadHelp,
+    currentContent.invalidFile
+  ]);
 
   return (
     <main className="tool-page" dir={language === 'ar' ? 'rtl' : 'ltr'}>
@@ -202,6 +257,21 @@ function ImageToPDF({ language }) {
               <p className="tool-helper-text">{currentContent.emptyState}</p>
             )}
 
+            {isGenerating && (
+              <p className="tool-helper-text">{currentContent.generating}</p>
+            )}
+
+            {shouldShowBrowserWarning && (
+              <>
+                <p className="tool-helper-text tool-helper-text-error">
+                  {currentContent.inAppWarning}
+                </p>
+                <p className="tool-helper-text">
+                  {currentContent.downloadHelp}
+                </p>
+              </>
+            )}
+
             {error && (
               <p className="tool-helper-text tool-helper-text-error">{error}</p>
             )}
@@ -240,6 +310,12 @@ function ImageToPDF({ language }) {
                 )}
               </div>
             </div>
+
+            {shouldShowBrowserWarning && (
+              <p className="tool-helper-text">
+                {currentContent.downloadHelp}
+              </p>
+            )}
           </section>
         </section>
 

@@ -21,6 +21,7 @@ const componentMap = {
   '/pdf-page-counter': lazy(() => import('../pdf-tools/PDFPageCounter')),
   '/pdf-metadata-viewer': lazy(() => import('../pdf-tools/PDFMetadataViewer')),
   '/pdf-text-extractor': lazy(() => import('../pdf-tools/PDFTextExtractor')),
+  '/pdf-merger': lazy(() => import('../pdf-tools/PDFMerger')),
 
   '/password-generator': lazy(() => import('../generators/PasswordGenerator')),
   '/qr-code-generator': lazy(() => import('../generators/QRCodeGenerator')),

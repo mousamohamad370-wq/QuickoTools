@@ -395,6 +395,20 @@ const toolsData = [
   isPopular: true,
   isPublished: true
 },
+{
+  id: 'pdf-merger',
+  path: '/pdf-merger',
+  category: 'pdf-tools',
+  name: 'PDF Merger',
+  nameAr: 'دمج ملفات PDF',
+  description: 'Merge multiple PDF files into one downloadable PDF document instantly.',
+  descriptionAr: 'ادمج عدة ملفات PDF في مستند PDF واحد قابل للتنزيل فورًا.',
+  keywords: ['pdf merger', 'merge pdf', 'combine pdf files', 'pdf combine'],
+  keywordsAr: ['دمج PDF', 'دمج ملفات PDF', 'جمع ملفات PDF', 'توحيد PDF'],
+  languages: ['en', 'ar'],
+  isPopular: true,
+  isPublished: true
+},
 ];
 
 export default toolsData;

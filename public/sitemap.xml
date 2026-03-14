@@ -27,6 +27,11 @@
   </url>
 
   <url>
+    <loc>https://quicko-tools.web.app/pdf-tools</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
     <loc>https://quicko-tools.web.app/generators</loc>
     <priority>0.8</priority>
   </url>
@@ -153,6 +158,51 @@
 
   <url>
     <loc>https://quicko-tools.web.app/roman-numeral-converter</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://quicko-tools.web.app/remove-extra-spaces</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://quicko-tools.web.app/reverse-text</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://quicko-tools.web.app/text-sorter</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://quicko-tools.web.app/remove-empty-lines</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://quicko-tools.web.app/image-to-pdf</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://quicko-tools.web.app/pdf-page-counter</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://quicko-tools.web.app/pdf-metadata-viewer</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://quicko-tools.web.app/pdf-text-extractor</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://quicko-tools.web.app/pdf-merger</loc>
     <priority>0.8</priority>
   </url>
 

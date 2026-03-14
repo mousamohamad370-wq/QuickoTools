@@ -40,6 +40,11 @@ function Home({ language }) {
         { value: 'سريع', label: 'تجربة بسيطة' }
       ],
 
+      heroVisual: {
+        toolsCountLabel: 'Published Tools',
+        toolsCountSubLabel: 'Auto updated'
+      },
+
       searchTitle: 'Find the right tool quickly',
       searchText:
         'Search by tool name, description, or keywords to jump directly to the tool you need.',
@@ -109,6 +114,11 @@ function Home({ language }) {
         { value: '2', label: 'لغات' },
         { value: 'سريع', label: 'تجربة بسيطة' }
       ],
+
+      heroVisual: {
+        toolsCountLabel: 'أداة منشورة',
+        toolsCountSubLabel: 'يتحدث تلقائيًا'
+      },
 
       searchTitle: 'اعثر على الأداة المناسبة بسرعة',
       searchText:
@@ -271,34 +281,37 @@ function Home({ language }) {
               </div>
             </div>
 
-         <div className="hero-tools-visual" aria-hidden="true">
-  <div className="hero-search-mock">
-    <span className="hero-search-icon">🔍</span>
-    <span className="hero-search-text">Search</span>
-  </div>
+            <div className="hero-tools-visual" aria-hidden="true">
+              <div className="hero-search-mock">
+                <span className="hero-search-text">
+  {publishedTools.length} {language === 'ar' ? 'أداة' : 'Tools'}
+</span>
+                <span className="hero-search-icon">🧰</span>
+              </div>
 
-  <div className="hero-tools-grid">
-    <div className="hero-tool-card">
-      <span className="hero-tool-icon">{`</>`}</span>
-      <span>Code</span>
-    </div>
+              <div className="hero-tools-grid">
+                <div className="hero-tool-card hero-tool-card-count">
+                  <span className="hero-tool-count-number">{publishedTools.length}</span>
+                  <span>{currentContent.heroVisual.toolsCountLabel}</span>
+                  <small>{currentContent.heroVisual.toolsCountSubLabel}</small>
+                </div>
 
-    <div className="hero-tool-card">
-      <span className="hero-tool-icon">🧮</span>
-      <span>Calculator</span>
-    </div>
+                <div className="hero-tool-card">
+                  <span className="hero-tool-icon">🧮</span>
+                  <span>Calculator</span>
+                </div>
 
-    <div className="hero-tool-card">
-      <span className="hero-tool-icon">T</span>
-      <span>Text</span>
-    </div>
+                <div className="hero-tool-card">
+                  <span className="hero-tool-icon">⚡</span>
+                  <span>Fast</span>
+                </div>
 
-    <div className="hero-tool-card">
-      <span className="hero-tool-icon">⚡</span>
-      <span>Fast</span>
-    </div>
-  </div>
-</div>
+                <div className="hero-tool-card">
+                  <span className="hero-tool-icon">T</span>
+                  <span>Text</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
