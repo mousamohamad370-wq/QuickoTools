@@ -1,153 +1,243 @@
-import { useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
+import usePageMeta from '../../hooks/usePageMeta';
+import '../../styles/tool-page.css';
+
+const content = {
+  en: {
+    metaTitle: 'Remove Duplicate Lines - QuickoTools',
+    metaDescription:
+      'Remove duplicate lines from your text instantly with the free Remove Duplicate Lines tool from QuickoTools.',
+    title: 'Remove Duplicate Lines',
+    description:
+      'Remove repeated lines from your text instantly while keeping only unique lines in the output.',
+    inputTitle: 'Input Text',
+    outputTitle: 'Cleaned Output',
+    placeholder: 'Paste your lines here...',
+    resultPlaceholder: 'Your cleaned text will appear here.',
+    remove: 'Remove Duplicates',
+    clear: 'Clear',
+    copy: 'Copy Result',
+    copied: 'Copied!',
+    loadExample: 'Load Example',
+    exampleText: 'apple\nbanana\napple\norange\nbanana',
+    totalLines: 'Total Lines',
+    uniqueLines: 'Unique Lines',
+    emptyState: 'Paste your lines, then remove duplicates to generate clean output.',
+    infoTitle: 'What does this tool do?',
+    infoText:
+      'This tool removes duplicate lines from your text while preserving the first occurrence of each line.'
+  },
+  ar: {
+    metaTitle: 'إزالة الأسطر المكررة - QuickoTools',
+    metaDescription:
+      'أزل الأسطر المكررة من النص فورًا باستخدام أداة إزالة الأسطر المكررة المجانية من QuickoTools.',
+    title: 'إزالة الأسطر المكررة',
+    description:
+      'أزل الأسطر المكررة من النص فورًا مع الاحتفاظ بالأسطر الفريدة فقط في النتيجة.',
+    inputTitle: 'النص المدخل',
+    outputTitle: 'الناتج المنظف',
+    placeholder: 'ألصق الأسطر هنا...',
+    resultPlaceholder: 'سيظهر النص المنظف هنا.',
+    remove: 'إزالة التكرار',
+    clear: 'مسح',
+    copy: 'نسخ النتيجة',
+    copied: 'تم النسخ!',
+    loadExample: 'تجربة مثال',
+    exampleText: 'تفاح\nموز\nتفاح\nبرتقال\nموز',
+    totalLines: 'إجمالي الأسطر',
+    uniqueLines: 'الأسطر الفريدة',
+    emptyState: 'ألصق الأسطر ثم أزل التكرار لإنشاء الناتج المنظف.',
+    infoTitle: 'ماذا تفعل هذه الأداة؟',
+    infoText:
+      'تقوم هذه الأداة بحذف الأسطر المكررة من النص مع الاحتفاظ بأول ظهور فقط لكل سطر.'
+  }
+};
 
 function RemoveDuplicateLines({ language }) {
-  const [text, setText] = useState('');
+  const currentContent = language === 'ar' ? content.ar : content.en;
 
-  const lines = text.split('\n');
-  const cleanedLines = [...new Set(lines)];
-  const cleanedText = cleanedLines.join('\n');
+  const [inputText, setInputText] = useState('');
+  const [outputText, setOutputText] = useState('');
+  const [copied, setCopied] = useState(false);
 
-  const content = {
-    en: {
-      title: 'Remove Duplicate Lines',
-      description: 'Remove duplicate lines from your text instantly.',
-      placeholder: 'Paste your lines here...',
-      remove: 'Remove Duplicates',
-      clear: 'Clear',
-      totalLines: 'Total Lines',
-      uniqueLines: 'Unique Lines'
-    },
-    ar: {
-      title: 'إزالة الأسطر المكررة',
-      description: 'أزل الأسطر المكررة من النص فورًا.',
-      placeholder: 'ألصق الأسطر هنا...',
-      remove: 'إزالة التكرار',
-      clear: 'مسح',
-      totalLines: 'إجمالي الأسطر',
-      uniqueLines: 'الأسطر الفريدة'
+  usePageMeta(currentContent.metaTitle, currentContent.metaDescription);
+
+  const stats = useMemo(() => {
+    const inputLines = inputText ? inputText.split('\n') : [];
+    const uniqueLines = inputText ? [...new Set(inputLines)] : [];
+
+    return {
+      totalLines: inputLines.length,
+      uniqueLines: uniqueLines.length,
+      cleanedText: uniqueLines.join('\n')
+    };
+  }, [inputText]);
+
+  const cards = useMemo(() => {
+    return [
+      {
+        key: 'totalLines',
+        label: currentContent.totalLines,
+        value: stats.totalLines
+      },
+      {
+        key: 'uniqueLines',
+        label: currentContent.uniqueLines,
+        value: stats.uniqueLines
+      }
+    ];
+  }, [
+    currentContent.totalLines,
+    currentContent.uniqueLines,
+    stats.totalLines,
+    stats.uniqueLines
+  ]);
+
+  const handleChange = useCallback((event) => {
+    setInputText(event.target.value);
+    setCopied(false);
+  }, []);
+
+  const handleRemoveDuplicates = useCallback(() => {
+    setOutputText(stats.cleanedText);
+    setCopied(false);
+  }, [stats.cleanedText]);
+
+  const handleClear = useCallback(() => {
+    setInputText('');
+    setOutputText('');
+    setCopied(false);
+  }, []);
+
+  const handleLoadExample = useCallback(() => {
+    setInputText(currentContent.exampleText);
+    setOutputText('');
+    setCopied(false);
+  }, [currentContent.exampleText]);
+
+  const handleCopy = useCallback(async () => {
+    if (!outputText) return;
+
+    try {
+      await navigator.clipboard.writeText(outputText);
+      setCopied(true);
+
+      setTimeout(() => {
+        setCopied(false);
+      }, 1800);
+    } catch {
+      setCopied(false);
     }
-  };
-
-  const t = language === 'ar' ? content.ar : content.en;
-
-  const handleRemoveDuplicates = () => {
-    setText(cleanedText);
-  };
-
-  const handleClear = () => {
-    setText('');
-  };
+  }, [outputText]);
 
   return (
-    <main
-      className="tool-page"
-      dir={language === 'ar' ? 'rtl' : 'ltr'}
-      style={{ padding: '40px 20px' }}
-    >
-      <div style={{ maxWidth: '900px', margin: '0 auto' }}>
-        <h1 style={{ fontSize: '32px', marginBottom: '12px' }}>
-          {t.title}
-        </h1>
-
-        <p style={{ color: '#6b7280', marginBottom: '24px', lineHeight: '1.6' }}>
-          {t.description}
-        </p>
-
-        <textarea
-          value={text}
-          onChange={(event) => setText(event.target.value)}
-          placeholder={t.placeholder}
-          style={{
-            width: '100%',
-            minHeight: '240px',
-            padding: '16px',
-            border: '1px solid #d1d5db',
-            borderRadius: '10px',
-            resize: 'vertical',
-            outline: 'none',
-            fontSize: '16px',
-            lineHeight: '1.6',
-            marginBottom: '20px'
-          }}
-        />
-
-        <div
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: '12px',
-            marginBottom: '24px'
-          }}
-        >
-          <button
-            onClick={handleRemoveDuplicates}
-            style={{
-              backgroundColor: '#2563eb',
-              color: '#ffffff',
-              border: 'none',
-              padding: '12px 18px',
-              borderRadius: '8px',
-              cursor: 'pointer'
-            }}
-          >
-            {t.remove}
-          </button>
-
-          <button
-            onClick={handleClear}
-            style={{
-              backgroundColor: '#111827',
-              color: '#ffffff',
-              border: 'none',
-              padding: '12px 18px',
-              borderRadius: '8px',
-              cursor: 'pointer'
-            }}
-          >
-            {t.clear}
-          </button>
+    <main className="tool-page" dir={language === 'ar' ? 'rtl' : 'ltr'}>
+      <section className="tool-shell">
+        <div className="tool-shell-header">
+          <span className="tool-shell-badge">QuickoTools</span>
+          <h1 className="tool-shell-title">{currentContent.title}</h1>
+          <p className="tool-shell-description">{currentContent.description}</p>
         </div>
 
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(2, 1fr)',
-            gap: '16px'
-          }}
-        >
-          <div
-            style={{
-              backgroundColor: '#ffffff',
-              borderRadius: '12px',
-              padding: '20px',
-              boxShadow: '0 6px 18px rgba(0, 0, 0, 0.06)'
-            }}
-          >
-            <h2 style={{ fontSize: '18px', marginBottom: '8px' }}>
-              {t.totalLines}
-            </h2>
-            <p style={{ fontSize: '28px', fontWeight: '700' }}>
-              {text ? lines.length : 0}
+        <section className="tool-panel">
+          <div className="tool-panel-top">
+            <div className="tool-panel-heading">
+              <h2 className="tool-panel-title">{currentContent.inputTitle}</h2>
+            </div>
+
+            <div className="tool-panel-actions">
+              <button
+                type="button"
+                className="tool-action-button tool-action-button-primary"
+                onClick={handleLoadExample}
+              >
+                {currentContent.loadExample}
+              </button>
+
+              <button
+                type="button"
+                className="tool-action-button tool-action-button-secondary"
+                onClick={handleRemoveDuplicates}
+                disabled={!inputText}
+              >
+                {currentContent.remove}
+              </button>
+
+              <button
+                type="button"
+                className="tool-action-button tool-action-button-secondary"
+                onClick={handleClear}
+                disabled={!inputText && !outputText}
+              >
+                {currentContent.clear}
+              </button>
+            </div>
+          </div>
+
+          <textarea
+            value={inputText}
+            onChange={handleChange}
+            placeholder={currentContent.placeholder}
+            className="tool-textarea"
+            aria-label={currentContent.inputTitle}
+          />
+
+          {!inputText.trim() && (
+            <p className="tool-helper-text">{currentContent.emptyState}</p>
+          )}
+        </section>
+
+        <section className="tool-stats-grid">
+          {cards.map((item) => (
+            <div key={item.key} className="tool-stat-card">
+              <h2 className="tool-stat-label">{item.label}</h2>
+              <p className="tool-stat-value">{item.value}</p>
+            </div>
+          ))}
+        </section>
+
+        <section className="tool-panel">
+          <div className="tool-panel-top">
+            <div className="tool-panel-heading">
+              <h2 className="tool-panel-title">{currentContent.outputTitle}</h2>
+            </div>
+
+            <div className="tool-panel-actions">
+              <button
+                type="button"
+                className="tool-action-button tool-action-button-primary"
+                onClick={handleCopy}
+                disabled={!outputText}
+              >
+                {currentContent.copy}
+              </button>
+            </div>
+          </div>
+
+          <div className="tool-result-box">
+            <p
+              className={`tool-result-text ${
+                !outputText ? 'tool-result-placeholder' : ''
+              }`}
+            >
+              {outputText || currentContent.resultPlaceholder}
             </p>
           </div>
 
-          <div
-            style={{
-              backgroundColor: '#ffffff',
-              borderRadius: '12px',
-              padding: '20px',
-              boxShadow: '0 6px 18px rgba(0, 0, 0, 0.06)'
-            }}
-          >
-            <h2 style={{ fontSize: '18px', marginBottom: '8px' }}>
-              {t.uniqueLines}
-            </h2>
-            <p style={{ fontSize: '28px', fontWeight: '700' }}>
-              {text ? cleanedLines.length : 0}
+          {copied && (
+            <p className="tool-helper-text tool-helper-text-success">
+              {currentContent.copied}
             </p>
+          )}
+        </section>
+
+        <section className="tool-panel">
+          <div className="tool-panel-heading">
+            <h2 className="tool-panel-title">{currentContent.infoTitle}</h2>
           </div>
-        </div>
-      </div>
+          <p className="tool-helper-text">{currentContent.infoText}</p>
+        </section>
+      </section>
     </main>
   );
 }

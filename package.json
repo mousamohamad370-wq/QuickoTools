@@ -4,13 +4,15 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-   "dev": "vite",
+    "dev": "vite",
     "build": "npm run generate:sitemap && vite build",
     "preview": "vite preview",
     "generate:sitemap": "node scripts/generate-sitemap.mjs",
-     "validate:tools": "node scripts/validate-tools.mjs"
+    "validate:tools": "node scripts/validate-tools.mjs"
   },
   "dependencies": {
+    "jspdf": "^4.2.0",
+    "pdfjs-dist": "^5.5.207",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-qr-code": "^2.0.18",

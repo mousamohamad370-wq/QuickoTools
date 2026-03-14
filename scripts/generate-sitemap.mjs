@@ -7,7 +7,7 @@ import categoriesData from '../src/tools/data/categoriesData.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const SITE_URL = 'https://quickotools.com';
+const SITE_URL = 'https://quicko-tools.web.app';
 
 const staticPages = [
   '/',

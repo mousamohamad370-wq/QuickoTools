@@ -1,81 +1,124 @@
-import { useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
+import usePageMeta from '../../hooks/usePageMeta';
+import '../../styles/tool-page.css';
+
+const content = {
+  en: {
+    metaTitle: 'Text Repeater - QuickoTools',
+    metaDescription:
+      'Repeat any text multiple times instantly with the free Text Repeater tool from QuickoTools.',
+    title: 'Text Repeater',
+    description:
+      'Repeat any text multiple times instantly for testing, formatting, and content tasks.',
+    inputTitle: 'Repeat Your Text',
+    textLabel: 'Text',
+    textPlaceholder: 'Enter your text here...',
+    countLabel: 'Repeat Count',
+    countPlaceholder: 'Enter repeat count',
+    generate: 'Repeat Text',
+    clear: 'Clear',
+    copy: 'Copy Result',
+    copied: 'Copied!',
+    resultTitle: 'Repeated Text',
+    resultPlaceholder: 'Your repeated text will appear here.',
+    infoTitle: 'What is a Text Repeater?',
+    infoText:
+      'A text repeater duplicates the same text multiple times, which is useful for testing, formatting, and quick content generation.',
+    loadExample: 'Try Example',
+    exampleText: 'Hello',
+    invalidCount: 'Please enter a valid repeat count between 1 and 1000.',
+    emptyState: 'Enter text and a repeat count, then generate the result.'
+  },
+  ar: {
+    metaTitle: 'مكرر النص - QuickoTools',
+    metaDescription:
+      'كرر أي نص عدة مرات فورًا باستخدام أداة مكرر النص المجانية من QuickoTools.',
+    title: 'مكرر النص',
+    description:
+      'كرر أي نص عدة مرات فورًا لأغراض الاختبار والتنسيق وإنشاء المحتوى.',
+    inputTitle: 'كرّر النص',
+    textLabel: 'النص',
+    textPlaceholder: 'أدخل النص هنا...',
+    countLabel: 'عدد التكرار',
+    countPlaceholder: 'أدخل عدد مرات التكرار',
+    generate: 'تكرار النص',
+    clear: 'مسح',
+    copy: 'نسخ النتيجة',
+    copied: 'تم النسخ!',
+    resultTitle: 'النص المكرر',
+    resultPlaceholder: 'سيظهر النص المكرر هنا.',
+    infoTitle: 'ما هو مكرر النص؟',
+    infoText:
+      'مكرر النص هو أداة تقوم بتكرار نفس النص عدة مرات، وهو مفيد للاختبار والتنسيق وإنشاء محتوى سريع.',
+    loadExample: 'تجربة مثال',
+    exampleText: 'مرحبا',
+    invalidCount: 'يرجى إدخال عدد تكرار صالح بين 1 و 1000.',
+    emptyState: 'أدخل النص وحدد عدد التكرار ثم أنشئ النتيجة.'
+  }
+};
 
 function TextRepeater({ language }) {
+  const currentContent = language === 'ar' ? content.ar : content.en;
+
   const [text, setText] = useState('');
   const [count, setCount] = useState(5);
   const [output, setOutput] = useState('');
   const [copied, setCopied] = useState(false);
+  const [error, setError] = useState('');
 
-  const content = {
-    en: {
-      title: 'Text Repeater',
-      description: 'Repeat any text multiple times instantly for testing, formatting, and content tasks.',
-      textLabel: 'Text',
-      textPlaceholder: 'Enter your text here...',
-      countLabel: 'Repeat Count',
-      countPlaceholder: 'Enter repeat count',
-      generate: 'Repeat Text',
-      clear: 'Clear',
-      copy: 'Copy',
-      copied: 'Copied!',
-      resultTitle: 'Repeated Text',
-      resultPlaceholder: 'Your repeated text will appear here.',
-      infoTitle: 'What is a Text Repeater?',
-      infoText:
-        'A text repeater duplicates the same text multiple times, which is useful for testing, formatting, and quick content generation.',
-      exampleTitle: 'Example',
-      tryExample: 'Try Example',
-      exampleText: 'Hello',
-      invalidCount: 'Please enter a valid repeat count'
-    },
-    ar: {
-      title: 'مكرر النص',
-      description: 'كرر أي نص عدة مرات فورًا لأغراض الاختبار والتنسيق وإنشاء المحتوى.',
-      textLabel: 'النص',
-      textPlaceholder: 'أدخل النص هنا...',
-      countLabel: 'عدد التكرار',
-      countPlaceholder: 'أدخل عدد مرات التكرار',
-      generate: 'تكرار النص',
-      clear: 'مسح',
-      copy: 'نسخ',
-      copied: 'تم النسخ!',
-      resultTitle: 'النص المكرر',
-      resultPlaceholder: 'سيظهر النص المكرر هنا.',
-      infoTitle: 'ما هو مكرر النص؟',
-      infoText:
-        'مكرر النص هو أداة تقوم بتكرار نفس النص عدة مرات، وهو مفيد للاختبار والتنسيق وإنشاء محتوى سريع.',
-      exampleTitle: 'مثال',
-      tryExample: 'جرّب المثال',
-      exampleText: 'مرحبا',
-      invalidCount: 'يرجى إدخال عدد تكرار صالح'
-    }
-  };
+  usePageMeta(currentContent.metaTitle, currentContent.metaDescription);
 
-  const t = language === 'ar' ? content.ar : content.en;
+  const hasValidOutput = useMemo(() => {
+    return Boolean(output && !error);
+  }, [output, error]);
 
-  const generateRepeatedText = () => {
+  const handleTextChange = useCallback((event) => {
+    setText(event.target.value);
+    setCopied(false);
+    setError('');
+  }, []);
+
+  const handleCountChange = useCallback((event) => {
+    setCount(event.target.value);
+    setCopied(false);
+    setError('');
+  }, []);
+
+  const handleGenerate = useCallback(() => {
     const safeCount = Number(count);
 
     if (!text.trim() || !safeCount || safeCount < 1 || safeCount > 1000) {
-      setOutput(t.invalidCount);
+      setOutput('');
+      setError(currentContent.invalidCount);
       setCopied(false);
       return;
     }
 
     const repeated = Array.from({ length: safeCount }, () => text).join('\n');
-    setOutput(repeated);
-    setCopied(false);
-  };
 
-  const clearAll = () => {
+    setOutput(repeated);
+    setError('');
+    setCopied(false);
+  }, [text, count, currentContent.invalidCount]);
+
+  const handleClear = useCallback(() => {
     setText('');
     setCount(5);
     setOutput('');
     setCopied(false);
-  };
+    setError('');
+  }, []);
 
-  const copyResult = async () => {
-    if (!output || output === t.invalidCount) return;
+  const handleLoadExample = useCallback(() => {
+    setText(currentContent.exampleText);
+    setCount(5);
+    setOutput('');
+    setCopied(false);
+    setError('');
+  }, [currentContent.exampleText]);
+
+  const handleCopy = useCallback(async () => {
+    if (!hasValidOutput) return;
 
     try {
       await navigator.clipboard.writeText(output);
@@ -84,331 +127,138 @@ function TextRepeater({ language }) {
       setTimeout(() => {
         setCopied(false);
       }, 1800);
-    } catch (error) {
+    } catch {
       setCopied(false);
     }
-  };
-
-  const tryExample = () => {
-    setText(t.exampleText);
-    setCount(5);
-    setOutput('');
-    setCopied(false);
-  };
-
-  const isError = output === t.invalidCount;
+  }, [hasValidOutput, output]);
 
   return (
-    <main
-      className="tool-page"
-      dir={language === 'ar' ? 'rtl' : 'ltr'}
-      style={{
-        padding: '40px 20px',
-        backgroundColor: '#f3f4f6',
-        minHeight: '100vh'
-      }}
-    >
-      <div style={{ maxWidth: '980px', margin: '0 auto' }}>
-        <div style={{ textAlign: 'center', marginBottom: '28px' }}>
-          <h1
-            style={{
-              fontSize: '32px',
-              marginBottom: '12px',
-              fontWeight: '700',
-              color: '#111827'
-            }}
-          >
-            {t.title}
-          </h1>
-
-          <p
-            style={{
-              color: '#6b7280',
-              lineHeight: '1.7',
-              fontSize: '16px',
-              margin: 0
-            }}
-          >
-            {t.description}
-          </p>
+    <main className="tool-page" dir={language === 'ar' ? 'rtl' : 'ltr'}>
+      <section className="tool-shell">
+        <div className="tool-shell-header">
+          <span className="tool-shell-badge">QuickoTools</span>
+          <h1 className="tool-shell-title">{currentContent.title}</h1>
+          <p className="tool-shell-description">{currentContent.description}</p>
         </div>
 
-        <div
-          style={{
-            backgroundColor: '#ffffff',
-            borderRadius: '16px',
-            padding: '28px',
-            boxShadow: '0 6px 18px rgba(0, 0, 0, 0.06)',
-            marginBottom: '28px'
-          }}
-        >
-          <div style={{ marginBottom: '18px' }}>
-            <label
-              style={{
-                display: 'block',
-                fontWeight: '700',
-                marginBottom: '12px',
-                color: '#111827',
-                fontSize: '18px'
-              }}
-            >
-              {t.textLabel}
-            </label>
+        <section className="tool-panel">
+          <div className="tool-panel-top">
+            <div className="tool-panel-heading">
+              <h2 className="tool-panel-title">{currentContent.inputTitle}</h2>
+            </div>
 
+            <div className="tool-panel-actions">
+              <button
+                type="button"
+                className="tool-action-button tool-action-button-primary"
+                onClick={handleLoadExample}
+              >
+                {currentContent.loadExample}
+              </button>
+
+              <button
+                type="button"
+                className="tool-action-button tool-action-button-secondary"
+                onClick={handleClear}
+                disabled={!text && !output && Number(count) === 5}
+              >
+                {currentContent.clear}
+              </button>
+            </div>
+          </div>
+
+          <div className="tool-field">
+            <label className="tool-label" htmlFor="text-repeater-input">
+              {currentContent.textLabel}
+            </label>
             <textarea
+              id="text-repeater-input"
               value={text}
-              onChange={(event) => setText(event.target.value)}
-              placeholder={t.textPlaceholder}
-              style={{
-                width: '100%',
-                minHeight: '160px',
-                padding: '16px',
-                border: '1px solid #d1d5db',
-                borderRadius: '10px',
-                resize: 'vertical',
-                outline: 'none',
-                fontSize: '16px',
-                lineHeight: '1.6',
-                boxSizing: 'border-box',
-                marginBottom: '18px'
-              }}
+              onChange={handleTextChange}
+              placeholder={currentContent.textPlaceholder}
+              className="tool-textarea"
+              aria-label={currentContent.textLabel}
             />
+          </div>
 
-            <label
-              style={{
-                display: 'block',
-                fontWeight: '700',
-                marginBottom: '12px',
-                color: '#111827',
-                fontSize: '18px'
-              }}
-            >
-              {t.countLabel}
+          <div className="tool-field">
+            <label className="tool-label" htmlFor="text-repeater-count">
+              {currentContent.countLabel}
             </label>
-
             <input
+              id="text-repeater-count"
               type="number"
               min="1"
               max="1000"
               value={count}
-              onChange={(event) => setCount(event.target.value)}
-              placeholder={t.countPlaceholder}
-              style={{
-                width: '100%',
-                height: '54px',
-                padding: '0 16px',
-                border: '1px solid #d1d5db',
-                borderRadius: '10px',
-                outline: 'none',
-                fontSize: '16px',
-                backgroundColor: '#ffffff',
-                color: '#111827',
-                boxSizing: 'border-box'
-              }}
+              onChange={handleCountChange}
+              placeholder={currentContent.countPlaceholder}
+              className="tool-input"
+              aria-label={currentContent.countLabel}
             />
           </div>
 
-          {copied && (
-            <div style={{ marginBottom: '18px' }}>
-              <span
-                style={{
-                  backgroundColor: '#dbeafe',
-                  color: '#1d4ed8',
-                  borderRadius: '10px',
-                  padding: '10px 14px',
-                  fontSize: '14px',
-                  fontWeight: '600'
-                }}
-              >
-                {t.copied}
-              </span>
-            </div>
+          <div className="tool-panel-actions tool-actions-row">
+            <button
+              type="button"
+              className="tool-action-button tool-action-button-primary"
+              onClick={handleGenerate}
+            >
+              {currentContent.generate}
+            </button>
+          </div>
+
+          {!text.trim() && !output && !error && (
+            <p className="tool-helper-text">{currentContent.emptyState}</p>
           )}
 
-          <div
-            style={{
-              display: 'flex',
-              gap: '12px',
-              justifyContent: language === 'ar' ? 'flex-start' : 'flex-end',
-              flexWrap: 'wrap'
-            }}
-          >
-            <button
-              onClick={generateRepeatedText}
-              style={{
-                backgroundColor: '#2563eb',
-                color: '#ffffff',
-                border: 'none',
-                borderRadius: '10px',
-                padding: '14px 24px',
-                fontSize: '16px',
-                fontWeight: '700',
-                cursor: 'pointer'
-              }}
-            >
-              {t.generate}
-            </button>
+          {copied && (
+            <p className="tool-helper-text tool-helper-text-success">
+              {currentContent.copied}
+            </p>
+          )}
 
-            <button
-              onClick={clearAll}
-              style={{
-                backgroundColor: '#e5e7eb',
-                color: '#111827',
-                border: 'none',
-                borderRadius: '10px',
-                padding: '14px 24px',
-                fontSize: '16px',
-                fontWeight: '700',
-                cursor: 'pointer'
-              }}
-            >
-              {t.clear}
-            </button>
-          </div>
-        </div>
+          {error && (
+            <p className="tool-helper-text tool-helper-text-error">{error}</p>
+          )}
+        </section>
 
-        <div
-          style={{
-            backgroundColor: '#ffffff',
-            borderRadius: '16px',
-            padding: '28px',
-            boxShadow: '0 6px 18px rgba(0, 0, 0, 0.06)',
-            marginBottom: '28px'
-          }}
-        >
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              gap: '16px',
-              flexWrap: 'wrap',
-              marginBottom: '18px'
-            }}
-          >
-            <h2
-              style={{
-                fontSize: '18px',
-                margin: 0,
-                color: '#111827',
-                fontWeight: '700'
-              }}
-            >
-              {t.resultTitle}
-            </h2>
+        <section className="tool-panel">
+          <div className="tool-panel-top">
+            <div className="tool-panel-heading">
+              <h2 className="tool-panel-title">{currentContent.resultTitle}</h2>
+            </div>
 
-            <button
-              onClick={copyResult}
-              style={{
-                backgroundColor: '#2563eb',
-                color: '#ffffff',
-                border: 'none',
-                borderRadius: '10px',
-                padding: '12px 20px',
-                fontSize: '15px',
-                fontWeight: '700',
-                cursor: output && !isError ? 'pointer' : 'not-allowed',
-                opacity: output && !isError ? 1 : 0.65
-              }}
-            >
-              {t.copy}
-            </button>
+            <div className="tool-panel-actions">
+              <button
+                type="button"
+                className="tool-action-button tool-action-button-primary"
+                onClick={handleCopy}
+                disabled={!hasValidOutput}
+              >
+                {currentContent.copy}
+              </button>
+            </div>
           </div>
 
-          <div
-            style={{
-              minHeight: '120px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              textAlign: 'start'
-            }}
-          >
+          <div className="tool-result-box">
             <p
-              style={{
-                width: '100%',
-                fontSize: output ? '16px' : '20px',
-                fontWeight: output && !isError ? '400' : '700',
-                color: isError ? '#dc2626' : output ? '#111827' : '#374151',
-                lineHeight: '1.9',
-                margin: 0,
-                whiteSpace: 'pre-wrap',
-                wordBreak: 'break-word'
-              }}
+              className={`tool-result-text ${
+                !output && !error ? 'tool-result-placeholder' : ''
+              }`}
             >
-              {output || t.resultPlaceholder}
+              {error || output || currentContent.resultPlaceholder}
             </p>
           </div>
-        </div>
+        </section>
 
-        <div
-          style={{
-            backgroundColor: '#ffffff',
-            borderRadius: '16px',
-            padding: '28px',
-            boxShadow: '0 6px 18px rgba(0, 0, 0, 0.06)',
-            marginBottom: '28px'
-          }}
-        >
-          <h2
-            style={{
-              fontSize: '18px',
-              marginBottom: '12px',
-              color: '#111827',
-              fontWeight: '700'
-            }}
-          >
-            {t.exampleTitle}
-          </h2>
-
-          <button
-            onClick={tryExample}
-            style={{
-              backgroundColor: '#2563eb',
-              color: '#ffffff',
-              border: 'none',
-              borderRadius: '10px',
-              padding: '14px 24px',
-              fontSize: '16px',
-              fontWeight: '700',
-              cursor: 'pointer'
-            }}
-          >
-            {t.tryExample}
-          </button>
-        </div>
-
-        <div
-          style={{
-            backgroundColor: '#ffffff',
-            borderRadius: '16px',
-            padding: '28px',
-            boxShadow: '0 6px 18px rgba(0, 0, 0, 0.06)'
-          }}
-        >
-          <h2
-            style={{
-              fontSize: '18px',
-              marginBottom: '12px',
-              color: '#111827',
-              fontWeight: '700'
-            }}
-          >
-            {t.infoTitle}
-          </h2>
-
-          <p
-            style={{
-              color: '#6b7280',
-              lineHeight: '1.8',
-              margin: 0,
-              fontSize: '16px'
-            }}
-          >
-            {t.infoText}
-          </p>
-        </div>
-      </div>
+        <section className="tool-panel">
+          <div className="tool-panel-heading">
+            <h2 className="tool-panel-title">{currentContent.infoTitle}</h2>
+          </div>
+          <p className="tool-helper-text">{currentContent.infoText}</p>
+        </section>
+      </section>
     </main>
   );
 }

@@ -4,56 +4,65 @@ import '../../styles/tool-page.css';
 
 const content = {
   en: {
-    metaTitle: 'Line Break Remover - QuickoTools',
+    metaTitle: 'Text Sorter - QuickoTools',
     metaDescription:
-      'Remove line breaks from text instantly and convert multi-line text into a clean single line with QuickoTools.',
-    title: 'Line Break Remover',
+      'Sort lines of text alphabetically in ascending or descending order with the free Text Sorter tool from QuickoTools.',
+    title: 'Text Sorter',
     description:
-      'Remove line breaks from text instantly and turn multi-line text into a clean single line.',
+      'Sort lines of text alphabetically in ascending or descending order instantly.',
     inputTitle: 'Input Text',
-    inputPlaceholder: 'Paste your multi-line text here...',
-    outputTitle: 'Clean Text',
-    outputPlaceholder: 'Your cleaned text will appear here.',
-    remove: 'Remove Line Breaks',
+    inputLabel: 'Input Text',
+    inputPlaceholder: 'Paste your lines here...',
+    outputTitle: 'Sorted Text',
+    outputPlaceholder: 'Your sorted text will appear here.',
+    sortAZ: 'Sort A to Z',
+    sortZA: 'Sort Z to A',
     clear: 'Clear',
     copy: 'Copy Result',
     copied: 'Copied!',
     loadExample: 'Load Example',
-    exampleValue:
-      'Hello world\nThis is QuickoTools\nRemove line breaks easily',
-    emptyState:
-      'Paste your multi-line text, then remove line breaks to generate clean output.',
-    infoTitle: 'What is a Line Break Remover?',
+    exampleValue: 'Banana\nApple\nOrange\nGrape',
+    emptyState: 'Paste your text lines, then choose a sorting direction.',
+    infoTitle: 'What does this tool do?',
     infoText:
-      'A line break remover helps you convert multi-line text into one clean line, which is useful for forms, code, documents, and content formatting.'
+      'This tool sorts text line by line in alphabetical order, which is useful for organizing names, lists, keywords, and other text data.'
   },
   ar: {
-    metaTitle: 'إزالة فواصل الأسطر - QuickoTools',
+    metaTitle: 'ترتيب النص - QuickoTools',
     metaDescription:
-      'احذف فواصل الأسطر من النص فورًا وحوّل النص متعدد الأسطر إلى سطر واحد مرتب باستخدام QuickoTools.',
-    title: 'إزالة فواصل الأسطر',
+      'رتّب أسطر النص أبجديًا تصاعديًا أو تنازليًا باستخدام أداة ترتيب النص المجانية من QuickoTools.',
+    title: 'ترتيب النص',
     description:
-      'احذف فواصل الأسطر من النص فورًا وحوّل النص متعدد الأسطر إلى سطر واحد مرتب.',
+      'رتّب أسطر النص أبجديًا تصاعديًا أو تنازليًا فورًا.',
     inputTitle: 'النص المدخل',
-    inputPlaceholder: 'ألصق النص متعدد الأسطر هنا...',
-    outputTitle: 'النص المنظف',
-    outputPlaceholder: 'سيظهر النص بعد إزالة فواصل الأسطر هنا.',
-    remove: 'إزالة فواصل الأسطر',
+    inputLabel: 'النص المدخل',
+    inputPlaceholder: 'ألصق الأسطر هنا...',
+    outputTitle: 'النص المرتب',
+    outputPlaceholder: 'سيظهر النص المرتب هنا.',
+    sortAZ: 'ترتيب من أ إلى ي',
+    sortZA: 'ترتيب من ي إلى أ',
     clear: 'مسح',
     copy: 'نسخ النتيجة',
     copied: 'تم النسخ!',
     loadExample: 'تجربة مثال',
-    exampleValue:
-      'مرحبا بالعالم\nهذا هو QuickoTools\nاحذف فواصل الأسطر بسهولة',
-    emptyState:
-      'ألصق النص متعدد الأسطر ثم أزل فواصل الأسطر لإنشاء الناتج المنظف.',
-    infoTitle: 'ما هي أداة إزالة فواصل الأسطر؟',
+    exampleValue: 'موز\nتفاح\nبرتقال\nعنب',
+    emptyState: 'ألصق أسطر النص ثم اختر اتجاه الترتيب.',
+    infoTitle: 'ماذا تفعل هذه الأداة؟',
     infoText:
-      'تساعدك هذه الأداة على تحويل النص متعدد الأسطر إلى سطر واحد منظم، وهي مفيدة للنماذج والبرمجة والمستندات وتنسيق المحتوى.'
+      'تقوم هذه الأداة بترتيب النص سطرًا بسطر حسب الترتيب الأبجدي، وهي مفيدة لتنظيم الأسماء والقوائم والكلمات المفتاحية وغير ذلك.'
   }
 };
 
-function LineBreakRemover({ language }) {
+function sortLines(text, direction = 'asc') {
+  const lines = text.split('\n');
+  const sorted = [...lines].sort((a, b) =>
+    a.localeCompare(b, undefined, { sensitivity: 'base' })
+  );
+
+  return direction === 'desc' ? sorted.reverse().join('\n') : sorted.join('\n');
+}
+
+function TextSorter({ language }) {
   const currentContent = language === 'ar' ? content.ar : content.en;
 
   const [inputText, setInputText] = useState('');
@@ -64,16 +73,17 @@ function LineBreakRemover({ language }) {
 
   const handleChange = useCallback((event) => {
     setInputText(event.target.value);
+    setOutputText('');
     setCopied(false);
   }, []);
 
-  const handleRemoveLineBreaks = useCallback(() => {
-    const cleaned = inputText
-      .replace(/\r?\n+/g, ' ')
-      .replace(/\s+/g, ' ')
-      .trim();
+  const handleSortAZ = useCallback(() => {
+    setOutputText(sortLines(inputText, 'asc'));
+    setCopied(false);
+  }, [inputText]);
 
-    setOutputText(cleaned);
+  const handleSortZA = useCallback(() => {
+    setOutputText(sortLines(inputText, 'desc'));
     setCopied(false);
   }, [inputText]);
 
@@ -131,15 +141,6 @@ function LineBreakRemover({ language }) {
               <button
                 type="button"
                 className="tool-action-button tool-action-button-secondary"
-                onClick={handleRemoveLineBreaks}
-                disabled={!inputText}
-              >
-                {currentContent.remove}
-              </button>
-
-              <button
-                type="button"
-                className="tool-action-button tool-action-button-secondary"
                 onClick={handleClear}
                 disabled={!inputText && !outputText}
               >
@@ -148,13 +149,40 @@ function LineBreakRemover({ language }) {
             </div>
           </div>
 
-          <textarea
-            value={inputText}
-            onChange={handleChange}
-            placeholder={currentContent.inputPlaceholder}
-            className="tool-textarea"
-            aria-label={currentContent.inputTitle}
-          />
+          <div className="tool-field">
+            <label className="tool-label" htmlFor="text-sorter-input">
+              {currentContent.inputLabel}
+            </label>
+
+            <textarea
+              id="text-sorter-input"
+              value={inputText}
+              onChange={handleChange}
+              placeholder={currentContent.inputPlaceholder}
+              className="tool-textarea"
+              aria-label={currentContent.inputLabel}
+            />
+          </div>
+
+          <div className="tool-panel-actions tool-actions-row">
+            <button
+              type="button"
+              className="tool-action-button tool-action-button-primary"
+              onClick={handleSortAZ}
+              disabled={!inputText}
+            >
+              {currentContent.sortAZ}
+            </button>
+
+            <button
+              type="button"
+              className="tool-action-button tool-action-button-secondary"
+              onClick={handleSortZA}
+              disabled={!inputText}
+            >
+              {currentContent.sortZA}
+            </button>
+          </div>
 
           {!inputText.trim() && (
             <p className="tool-helper-text">{currentContent.emptyState}</p>
@@ -207,4 +235,4 @@ function LineBreakRemover({ language }) {
   );
 }
 
-export default LineBreakRemover;
+export default TextSorter;

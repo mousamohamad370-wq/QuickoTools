@@ -1,5 +1,13 @@
 const categoriesData = [
   {
+  key: 'pdf-tools',
+  slug: 'pdf-tools',
+  name: 'PDF Tools',
+  nameAr: 'أدوات PDF',
+  description: 'Useful tools for working with PDF files quickly and easily.',
+  descriptionAr: 'أدوات مفيدة للتعامل مع ملفات PDF بسرعة وسهولة.'
+},
+  {
     key: 'generators',
     slug: 'generators',
     name: 'Generators',
@@ -31,6 +39,7 @@ const categoriesData = [
     description: 'Formatting and developer-focused utilities.',
     descriptionAr: 'أدوات تنسيق وخدمات مفيدة للمطورين.'
   },
+
   {
     key: 'converters',
     slug: 'converters',

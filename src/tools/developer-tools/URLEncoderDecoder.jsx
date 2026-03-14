@@ -1,406 +1,250 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
+import usePageMeta from '../../hooks/usePageMeta';
+import '../../styles/tool-page.css';
+
+const content = {
+  en: {
+    metaTitle: 'URL Encoder / Decoder - QuickoTools',
+    metaDescription:
+      'Encode URLs and text for safe web usage or decode them back instantly with the free URL Encoder / Decoder tool from QuickoTools.',
+    title: 'URL Encoder / Decoder',
+    description:
+      'Encode URLs and text for safe web usage or decode them back instantly.',
+    inputTitle: 'Input',
+    inputLabel: 'Input',
+    inputPlaceholder: 'Enter text or URL here...',
+    outputTitle: 'Result',
+    outputPlaceholder: 'The result will appear here.',
+    encode: 'Encode',
+    decode: 'Decode',
+    clear: 'Clear',
+    copy: 'Copy Result',
+    copied: 'Copied!',
+    invalidInput: 'Invalid encoded URL input',
+    infoTitle: 'What is URL encoding?',
+    infoText:
+      'URL encoding converts special characters into a format that can be safely used inside web addresses.',
+    loadExample: 'Load Example',
+    exampleValue: 'https://example.com/search?q=hello world&lang=en',
+    emptyState:
+      'Enter text or a URL, then choose whether to encode or decode.'
+  },
+  ar: {
+    metaTitle: 'تشفير وفك URL - QuickoTools',
+    metaDescription:
+      'قم بترميز الروابط والنصوص لاستخدامها بأمان في الويب أو فكها فورًا باستخدام أداة تشفير وفك URL المجانية من QuickoTools.',
+    title: 'تشفير وفك URL',
+    description:
+      'قم بترميز الروابط والنصوص لاستخدامها بأمان في الويب أو فكها فورًا.',
+    inputTitle: 'الإدخال',
+    inputLabel: 'الإدخال',
+    inputPlaceholder: 'أدخل النص أو الرابط هنا...',
+    outputTitle: 'النتيجة',
+    outputPlaceholder: 'ستظهر النتيجة هنا.',
+    encode: 'تشفير',
+    decode: 'فك',
+    clear: 'مسح',
+    copy: 'نسخ النتيجة',
+    copied: 'تم النسخ!',
+    invalidInput: 'الرابط أو النص المشفر غير صالح',
+    infoTitle: 'ما هو URL encoding؟',
+    infoText:
+      'ترميز URL يحول الأحرف الخاصة إلى صيغة يمكن استخدامها بأمان داخل عناوين وروابط الويب.',
+    loadExample: 'تجربة مثال',
+    exampleValue: 'https://example.com/search?q=hello world&lang=en',
+    emptyState: 'أدخل النص أو الرابط ثم اختر التشفير أو الفك.'
+  }
+};
 
 function URLEncoderDecoder({ language }) {
-  const [input, setInput] = useState('');
-  const [output, setOutput] = useState('');
+  const currentContent = language === 'ar' ? content.ar : content.en;
+
+  const [inputText, setInputText] = useState('');
+  const [outputText, setOutputText] = useState('');
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState('');
 
-  const content = {
-    en: {
-      title: 'URL Encoder / Decoder',
-      description: 'Encode URLs and text for safe web usage or decode them back instantly.',
-      inputLabel: 'Input',
-      inputPlaceholder: 'Enter text or URL here...',
-      outputTitle: 'Result',
-      outputPlaceholder: 'The result will appear here.',
-      encode: 'Encode',
-      decode: 'Decode',
-      clear: 'Clear',
-      copy: 'Copy',
-      copied: 'Copied!',
-      invalidInput: 'Invalid encoded URL input',
-      infoTitle: 'What is URL encoding?',
-      infoText:
-        'URL encoding converts special characters into a format that can be safely used inside web addresses.',
-      exampleTitle: 'Example',
-      tryExample: 'Try Example',
-      exampleValue: 'https://example.com/search?q=hello world&lang=en'
-    },
-    ar: {
-      title: 'تشفير وفك URL',
-      description: 'قم بترميز الروابط والنصوص لاستخدامها بأمان في الويب أو فكها فورًا.',
-      inputLabel: 'الإدخال',
-      inputPlaceholder: 'أدخل النص أو الرابط هنا...',
-      outputTitle: 'النتيجة',
-      outputPlaceholder: 'ستظهر النتيجة هنا.',
-      encode: 'تشفير',
-      decode: 'فك',
-      clear: 'مسح',
-      copy: 'نسخ',
-      copied: 'تم النسخ!',
-      invalidInput: 'الرابط أو النص المشفر غير صالح',
-      infoTitle: 'ما هو URL encoding؟',
-      infoText:
-        'ترميز URL يحول الأحرف الخاصة إلى صيغة يمكن استخدامها بأمان داخل عناوين وروابط الويب.',
-      exampleTitle: 'مثال',
-      tryExample: 'جرّب المثال',
-      exampleValue: 'https://example.com/search?q=hello world&lang=en'
-    }
-  };
+  usePageMeta(currentContent.metaTitle, currentContent.metaDescription);
 
-  const t = language === 'ar' ? content.ar : content.en;
-
-  const encodeText = () => {
-    try {
-      const encoded = encodeURIComponent(input);
-      setOutput(encoded);
-      setError('');
-      setCopied(false);
-    } catch (error) {
-      setOutput('');
-      setError('');
-      setCopied(false);
-    }
-  };
-
-  const decodeText = () => {
-    try {
-      const decoded = decodeURIComponent(input);
-      setOutput(decoded);
-      setError('');
-      setCopied(false);
-    } catch (error) {
-      setOutput('');
-      setError(t.invalidInput);
-      setCopied(false);
-    }
-  };
-
-  const clearAll = () => {
-    setInput('');
-    setOutput('');
+  const handleChange = useCallback((event) => {
+    setInputText(event.target.value);
+    setOutputText('');
     setError('');
     setCopied(false);
-  };
+  }, []);
 
-  const copyResult = async () => {
-    if (!output) return;
+  const handleEncode = useCallback(() => {
+    try {
+      const encoded = encodeURIComponent(inputText);
+      setOutputText(encoded);
+      setError('');
+      setCopied(false);
+    } catch {
+      setOutputText('');
+      setError('');
+      setCopied(false);
+    }
+  }, [inputText]);
+
+  const handleDecode = useCallback(() => {
+    try {
+      const decoded = decodeURIComponent(inputText);
+      setOutputText(decoded);
+      setError('');
+      setCopied(false);
+    } catch {
+      setOutputText('');
+      setError(currentContent.invalidInput);
+      setCopied(false);
+    }
+  }, [inputText, currentContent.invalidInput]);
+
+  const handleClear = useCallback(() => {
+    setInputText('');
+    setOutputText('');
+    setError('');
+    setCopied(false);
+  }, []);
+
+  const handleCopy = useCallback(async () => {
+    if (!outputText || error) return;
 
     try {
-      await navigator.clipboard.writeText(output);
+      await navigator.clipboard.writeText(outputText);
       setCopied(true);
 
       setTimeout(() => {
         setCopied(false);
       }, 1800);
-    } catch (error) {
+    } catch {
       setCopied(false);
     }
-  };
+  }, [outputText, error]);
 
-  const tryExample = () => {
-    setInput(t.exampleValue);
-    setOutput('');
+  const handleLoadExample = useCallback(() => {
+    setInputText(currentContent.exampleValue);
+    setOutputText('');
     setError('');
     setCopied(false);
-  };
+  }, [currentContent.exampleValue]);
 
   return (
-    <main
-      className="tool-page"
-      dir={language === 'ar' ? 'rtl' : 'ltr'}
-      style={{
-        padding: '40px 20px',
-        backgroundColor: '#f3f4f6',
-        minHeight: '100vh'
-      }}
-    >
-      <div style={{ maxWidth: '980px', margin: '0 auto' }}>
-        <div style={{ textAlign: 'center', marginBottom: '28px' }}>
-          <h1
-            style={{
-              fontSize: '32px',
-              marginBottom: '12px',
-              fontWeight: '700',
-              color: '#111827'
-            }}
-          >
-            {t.title}
-          </h1>
-
-          <p
-            style={{
-              color: '#6b7280',
-              lineHeight: '1.7',
-              fontSize: '16px',
-              margin: 0
-            }}
-          >
-            {t.description}
-          </p>
+    <main className="tool-page" dir={language === 'ar' ? 'rtl' : 'ltr'}>
+      <section className="tool-shell">
+        <div className="tool-shell-header">
+          <span className="tool-shell-badge">QuickoTools</span>
+          <h1 className="tool-shell-title">{currentContent.title}</h1>
+          <p className="tool-shell-description">{currentContent.description}</p>
         </div>
 
-        <div
-          style={{
-            backgroundColor: '#ffffff',
-            borderRadius: '16px',
-            padding: '28px',
-            boxShadow: '0 6px 18px rgba(0, 0, 0, 0.06)',
-            marginBottom: '28px'
-          }}
-        >
-          <div style={{ marginBottom: '18px' }}>
-            <label
-              style={{
-                display: 'block',
-                fontWeight: '700',
-                marginBottom: '12px',
-                color: '#111827',
-                fontSize: '18px'
-              }}
-            >
-              {t.inputLabel}
+        <section className="tool-panel">
+          <div className="tool-panel-top">
+            <div className="tool-panel-heading">
+              <h2 className="tool-panel-title">{currentContent.inputTitle}</h2>
+            </div>
+
+            <div className="tool-panel-actions">
+              <button
+                type="button"
+                className="tool-action-button tool-action-button-primary"
+                onClick={handleLoadExample}
+              >
+                {currentContent.loadExample}
+              </button>
+
+              <button
+                type="button"
+                className="tool-action-button tool-action-button-secondary"
+                onClick={handleClear}
+                disabled={!inputText && !outputText}
+              >
+                {currentContent.clear}
+              </button>
+            </div>
+          </div>
+
+          <div className="tool-field">
+            <label className="tool-label" htmlFor="url-encoder-input">
+              {currentContent.inputLabel}
             </label>
 
             <textarea
-              value={input}
-              onChange={(event) => setInput(event.target.value)}
-              placeholder={t.inputPlaceholder}
-              style={{
-                width: '100%',
-                minHeight: '180px',
-                padding: '16px',
-                border: '1px solid #d1d5db',
-                borderRadius: '10px',
-                resize: 'vertical',
-                outline: 'none',
-                fontSize: '16px',
-                lineHeight: '1.6',
-                boxSizing: 'border-box'
-              }}
+              id="url-encoder-input"
+              value={inputText}
+              onChange={handleChange}
+              placeholder={currentContent.inputPlaceholder}
+              className="tool-textarea"
+              aria-label={currentContent.inputLabel}
             />
           </div>
 
-          {copied && (
-            <div
-              style={{
-                marginBottom: '18px'
-              }}
+          <div className="tool-panel-actions tool-actions-row">
+            <button
+              type="button"
+              className="tool-action-button tool-action-button-primary"
+              onClick={handleEncode}
+              disabled={!inputText}
             >
-              <span
-                style={{
-                  backgroundColor: '#dbeafe',
-                  color: '#1d4ed8',
-                  borderRadius: '10px',
-                  padding: '10px 14px',
-                  fontSize: '14px',
-                  fontWeight: '600'
-                }}
-              >
-                {t.copied}
-              </span>
-            </div>
+              {currentContent.encode}
+            </button>
+
+            <button
+              type="button"
+              className="tool-action-button tool-action-button-secondary"
+              onClick={handleDecode}
+              disabled={!inputText}
+            >
+              {currentContent.decode}
+            </button>
+          </div>
+
+          {!inputText.trim() && !error && (
+            <p className="tool-helper-text">{currentContent.emptyState}</p>
           )}
 
-          <div
-            style={{
-              display: 'flex',
-              gap: '12px',
-              justifyContent: language === 'ar' ? 'flex-start' : 'flex-end',
-              flexWrap: 'wrap'
-            }}
-          >
-            <button
-              onClick={encodeText}
-              style={{
-                backgroundColor: '#2563eb',
-                color: '#ffffff',
-                border: 'none',
-                borderRadius: '10px',
-                padding: '14px 24px',
-                fontSize: '16px',
-                fontWeight: '700',
-                cursor: 'pointer'
-              }}
-            >
-              {t.encode}
-            </button>
+          {copied && (
+            <p className="tool-helper-text tool-helper-text-success">
+              {currentContent.copied}
+            </p>
+          )}
+        </section>
 
-            <button
-              onClick={decodeText}
-              style={{
-                backgroundColor: '#0f172a',
-                color: '#ffffff',
-                border: 'none',
-                borderRadius: '10px',
-                padding: '14px 24px',
-                fontSize: '16px',
-                fontWeight: '700',
-                cursor: 'pointer'
-              }}
-            >
-              {t.decode}
-            </button>
+        <section className="tool-panel">
+          <div className="tool-panel-top">
+            <div className="tool-panel-heading">
+              <h2 className="tool-panel-title">{currentContent.outputTitle}</h2>
+            </div>
 
-            <button
-              onClick={clearAll}
-              style={{
-                backgroundColor: '#e5e7eb',
-                color: '#111827',
-                border: 'none',
-                borderRadius: '10px',
-                padding: '14px 24px',
-                fontSize: '16px',
-                fontWeight: '700',
-                cursor: 'pointer'
-              }}
-            >
-              {t.clear}
-            </button>
-          </div>
-        </div>
-
-        <div
-          style={{
-            backgroundColor: '#ffffff',
-            borderRadius: '16px',
-            padding: '28px',
-            boxShadow: '0 6px 18px rgba(0, 0, 0, 0.06)',
-            marginBottom: '28px'
-          }}
-        >
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              gap: '16px',
-              flexWrap: 'wrap',
-              marginBottom: '18px'
-            }}
-          >
-            <h2
-              style={{
-                fontSize: '18px',
-                margin: 0,
-                color: '#111827',
-                fontWeight: '700'
-              }}
-            >
-              {t.outputTitle}
-            </h2>
-
-            <button
-              onClick={copyResult}
-              style={{
-                backgroundColor: '#2563eb',
-                color: '#ffffff',
-                border: 'none',
-                borderRadius: '10px',
-                padding: '12px 20px',
-                fontSize: '15px',
-                fontWeight: '700',
-                cursor: output ? 'pointer' : 'not-allowed',
-                opacity: output ? 1 : 0.65
-              }}
-            >
-              {t.copy}
-            </button>
+            <div className="tool-panel-actions">
+              <button
+                type="button"
+                className="tool-action-button tool-action-button-primary"
+                onClick={handleCopy}
+                disabled={!outputText || Boolean(error)}
+              >
+                {currentContent.copy}
+              </button>
+            </div>
           </div>
 
-          <div
-            style={{
-              minHeight: '80px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              textAlign: 'center'
-            }}
-          >
+          <div className="tool-result-box">
             <p
-              style={{
-                fontSize: output || error ? '22px' : '20px',
-                fontWeight: '700',
-                color: error ? '#dc2626' : output ? '#111827' : '#374151',
-                lineHeight: '1.8',
-                margin: 0,
-                wordBreak: 'break-word'
-              }}
+              className={`tool-result-text ${
+                !outputText && !error ? 'tool-result-placeholder' : ''
+              } ${error ? 'tool-helper-text-error' : ''}`}
             >
-              {error || output || t.outputPlaceholder}
+              {error || outputText || currentContent.outputPlaceholder}
             </p>
           </div>
-        </div>
+        </section>
 
-        <div
-          style={{
-            backgroundColor: '#ffffff',
-            borderRadius: '16px',
-            padding: '28px',
-            boxShadow: '0 6px 18px rgba(0, 0, 0, 0.06)',
-            marginBottom: '28px'
-          }}
-        >
-          <h2
-            style={{
-              fontSize: '18px',
-              marginBottom: '16px',
-              color: '#111827',
-              fontWeight: '700'
-            }}
-          >
-            {t.exampleTitle}
-          </h2>
-
-          <button
-            onClick={tryExample}
-            style={{
-              backgroundColor: '#2563eb',
-              color: '#ffffff',
-              border: 'none',
-              borderRadius: '10px',
-              padding: '14px 24px',
-              fontSize: '16px',
-              fontWeight: '700',
-              cursor: 'pointer'
-            }}
-          >
-            {t.tryExample}
-          </button>
-        </div>
-
-        <div
-          style={{
-            backgroundColor: '#ffffff',
-            borderRadius: '16px',
-            padding: '28px',
-            boxShadow: '0 6px 18px rgba(0, 0, 0, 0.06)'
-          }}
-        >
-          <h2
-            style={{
-              fontSize: '18px',
-              marginBottom: '12px',
-              color: '#111827',
-              fontWeight: '700'
-            }}
-          >
-            {t.infoTitle}
-          </h2>
-
-          <p
-            style={{
-              color: '#6b7280',
-              lineHeight: '1.8',
-              margin: 0,
-              fontSize: '16px'
-            }}
-          >
-            {t.infoText}
-          </p>
-        </div>
-      </div>
+        <section className="tool-panel">
+          <div className="tool-panel-heading">
+            <h2 className="tool-panel-title">{currentContent.infoTitle}</h2>
+          </div>
+          <p className="tool-helper-text">{currentContent.infoText}</p>
+        </section>
+      </section>
     </main>
   );
 }

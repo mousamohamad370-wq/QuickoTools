@@ -4,56 +4,58 @@ import '../../styles/tool-page.css';
 
 const content = {
   en: {
-    metaTitle: 'Line Break Remover - QuickoTools',
+    metaTitle: 'Reverse Text - QuickoTools',
     metaDescription:
-      'Remove line breaks from text instantly and convert multi-line text into a clean single line with QuickoTools.',
-    title: 'Line Break Remover',
+      'Reverse text instantly with the free Reverse Text tool from QuickoTools.',
+    title: 'Reverse Text',
     description:
-      'Remove line breaks from text instantly and turn multi-line text into a clean single line.',
+      'Reverse text instantly by characters for quick text manipulation and formatting.',
     inputTitle: 'Input Text',
-    inputPlaceholder: 'Paste your multi-line text here...',
-    outputTitle: 'Clean Text',
-    outputPlaceholder: 'Your cleaned text will appear here.',
-    remove: 'Remove Line Breaks',
+    inputLabel: 'Input Text',
+    inputPlaceholder: 'Type or paste your text here...',
+    outputTitle: 'Reversed Text',
+    outputPlaceholder: 'Your reversed text will appear here.',
+    reverse: 'Reverse Text',
     clear: 'Clear',
     copy: 'Copy Result',
     copied: 'Copied!',
     loadExample: 'Load Example',
-    exampleValue:
-      'Hello world\nThis is QuickoTools\nRemove line breaks easily',
-    emptyState:
-      'Paste your multi-line text, then remove line breaks to generate clean output.',
-    infoTitle: 'What is a Line Break Remover?',
+    exampleValue: 'Hello world from QuickoTools',
+    emptyState: 'Type or paste text, then reverse it to generate the result.',
+    infoTitle: 'What does this tool do?',
     infoText:
-      'A line break remover helps you convert multi-line text into one clean line, which is useful for forms, code, documents, and content formatting.'
+      'This tool reverses the order of characters in your text instantly, which can be useful for testing, formatting, puzzles, and text manipulation.'
   },
   ar: {
-    metaTitle: 'إزالة فواصل الأسطر - QuickoTools',
+    metaTitle: 'عكس النص - QuickoTools',
     metaDescription:
-      'احذف فواصل الأسطر من النص فورًا وحوّل النص متعدد الأسطر إلى سطر واحد مرتب باستخدام QuickoTools.',
-    title: 'إزالة فواصل الأسطر',
+      'اعكس النص فورًا باستخدام أداة عكس النص المجانية من QuickoTools.',
+    title: 'عكس النص',
     description:
-      'احذف فواصل الأسطر من النص فورًا وحوّل النص متعدد الأسطر إلى سطر واحد مرتب.',
+      'اعكس النص فورًا على مستوى الأحرف لمعالجة النصوص وتنسيقها بسرعة.',
     inputTitle: 'النص المدخل',
-    inputPlaceholder: 'ألصق النص متعدد الأسطر هنا...',
-    outputTitle: 'النص المنظف',
-    outputPlaceholder: 'سيظهر النص بعد إزالة فواصل الأسطر هنا.',
-    remove: 'إزالة فواصل الأسطر',
+    inputLabel: 'النص المدخل',
+    inputPlaceholder: 'اكتب النص هنا أو ألصقه...',
+    outputTitle: 'النص المعكوس',
+    outputPlaceholder: 'سيظهر النص المعكوس هنا.',
+    reverse: 'عكس النص',
     clear: 'مسح',
     copy: 'نسخ النتيجة',
     copied: 'تم النسخ!',
     loadExample: 'تجربة مثال',
-    exampleValue:
-      'مرحبا بالعالم\nهذا هو QuickoTools\nاحذف فواصل الأسطر بسهولة',
-    emptyState:
-      'ألصق النص متعدد الأسطر ثم أزل فواصل الأسطر لإنشاء الناتج المنظف.',
-    infoTitle: 'ما هي أداة إزالة فواصل الأسطر؟',
+    exampleValue: 'مرحبا بك في QuickoTools',
+    emptyState: 'اكتب النص أو ألصقه ثم اعكسه لإنشاء النتيجة.',
+    infoTitle: 'ماذا تفعل هذه الأداة؟',
     infoText:
-      'تساعدك هذه الأداة على تحويل النص متعدد الأسطر إلى سطر واحد منظم، وهي مفيدة للنماذج والبرمجة والمستندات وتنسيق المحتوى.'
+      'تقوم هذه الأداة بعكس ترتيب الأحرف في النص فورًا، وهي مفيدة للاختبار والتنسيق والألعاب النصية ومعالجة النصوص.'
   }
 };
 
-function LineBreakRemover({ language }) {
+function reverseText(value) {
+  return value.split('').reverse().join('');
+}
+
+function ReverseText({ language }) {
   const currentContent = language === 'ar' ? content.ar : content.en;
 
   const [inputText, setInputText] = useState('');
@@ -64,16 +66,12 @@ function LineBreakRemover({ language }) {
 
   const handleChange = useCallback((event) => {
     setInputText(event.target.value);
+    setOutputText('');
     setCopied(false);
   }, []);
 
-  const handleRemoveLineBreaks = useCallback(() => {
-    const cleaned = inputText
-      .replace(/\r?\n+/g, ' ')
-      .replace(/\s+/g, ' ')
-      .trim();
-
-    setOutputText(cleaned);
+  const handleReverse = useCallback(() => {
+    setOutputText(reverseText(inputText));
     setCopied(false);
   }, [inputText]);
 
@@ -131,15 +129,6 @@ function LineBreakRemover({ language }) {
               <button
                 type="button"
                 className="tool-action-button tool-action-button-secondary"
-                onClick={handleRemoveLineBreaks}
-                disabled={!inputText}
-              >
-                {currentContent.remove}
-              </button>
-
-              <button
-                type="button"
-                className="tool-action-button tool-action-button-secondary"
                 onClick={handleClear}
                 disabled={!inputText && !outputText}
               >
@@ -148,13 +137,31 @@ function LineBreakRemover({ language }) {
             </div>
           </div>
 
-          <textarea
-            value={inputText}
-            onChange={handleChange}
-            placeholder={currentContent.inputPlaceholder}
-            className="tool-textarea"
-            aria-label={currentContent.inputTitle}
-          />
+          <div className="tool-field">
+            <label className="tool-label" htmlFor="reverse-text-input">
+              {currentContent.inputLabel}
+            </label>
+
+            <textarea
+              id="reverse-text-input"
+              value={inputText}
+              onChange={handleChange}
+              placeholder={currentContent.inputPlaceholder}
+              className="tool-textarea"
+              aria-label={currentContent.inputLabel}
+            />
+          </div>
+
+          <div className="tool-panel-actions tool-actions-row">
+            <button
+              type="button"
+              className="tool-action-button tool-action-button-primary"
+              onClick={handleReverse}
+              disabled={!inputText}
+            >
+              {currentContent.reverse}
+            </button>
+          </div>
 
           {!inputText.trim() && (
             <p className="tool-helper-text">{currentContent.emptyState}</p>
@@ -207,4 +214,4 @@ function LineBreakRemover({ language }) {
   );
 }
 
-export default LineBreakRemover;
+export default ReverseText;

@@ -1,226 +1,183 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
+import usePageMeta from '../../hooks/usePageMeta';
+import '../../styles/tool-page.css';
+
+const content = {
+  en: {
+    metaTitle: 'UUID Generator - QuickoTools',
+    metaDescription:
+      'Generate random UUIDs instantly for development and databases with the free UUID Generator tool from QuickoTools.',
+    title: 'UUID Generator',
+    description:
+      'Generate a random UUID instantly for development, APIs, and databases.',
+    inputTitle: 'Generator Controls',
+    outputTitle: 'Generated UUID',
+    placeholder: 'Your generated UUID will appear here.',
+    generate: 'Generate UUID',
+    copy: 'Copy Result',
+    clear: 'Clear',
+    copied: 'Copied!',
+    loadExample: 'Load Example',
+    exampleValue: '550e8400-e29b-41d4-a716-446655440000',
+    emptyState: 'Generate a UUID to see the result here.',
+    infoTitle: 'What is a UUID?',
+    infoText:
+      'A UUID is a universally unique identifier used in software systems, databases, APIs, and distributed applications to create unique values.'
+  },
+  ar: {
+    metaTitle: 'مولد UUID - QuickoTools',
+    metaDescription:
+      'أنشئ UUID عشوائيًا فورًا للاستخدام في البرمجة وقواعد البيانات باستخدام أداة مولد UUID المجانية من QuickoTools.',
+    title: 'مولد UUID',
+    description:
+      'أنشئ UUID عشوائيًا فورًا للاستخدام في البرمجة وواجهات البرمجة وقواعد البيانات.',
+    inputTitle: 'أدوات التوليد',
+    outputTitle: 'UUID الناتج',
+    placeholder: 'ستظهر قيمة UUID هنا.',
+    generate: 'إنشاء UUID',
+    copy: 'نسخ النتيجة',
+    clear: 'مسح',
+    copied: 'تم النسخ!',
+    loadExample: 'تجربة مثال',
+    exampleValue: '550e8400-e29b-41d4-a716-446655440000',
+    emptyState: 'أنشئ UUID لعرض النتيجة هنا.',
+    infoTitle: 'ما هو UUID؟',
+    infoText:
+      'UUID هو معرّف فريد عالميًا يُستخدم في الأنظمة البرمجية وقواعد البيانات وواجهات البرمجة والتطبيقات الموزعة لإنشاء قيم فريدة.'
+  }
+};
 
 function UUIDGenerator({ language }) {
+  const currentContent = language === 'ar' ? content.ar : content.en;
+
   const [uuid, setUuid] = useState('');
+  const [copied, setCopied] = useState(false);
 
-  const content = {
-    en: {
-      title: 'UUID Generator',
-      description: 'Generate a random UUID instantly for development and databases.',
-      resultTitle: 'Generated UUID',
-      placeholder: 'Your generated UUID will appear here.',
-      generate: 'Generate UUID',
-      copy: 'Copy UUID',
-      clear: 'Clear'
-    },
-    ar: {
-      title: 'مولد UUID',
-      description: 'أنشئ UUID عشوائيًا فورًا للاستخدام في البرمجة وقواعد البيانات.',
-      resultTitle: 'UUID الناتج',
-      placeholder: 'ستظهر قيمة UUID هنا.',
-      generate: 'إنشاء UUID',
-      copy: 'نسخ UUID',
-      clear: 'مسح'
-    }
-  };
+  usePageMeta(currentContent.metaTitle, currentContent.metaDescription);
 
-  const t = language === 'ar' ? content.ar : content.en;
-
-  const generateUUID = () => {
+  const handleGenerate = useCallback(() => {
     setUuid(crypto.randomUUID());
-  };
+    setCopied(false);
+  }, []);
 
-  const copyUUID = async () => {
+  const handleCopy = useCallback(async () => {
     if (!uuid) return;
+
     try {
       await navigator.clipboard.writeText(uuid);
-    } catch (error) {
-      console.error('Copy failed:', error);
-    }
-  };
+      setCopied(true);
 
-  const clearUUID = () => {
+      setTimeout(() => {
+        setCopied(false);
+      }, 1800);
+    } catch {
+      setCopied(false);
+    }
+  }, [uuid]);
+
+  const handleClear = useCallback(() => {
     setUuid('');
-  };
+    setCopied(false);
+  }, []);
+
+  const handleLoadExample = useCallback(() => {
+    setUuid(currentContent.exampleValue);
+    setCopied(false);
+  }, [currentContent.exampleValue]);
 
   return (
-    <main
-      className="tool-page"
-      dir={language === 'ar' ? 'rtl' : 'ltr'}
-      style={{
-        padding: '40px 20px',
-        backgroundColor: '#f3f4f6',
-        minHeight: '100vh'
-      }}
-    >
-      <div style={{ maxWidth: '980px', margin: '0 auto' }}>
-        <div style={{ textAlign: 'center', marginBottom: '28px' }}>
-          <h1
-            style={{
-              fontSize: '32px',
-              marginBottom: '12px',
-              fontWeight: '700',
-              color: '#111827'
-            }}
-          >
-            {t.title}
-          </h1>
-
-          <p
-            style={{
-              color: '#6b7280',
-              lineHeight: '1.7',
-              fontSize: '16px',
-              margin: 0
-            }}
-          >
-            {t.description}
-          </p>
+    <main className="tool-page" dir={language === 'ar' ? 'rtl' : 'ltr'}>
+      <section className="tool-shell">
+        <div className="tool-shell-header">
+          <span className="tool-shell-badge">QuickoTools</span>
+          <h1 className="tool-shell-title">{currentContent.title}</h1>
+          <p className="tool-shell-description">{currentContent.description}</p>
         </div>
 
-        <div
-          style={{
-            backgroundColor: '#ffffff',
-            borderRadius: '16px',
-            padding: '28px',
-            boxShadow: '0 6px 18px rgba(0, 0, 0, 0.06)',
-            marginBottom: '28px'
-          }}
-        >
-          <div style={{ marginBottom: '18px' }}>
-            <label
-              style={{
-                display: 'block',
-                fontWeight: '700',
-                marginBottom: '12px',
-                color: '#111827',
-                fontSize: '18px'
-              }}
-            >
-              {t.resultTitle}
-            </label>
+        <section className="tool-panel">
+          <div className="tool-panel-top">
+            <div className="tool-panel-heading">
+              <h2 className="tool-panel-title">{currentContent.inputTitle}</h2>
+            </div>
 
-            <input
-              type="text"
-              value={uuid}
-              readOnly
-              placeholder={t.placeholder}
-              style={{
-                width: '100%',
-                height: '54px',
-                padding: '0 16px',
-                border: '1px solid #d1d5db',
-                borderRadius: '10px',
-                outline: 'none',
-                fontSize: '18px',
-                backgroundColor: '#ffffff',
-                color: '#111827',
-                boxSizing: 'border-box'
-              }}
-            />
+            <div className="tool-panel-actions">
+              <button
+                type="button"
+                className="tool-action-button tool-action-button-primary"
+                onClick={handleLoadExample}
+              >
+                {currentContent.loadExample}
+              </button>
+
+              <button
+                type="button"
+                className="tool-action-button tool-action-button-secondary"
+                onClick={handleClear}
+                disabled={!uuid}
+              >
+                {currentContent.clear}
+              </button>
+            </div>
           </div>
 
-          <div
-            style={{
-              display: 'flex',
-              gap: '12px',
-              justifyContent: language === 'ar' ? 'flex-start' : 'flex-end',
-              flexWrap: 'wrap'
-            }}
-          >
+          <div className="tool-panel-actions tool-actions-row">
             <button
-              onClick={generateUUID}
-              style={{
-                backgroundColor: '#2563eb',
-                color: '#ffffff',
-                border: 'none',
-                borderRadius: '10px',
-                padding: '14px 24px',
-                fontSize: '16px',
-                fontWeight: '700',
-                cursor: 'pointer'
-              }}
+              type="button"
+              className="tool-action-button tool-action-button-primary"
+              onClick={handleGenerate}
             >
-              {t.generate}
-            </button>
-
-            <button
-              onClick={copyUUID}
-              style={{
-                backgroundColor: '#0f172a',
-                color: '#ffffff',
-                border: 'none',
-                borderRadius: '10px',
-                padding: '14px 24px',
-                fontSize: '16px',
-                fontWeight: '700',
-                cursor: 'pointer'
-              }}
-            >
-              {t.copy}
-            </button>
-
-            <button
-              onClick={clearUUID}
-              style={{
-                backgroundColor: '#e5e7eb',
-                color: '#111827',
-                border: 'none',
-                borderRadius: '10px',
-                padding: '14px 24px',
-                fontSize: '16px',
-                fontWeight: '700',
-                cursor: 'pointer'
-              }}
-            >
-              {t.clear}
+              {currentContent.generate}
             </button>
           </div>
-        </div>
 
-        <div
-          style={{
-            backgroundColor: '#ffffff',
-            borderRadius: '16px',
-            padding: '28px',
-            boxShadow: '0 6px 18px rgba(0, 0, 0, 0.06)'
-          }}
-        >
-          <h2
-            style={{
-              fontSize: '18px',
-              marginBottom: '18px',
-              color: '#111827',
-              fontWeight: '700'
-            }}
-          >
-            {t.resultTitle}
-          </h2>
+          {!uuid && (
+            <p className="tool-helper-text">{currentContent.emptyState}</p>
+          )}
 
-          <div
-            style={{
-              minHeight: '80px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              textAlign: 'center'
-            }}
-          >
+          {copied && (
+            <p className="tool-helper-text tool-helper-text-success">
+              {currentContent.copied}
+            </p>
+          )}
+        </section>
+
+        <section className="tool-panel">
+          <div className="tool-panel-top">
+            <div className="tool-panel-heading">
+              <h2 className="tool-panel-title">{currentContent.outputTitle}</h2>
+            </div>
+
+            <div className="tool-panel-actions">
+              <button
+                type="button"
+                className="tool-action-button tool-action-button-primary"
+                onClick={handleCopy}
+                disabled={!uuid}
+              >
+                {currentContent.copy}
+              </button>
+            </div>
+          </div>
+
+          <div className="tool-result-box">
             <p
-              style={{
-                fontSize: uuid ? '24px' : '20px',
-                fontWeight: '700',
-                color: uuid ? '#111827' : '#374151',
-                lineHeight: '1.8',
-                margin: 0,
-                wordBreak: 'break-all'
-              }}
+              className={`tool-result-text ${
+                !uuid ? 'tool-result-placeholder' : ''
+              }`}
+              style={{ wordBreak: 'break-all' }}
             >
-              {uuid || t.placeholder}
+              {uuid || currentContent.placeholder}
             </p>
           </div>
-        </div>
-      </div>
+        </section>
+
+        <section className="tool-panel">
+          <div className="tool-panel-heading">
+            <h2 className="tool-panel-title">{currentContent.infoTitle}</h2>
+          </div>
+          <p className="tool-helper-text">{currentContent.infoText}</p>
+        </section>
+      </section>
     </main>
   );
 }

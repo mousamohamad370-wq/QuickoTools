@@ -4,56 +4,66 @@ import '../../styles/tool-page.css';
 
 const content = {
   en: {
-    metaTitle: 'Line Break Remover - QuickoTools',
+    metaTitle: 'Remove Extra Spaces - QuickoTools',
     metaDescription:
-      'Remove line breaks from text instantly and convert multi-line text into a clean single line with QuickoTools.',
-    title: 'Line Break Remover',
+      'Remove extra spaces from text instantly and clean spacing with the free Remove Extra Spaces tool from QuickoTools.',
+    title: 'Remove Extra Spaces',
     description:
-      'Remove line breaks from text instantly and turn multi-line text into a clean single line.',
+      'Remove extra spaces from text instantly and clean unnecessary spacing in one click.',
     inputTitle: 'Input Text',
-    inputPlaceholder: 'Paste your multi-line text here...',
-    outputTitle: 'Clean Text',
+    inputLabel: 'Input Text',
+    inputPlaceholder: 'Paste your text here...',
+    outputTitle: 'Cleaned Text',
     outputPlaceholder: 'Your cleaned text will appear here.',
-    remove: 'Remove Line Breaks',
+    remove: 'Remove Extra Spaces',
     clear: 'Clear',
     copy: 'Copy Result',
     copied: 'Copied!',
     loadExample: 'Load Example',
     exampleValue:
-      'Hello world\nThis is QuickoTools\nRemove line breaks easily',
+      'Hello     world    from   QuickoTools.   This    text has   extra spaces.',
     emptyState:
-      'Paste your multi-line text, then remove line breaks to generate clean output.',
-    infoTitle: 'What is a Line Break Remover?',
+      'Paste your text, then remove extra spaces to generate clean output.',
+    infoTitle: 'What does this tool do?',
     infoText:
-      'A line break remover helps you convert multi-line text into one clean line, which is useful for forms, code, documents, and content formatting.'
+      'This tool removes repeated spaces between words and trims unnecessary spacing from your text to make it cleaner and easier to read.'
   },
   ar: {
-    metaTitle: 'إزالة فواصل الأسطر - QuickoTools',
+    metaTitle: 'إزالة المسافات الزائدة - QuickoTools',
     metaDescription:
-      'احذف فواصل الأسطر من النص فورًا وحوّل النص متعدد الأسطر إلى سطر واحد مرتب باستخدام QuickoTools.',
-    title: 'إزالة فواصل الأسطر',
+      'أزل المسافات الزائدة من النص فورًا ونظّف التباعد باستخدام أداة إزالة المسافات الزائدة المجانية من QuickoTools.',
+    title: 'إزالة المسافات الزائدة',
     description:
-      'احذف فواصل الأسطر من النص فورًا وحوّل النص متعدد الأسطر إلى سطر واحد مرتب.',
+      'أزل المسافات الزائدة من النص فورًا ونظّف التباعد غير الضروري بضغطة واحدة.',
     inputTitle: 'النص المدخل',
-    inputPlaceholder: 'ألصق النص متعدد الأسطر هنا...',
+    inputLabel: 'النص المدخل',
+    inputPlaceholder: 'ألصق النص هنا...',
     outputTitle: 'النص المنظف',
-    outputPlaceholder: 'سيظهر النص بعد إزالة فواصل الأسطر هنا.',
-    remove: 'إزالة فواصل الأسطر',
+    outputPlaceholder: 'سيظهر النص المنظف هنا.',
+    remove: 'إزالة المسافات الزائدة',
     clear: 'مسح',
     copy: 'نسخ النتيجة',
     copied: 'تم النسخ!',
     loadExample: 'تجربة مثال',
     exampleValue:
-      'مرحبا بالعالم\nهذا هو QuickoTools\nاحذف فواصل الأسطر بسهولة',
+      'مرحبا     بك    في   QuickoTools.   هذا    النص يحتوي   على مسافات زائدة.',
     emptyState:
-      'ألصق النص متعدد الأسطر ثم أزل فواصل الأسطر لإنشاء الناتج المنظف.',
-    infoTitle: 'ما هي أداة إزالة فواصل الأسطر؟',
+      'ألصق النص ثم أزل المسافات الزائدة لإنشاء الناتج المنظف.',
+    infoTitle: 'ماذا تفعل هذه الأداة؟',
     infoText:
-      'تساعدك هذه الأداة على تحويل النص متعدد الأسطر إلى سطر واحد منظم، وهي مفيدة للنماذج والبرمجة والمستندات وتنسيق المحتوى.'
+      'تقوم هذه الأداة بحذف المسافات المكررة بين الكلمات وإزالة التباعد غير الضروري من النص ليصبح أنظف وأسهل للقراءة.'
   }
 };
 
-function LineBreakRemover({ language }) {
+function removeExtraSpaces(text) {
+  return text
+    .replace(/[ \t]+/g, ' ')
+    .replace(/\n[ \t]+/g, '\n')
+    .replace(/[ \t]+\n/g, '\n')
+    .trim();
+}
+
+function RemoveExtraSpaces({ language }) {
   const currentContent = language === 'ar' ? content.ar : content.en;
 
   const [inputText, setInputText] = useState('');
@@ -64,16 +74,12 @@ function LineBreakRemover({ language }) {
 
   const handleChange = useCallback((event) => {
     setInputText(event.target.value);
+    setOutputText('');
     setCopied(false);
   }, []);
 
-  const handleRemoveLineBreaks = useCallback(() => {
-    const cleaned = inputText
-      .replace(/\r?\n+/g, ' ')
-      .replace(/\s+/g, ' ')
-      .trim();
-
-    setOutputText(cleaned);
+  const handleRemove = useCallback(() => {
+    setOutputText(removeExtraSpaces(inputText));
     setCopied(false);
   }, [inputText]);
 
@@ -131,15 +137,6 @@ function LineBreakRemover({ language }) {
               <button
                 type="button"
                 className="tool-action-button tool-action-button-secondary"
-                onClick={handleRemoveLineBreaks}
-                disabled={!inputText}
-              >
-                {currentContent.remove}
-              </button>
-
-              <button
-                type="button"
-                className="tool-action-button tool-action-button-secondary"
                 onClick={handleClear}
                 disabled={!inputText && !outputText}
               >
@@ -148,13 +145,31 @@ function LineBreakRemover({ language }) {
             </div>
           </div>
 
-          <textarea
-            value={inputText}
-            onChange={handleChange}
-            placeholder={currentContent.inputPlaceholder}
-            className="tool-textarea"
-            aria-label={currentContent.inputTitle}
-          />
+          <div className="tool-field">
+            <label className="tool-label" htmlFor="remove-extra-spaces-input">
+              {currentContent.inputLabel}
+            </label>
+
+            <textarea
+              id="remove-extra-spaces-input"
+              value={inputText}
+              onChange={handleChange}
+              placeholder={currentContent.inputPlaceholder}
+              className="tool-textarea"
+              aria-label={currentContent.inputLabel}
+            />
+          </div>
+
+          <div className="tool-panel-actions tool-actions-row">
+            <button
+              type="button"
+              className="tool-action-button tool-action-button-primary"
+              onClick={handleRemove}
+              disabled={!inputText}
+            >
+              {currentContent.remove}
+            </button>
+          </div>
 
           {!inputText.trim() && (
             <p className="tool-helper-text">{currentContent.emptyState}</p>
@@ -207,4 +222,4 @@ function LineBreakRemover({ language }) {
   );
 }
 
-export default LineBreakRemover;
+export default RemoveExtraSpaces;
