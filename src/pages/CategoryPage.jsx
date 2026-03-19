@@ -16,6 +16,7 @@ function CategoryPage({ language }) {
       emptyTitle: 'No tools in this category yet',
       emptyText: 'More tools will be added soon.',
       browseCategories: 'Browse Categories',
+      goHome: 'Go Home',
       toolsCount: 'tools'
     },
     ar: {
@@ -24,6 +25,7 @@ function CategoryPage({ language }) {
       emptyTitle: 'لا توجد أدوات في هذا التصنيف حاليًا',
       emptyText: 'سيتم إضافة أدوات جديدة قريبًا.',
       browseCategories: 'تصفح التصنيفات',
+      goHome: 'العودة للرئيسية',
       toolsCount: 'أدوات'
     }
   };
@@ -72,6 +74,10 @@ function CategoryPage({ language }) {
               <div className="hero-actions" style={{ justifyContent: 'center' }}>
                 <Link to="/categories" className="tool-card-button">
                   {t.browseCategories}
+                </Link>
+
+                <Link to="/" className="tool-card-button hero-secondary-button">
+                  {t.goHome}
                 </Link>
               </div>
             </div>

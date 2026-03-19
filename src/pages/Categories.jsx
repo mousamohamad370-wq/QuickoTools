@@ -86,7 +86,10 @@ function Categories({ language }) {
                   </p>
                 </div>
 
-                <Link to={`/${category.slug}`} className="tool-card-button">
+                <Link
+                  to={`/categories/${category.slug}`}
+                  className="tool-card-button"
+                >
                   {t.open}
                 </Link>
               </div>

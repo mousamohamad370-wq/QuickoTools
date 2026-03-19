@@ -47,30 +47,37 @@ function Navbar({ language, setLanguage }) {
   return (
     <header className="site-navbar">
       <div className="site-navbar-container">
-        <Link to="/" className="site-navbar-brand" onClick={handleCloseMenu}>
-          {t.brand}
-        </Link>
+        <Link
+  to="/"
+  className="site-navbar-link"
+  onClick={() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    handleCloseMenu();
+  }}
+>
+  {t.home}
+</Link>
 
         <nav className={`site-navbar-links ${isMenuOpen ? 'is-open' : ''}`}>
-          <a href="/#top" className="site-navbar-link" onClick={handleCloseMenu}>
+          <Link to="/#top" className="site-navbar-link" onClick={handleCloseMenu}>
             {t.home}
-          </a>
+          </Link>
 
-          <a
-            href="/#categories-section"
+          <Link
+            to="/#categories-section"
             className="site-navbar-link"
             onClick={handleCloseMenu}
           >
             {t.categories}
-          </a>
+          </Link>
 
-          <a
-            href="/#popular-tools"
+          <Link
+            to="/#popular-tools"
             className="site-navbar-link"
             onClick={handleCloseMenu}
           >
             {t.popular}
-          </a>
+          </Link>
 
           <Link
             to="/about"
@@ -102,6 +109,7 @@ function Navbar({ language, setLanguage }) {
           className="site-navbar-menu-button"
           onClick={handleMenuToggle}
           aria-label={isMenuOpen ? t.close : t.menu}
+          aria-expanded={isMenuOpen}
         >
           {isMenuOpen ? '✕' : '☰'}
         </button>

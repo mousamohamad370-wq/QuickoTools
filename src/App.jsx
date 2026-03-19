@@ -1,17 +1,18 @@
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense, useEffect, useState, lazy } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
-import Home from './pages/Home';
-import Categories from './pages/Categories';
-import CategoryPage from './pages/CategoryPage';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import toolsRegistry from './tools/registry/toolsRegistry.jsx';
-import About from './pages/About';
-import Contact from './pages/Contact';
-import PrivacyPolicy from './pages/PrivacyPolicy';
-import NotFound from './pages/NotFound';
-import'./components/ScrollToTop.jsx';
-import Terms from './pages/Terms.jsx';
+import './styles/layout.css';
+
+const Home = lazy(() => import('./pages/Home'));
+const Categories = lazy(() => import('./pages/Categories'));
+const CategoryPage = lazy(() => import('./pages/CategoryPage'));
+const About = lazy(() => import('./pages/About'));
+const Contact = lazy(() => import('./pages/Contact'));
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
+const Terms = lazy(() => import('./pages/Terms.jsx'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 function PageLoader() {
   return (
@@ -61,23 +62,26 @@ function App() {
       <Suspense fallback={<PageLoader />}>
         <Routes>
           <Route path="/" element={<Home language={language} />} />
+
           <Route
             path="/categories"
             element={<Categories language={language} />}
           />
-          <Route path="/terms-of-service" element={<Terms language={language}/> }></Route>
           <Route
-          
-            path="/:categorySlug"
+            path="/categories/:categorySlug"
             element={<CategoryPage language={language} />}
           />
+
           <Route path="/about" element={<About language={language} />} />
           <Route path="/contact" element={<Contact language={language} />} />
           <Route
-  path="/privacy-policy"
-  element={<PrivacyPolicy language={language} />}
-/>
-<Route path="*" element={<NotFound language={language} />} />
+            path="/privacy-policy"
+            element={<PrivacyPolicy language={language} />}
+          />
+          <Route
+            path="/terms-of-service"
+            element={<Terms language={language} />}
+          />
 
           {toolsRegistry.map((tool) => {
             const ToolComponent = tool.component;
@@ -90,6 +94,8 @@ function App() {
               />
             );
           })}
+
+          <Route path="*" element={<NotFound language={language} />} />
         </Routes>
       </Suspense>
 

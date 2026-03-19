@@ -63,7 +63,7 @@ function Footer({ language }) {
             </li>
 
             <li>
-              <Link to="/#popular-tools">{t.popularTools}</Link>
+              <a href="/#popular-tools">{t.popularTools}</a>
             </li>
 
             <li>
@@ -77,9 +77,10 @@ function Footer({ language }) {
             <li>
               <Link to="/privacy-policy">{t.privacy}</Link>
             </li>
+
             <li>
-  <Link to="/terms-of-service">{t.terms}</Link>
-</li>
+              <Link to="/terms-of-service">{t.terms}</Link>
+            </li>
           </ul>
         </div>
 

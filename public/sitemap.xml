@@ -2,207 +2,207 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
-    <loc>https://quicko-tools.web.app/</loc>
+    <loc>https://quickotools.com/</loc>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://quicko-tools.web.app/categories</loc>
+    <loc>https://quickotools.com/categories</loc>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://quicko-tools.web.app/about</loc>
+    <loc>https://quickotools.com/about</loc>
     <priority>0.5</priority>
   </url>
 
   <url>
-    <loc>https://quicko-tools.web.app/contact</loc>
+    <loc>https://quickotools.com/contact</loc>
     <priority>0.5</priority>
   </url>
 
   <url>
-    <loc>https://quicko-tools.web.app/privacy-policy</loc>
+    <loc>https://quickotools.com/privacy-policy</loc>
     <priority>0.5</priority>
   </url>
 
   <url>
-    <loc>https://quicko-tools.web.app/pdf-tools</loc>
+    <loc>https://quickotools.com/categories/pdf-tools</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://quicko-tools.web.app/generators</loc>
+    <loc>https://quickotools.com/categories/generators</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://quicko-tools.web.app/calculators</loc>
+    <loc>https://quickotools.com/categories/calculators</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://quicko-tools.web.app/text-tools</loc>
+    <loc>https://quickotools.com/categories/text-tools</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://quicko-tools.web.app/developer-tools</loc>
+    <loc>https://quickotools.com/categories/developer-tools</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://quicko-tools.web.app/converters</loc>
+    <loc>https://quickotools.com/categories/converters</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://quicko-tools.web.app/random-tools</loc>
+    <loc>https://quickotools.com/categories/random-tools</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://quicko-tools.web.app/word-counter</loc>
+    <loc>https://quickotools.com/tools/word-counter</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://quicko-tools.web.app/character-counter</loc>
+    <loc>https://quickotools.com/tools/character-counter</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://quicko-tools.web.app/remove-duplicate-lines</loc>
+    <loc>https://quickotools.com/tools/remove-duplicate-lines</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://quicko-tools.web.app/text-repeater</loc>
+    <loc>https://quickotools.com/tools/text-repeater</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://quicko-tools.web.app/case-converter</loc>
+    <loc>https://quickotools.com/tools/case-converter</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://quicko-tools.web.app/text-case-converter</loc>
+    <loc>https://quickotools.com/tools/text-case-converter</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://quicko-tools.web.app/line-break-remover</loc>
+    <loc>https://quickotools.com/tools/line-break-remover</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://quicko-tools.web.app/age-calculator</loc>
+    <loc>https://quickotools.com/tools/remove-extra-spaces</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://quicko-tools.web.app/bmi-calculator</loc>
+    <loc>https://quickotools.com/tools/reverse-text</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://quicko-tools.web.app/percentage-calculator</loc>
+    <loc>https://quickotools.com/tools/text-sorter</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://quicko-tools.web.app/password-generator</loc>
+    <loc>https://quickotools.com/tools/remove-empty-lines</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://quicko-tools.web.app/qr-code-generator</loc>
+    <loc>https://quickotools.com/tools/age-calculator</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://quicko-tools.web.app/slug-generator</loc>
+    <loc>https://quickotools.com/tools/bmi-calculator</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://quicko-tools.web.app/lorem-ipsum-generator</loc>
+    <loc>https://quickotools.com/tools/percentage-calculator</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://quicko-tools.web.app/json-formatter</loc>
+    <loc>https://quickotools.com/tools/password-generator</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://quicko-tools.web.app/uuid-generator</loc>
+    <loc>https://quickotools.com/tools/qr-code-generator</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://quicko-tools.web.app/base64-encoder-decoder</loc>
+    <loc>https://quickotools.com/tools/slug-generator</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://quicko-tools.web.app/url-encoder-decoder</loc>
+    <loc>https://quickotools.com/tools/lorem-ipsum-generator</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://quicko-tools.web.app/html-entity-encoder-decoder</loc>
+    <loc>https://quickotools.com/tools/json-formatter</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://quicko-tools.web.app/roman-numeral-converter</loc>
+    <loc>https://quickotools.com/tools/uuid-generator</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://quicko-tools.web.app/remove-extra-spaces</loc>
+    <loc>https://quickotools.com/tools/base64-encoder-decoder</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://quicko-tools.web.app/reverse-text</loc>
+    <loc>https://quickotools.com/tools/url-encoder-decoder</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://quicko-tools.web.app/text-sorter</loc>
+    <loc>https://quickotools.com/tools/html-entity-encoder-decoder</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://quicko-tools.web.app/remove-empty-lines</loc>
+    <loc>https://quickotools.com/tools/roman-numeral-converter</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://quicko-tools.web.app/image-to-pdf</loc>
+    <loc>https://quickotools.com/tools/image-to-pdf</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://quicko-tools.web.app/pdf-page-counter</loc>
+    <loc>https://quickotools.com/tools/pdf-page-counter</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://quicko-tools.web.app/pdf-metadata-viewer</loc>
+    <loc>https://quickotools.com/tools/pdf-metadata-viewer</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://quicko-tools.web.app/pdf-text-extractor</loc>
+    <loc>https://quickotools.com/tools/pdf-text-extractor</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://quicko-tools.web.app/pdf-merger</loc>
+    <loc>https://quickotools.com/tools/pdf-merger</loc>
     <priority>0.8</priority>
   </url>
 
